@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     public float vidaMax;
     public float vidaActual;
     public bool vivo;
+
+    [Header("movimiento")]
+    public Vector2 destinoAtaque = new Vector2(0,0);
     void Start()
     {
         vivo = true;
@@ -28,7 +31,17 @@ public class PlayerController : MonoBehaviour
             {
                 GetComponent<SpriteRenderer>().flipX = true;
             }
-            Debug.Log(Input.mousePosition);
+            Vector2 pos = Input.mousePosition;
+            //Debug.Log(Input.mousePosition);
+            pos.x = pos.x - (Screen.width / 2f);
+            pos.y = pos.y - (Screen.height / 2f);
+            Vector2 destinoAtaq = new Vector2(transform.position.x+(pos.x*1000),transform.position.y + (pos.y*1000));
+            destinoAtaque = destinoAtaq;
+            
         }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine((Vector2)transform.position, destinoAtaque);
     }
 }
