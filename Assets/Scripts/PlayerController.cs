@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
             //Debug.Log(Input.mousePosition);
             pos.x = pos.x - (Screen.width / 2f);
             pos.y = pos.y - (Screen.height / 2f);
-            Vector2 destinoAtaq = new Vector2(transform.position.x+(pos.x*1000),transform.position.y + (pos.y*1000));
+            Vector2 destinoAtaq = new Vector2(transform.position.x+(pos.x),slash.transform.position.y + (pos.y));
             destinoAtaque = destinoAtaq;
             if (timerAtaque > velocidadAtaque)
             {
@@ -59,10 +59,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine((Vector2)transform.position, destinoAtaque);
-    }
+    
     public void atacar(Vector2 pos)
     {
         Vector3 newdir = pos;
@@ -72,7 +69,6 @@ public class PlayerController : MonoBehaviour
         newdir.y = pos.y - slash.transform.position.y;
 
         float angle = Mathf.Atan2(newdir.y,newdir.x)*Mathf.Rad2Deg;
-        Debug.Log(angle);
         slash.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         slash.transform.GetChild(0).GetComponent<Animator>().SetTrigger("atacar");
     }
