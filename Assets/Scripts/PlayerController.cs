@@ -10,9 +10,15 @@ public class PlayerController : MonoBehaviour
     public float vidaMax;
     public float vidaActual;
     public bool vivo;
+    public float tamanoAtaque;
+    public float velocidadAtaque;
 
     [Header("movimiento")]
     public Vector2 destinoAtaque = new Vector2(0,0);
+
+    [Header("ataque")]
+    public GameObject slash;
+    public float timerAtaque=0;
     void Start()
     {
         vivo = true;
@@ -23,6 +29,7 @@ public class PlayerController : MonoBehaviour
         {
             float movVertical = Input.GetAxis("Vertical") * VelocidadBase * Time.deltaTime;
             float movHorizontal = Input.GetAxis("Horizontal") * VelocidadBase * Time.deltaTime;
+            timerAtaque += Time.deltaTime;
             transform.Translate(movHorizontal, movVertical, 0);
             if (Input.GetAxis("Horizontal") > 0)
             {
@@ -31,17 +38,42 @@ public class PlayerController : MonoBehaviour
             {
                 GetComponent<SpriteRenderer>().flipX = true;
             }
+            if(Input.GetAxis("Horizontal")!=0 || Input.GetAxis("Vertical") != 0)
+            {
+                GetComponent<Animator>().SetInteger("estado", 1);
+            }
+            else
+            {
+                GetComponent<Animator>().SetInteger("estado", 0);
+            }
             Vector2 pos = Input.mousePosition;
             //Debug.Log(Input.mousePosition);
             pos.x = pos.x - (Screen.width / 2f);
             pos.y = pos.y - (Screen.height / 2f);
             Vector2 destinoAtaq = new Vector2(transform.position.x+(pos.x*1000),transform.position.y + (pos.y*1000));
             destinoAtaque = destinoAtaq;
-            
+            if (timerAtaque > velocidadAtaque)
+            {
+                atacar(destinoAtaq);
+                timerAtaque = 0;
+            }
         }
     }
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine((Vector2)transform.position, destinoAtaque);
+    }
+    public void atacar(Vector2 pos)
+    {
+        Vector3 newdir = pos;
+        newdir.z = 0f;
+
+        newdir.x = pos.x - slash.transform.position.x;
+        newdir.y = pos.y - slash.transform.position.y;
+
+        float angle = Mathf.Atan2(newdir.y,newdir.x)*Mathf.Rad2Deg;
+        Debug.Log(angle);
+        slash.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        slash.transform.GetChild(0).GetComponent<Animator>().SetTrigger("atacar");
     }
 }
