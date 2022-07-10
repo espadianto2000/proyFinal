@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4231294210651809505}
   - component: {fileID: 6167794101712757712}
   - component: {fileID: 6813191642060559085}
+  - component: {fileID: 334104099696762550}
   m_Layer: 0
   m_Name: heavyBandit
   m_TagString: Untagged
@@ -102,3 +103,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &334104099696762550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3872477617356231175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efda9cd7ead9acd41b51c2bafd7f05e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  auxVolteado: 1
+  velocidad: 9
+  vidaMax: 0
+  vida: 0

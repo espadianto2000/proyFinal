@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4613928036836708555}
   - component: {fileID: 4613928036836708596}
   - component: {fileID: 4613928036836708597}
+  - component: {fileID: -4295295763290164662}
   m_Layer: 0
   m_Name: Skeleton2
   m_TagString: Untagged
@@ -102,3 +103,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-4295295763290164662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4613928036836708598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efda9cd7ead9acd41b51c2bafd7f05e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  auxVolteado: 0
+  velocidad: 9
+  vidaMax: 0
+  vida: 0

@@ -287,6 +287,7 @@ GameObject:
   - component: {fileID: 5864283828274791471}
   - component: {fileID: 5864283828274791470}
   - component: {fileID: 5864283828274791469}
+  - component: {fileID: 2035654082212507424}
   m_Layer: 0
   m_Name: Bringer Of Death
   m_TagString: Untagged
@@ -379,3 +380,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2035654082212507424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5864283828274791468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efda9cd7ead9acd41b51c2bafd7f05e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  auxVolteado: 1
+  velocidad: 9
+  vidaMax: 0
+  vida: 0
