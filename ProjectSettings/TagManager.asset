@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ataque
   - Heroe
+  - boton1
+  - boton2
   layers:
   - Default
   - TransparentFX
