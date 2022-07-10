@@ -217,7 +217,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -253,6 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3216211495730839932}
   - component: {fileID: 3216211495730839933}
+  - component: {fileID: 929944562}
   m_Layer: 0
   m_Name: Heroe
   m_TagString: Heroe
@@ -295,8 +296,25 @@ MonoBehaviour:
   tamanoAtaque: 1
   velocidadAtaque: 3
   destinoAtaque: {x: 325.95645, y: -39.350983}
+  rd: {fileID: 0}
   slash: {fileID: 3216211496783763100}
   timerAtaque: 2.752571
+--- !u!70 &929944562
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3216211495730839935}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.2}
+  m_Size: {x: 1.2, y: 2.2}
+  m_Direction: 0
 --- !u!1 &3216211496063431870
 GameObject:
   m_ObjectHideFlags: 0

@@ -367,6 +367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3804537778972183177}
   - component: {fileID: 3804537778972183176}
+  - component: {fileID: 1334394618302152177}
   m_Layer: 0
   m_Name: Heroina
   m_TagString: Heroe
@@ -409,5 +410,22 @@ MonoBehaviour:
   tamanoAtaque: 1
   velocidadAtaque: 3
   destinoAtaque: {x: 325.95645, y: -39.350983}
+  rd: {fileID: 0}
   slash: {fileID: 3804537777927921001}
   timerAtaque: 2.752571
+--- !u!70 &1334394618302152177
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3804537778972183178}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.3}
+  m_Size: {x: 1.2, y: 2.2}
+  m_Direction: 0
