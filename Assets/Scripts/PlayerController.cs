@@ -33,18 +33,18 @@ public class PlayerController : MonoBehaviour
             transform.Translate(movHorizontal, movVertical, 0);
             if (Input.GetAxis("Horizontal") > 0)
             {
-                GetComponent<SpriteRenderer>().flipX = false;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
             }else if (Input.GetAxis("Horizontal") < 0)
             {
-                GetComponent<SpriteRenderer>().flipX = true;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
             }
             if(Input.GetAxis("Horizontal")!=0 || Input.GetAxis("Vertical") != 0)
             {
-                GetComponent<Animator>().SetInteger("estado", 1);
+                transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 1);
             }
             else
             {
-                GetComponent<Animator>().SetInteger("estado", 0);
+                transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 0);
             }
             Vector2 pos = Input.mousePosition;
             //Debug.Log(Input.mousePosition);
