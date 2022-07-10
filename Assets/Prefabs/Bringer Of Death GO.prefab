@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 507108714391817554}
   m_Layer: 0
   m_Name: Bringer Of Death GO
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -425,7 +425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   auxVolteado: 1
-  velocidad: 4
+  velocidad: 3
   vidaMax: 0
   vida: 0
   distanciaX: 2

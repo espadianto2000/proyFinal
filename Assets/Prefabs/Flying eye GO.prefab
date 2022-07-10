@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3201377493881953159}
   m_Layer: 0
   m_Name: Flying eye GO
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   auxVolteado: 0
-  velocidad: 4
+  velocidad: 3
   vidaMax: 0
   vida: 0
   distanciaX: 2

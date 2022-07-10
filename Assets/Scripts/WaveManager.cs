@@ -12,6 +12,10 @@ public class WaveManager : MonoBehaviour
     public GameObject[] prefabsEnemigosNiv4;
     public GameObject[] prefabsEnemigosNiv5;
     public GameObject[] prefabsEnemigosNiv6;
+    public GameObject[] prefabsEnemigosNiv7;
+    public GameObject[] prefabsEnemigosNiv8;
+    public GameObject[] prefabsEnemigosNiv9;
+    public GameObject[] prefabsEnemigosNiv10;
     public GameObject[] prefabsBosses;
 
     [Header("Wave")]
@@ -20,11 +24,14 @@ public class WaveManager : MonoBehaviour
     public float enemigosPorOleada = 1f;
     public int oleadaAnterior = 0;
     public int nivelDificultad = 0;
+    public int cantidadMaximaEnemigos = 30;
+    public int iteracionOleada = 1;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        spawnEnemigos();
+        enemigosPorOleada = 2f;
     }
 
     // Update is called once per frame
@@ -33,15 +40,22 @@ public class WaveManager : MonoBehaviour
         timeTotal += Time.deltaTime;
         if (oleadaAnterior < Mathf.Floor(timeTotal / timeEntreOleadas))
         {
-            if(GameObject.FindGameObjectsWithTag("Enemy").Length < 50)
+            if(GameObject.FindGameObjectsWithTag("Enemy").Length < cantidadMaximaEnemigos)
             {
-                //spawnEnemigos();
+                spawnEnemigos();
             }
             oleadaAnterior++;
         }
         if (Mathf.Floor(timeTotal / 360) > nivelDificultad)
         {
-            nivelDificultad++;
+            if (nivelDificultad >= 10)
+            {
+                nivelDificultad = 0;
+                iteracionOleada++;
+                cantidadMaximaEnemigos = 30;
+            }
+            else { nivelDificultad++; }
+            cantidadMaximaEnemigos+=5;
         }
     }
     public void spawnEnemigos()
@@ -91,8 +105,20 @@ public class WaveManager : MonoBehaviour
                 case 6:
                     Instantiate(prefabsEnemigosNiv6[Random.RandomRange(0, prefabsEnemigosNiv6.Length)], new Vector2(x, y), Quaternion.identity);
                     break;
+                case 7:
+                    Instantiate(prefabsEnemigosNiv7[Random.RandomRange(0, prefabsEnemigosNiv1.Length)], new Vector2(x, y), Quaternion.identity);
+                    break;
+                case 8:
+                    Instantiate(prefabsEnemigosNiv8[Random.RandomRange(0, prefabsEnemigosNiv2.Length)], new Vector2(x, y), Quaternion.identity);
+                    break;
+                case 9:
+                    Instantiate(prefabsEnemigosNiv9[Random.RandomRange(0, prefabsEnemigosNiv3.Length)], new Vector2(x, y), Quaternion.identity);
+                    break;
+                case 10:
+                    Instantiate(prefabsEnemigosNiv10[Random.RandomRange(0, prefabsEnemigosNiv4.Length)], new Vector2(x, y), Quaternion.identity);
+                    break;
             }
         }
-        enemigosPorOleada = (enemigosPorOleada * 1.2f) < 10 ? (enemigosPorOleada * 1.2f) : 10;
+        enemigosPorOleada = (enemigosPorOleada * 1.2f) < 20 ? (enemigosPorOleada * 1.2f) : 20;
     }
 }
