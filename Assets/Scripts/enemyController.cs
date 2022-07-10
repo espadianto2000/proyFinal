@@ -28,6 +28,10 @@ public class enemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(vida<=0)
+        {
+            Destroy(transform.gameObject);
+        }
         //Debug.Log(transform.position.x);
         if (Mathf.Abs(transform.position.x - player.transform.GetChild(0).transform.position.x) >= distanciaX || Mathf.Abs(transform.position.y - player.transform.GetChild(0).transform.position.y) >= distanciaY)
         {

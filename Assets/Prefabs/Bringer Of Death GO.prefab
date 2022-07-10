@@ -211,7 +211,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   rd: {fileID: 0}
   velocidad: 10
-  vidaMax: 0
+  vidaMax: 10
   vida: 0
   distanciaX: 2
   distanciaY: 2

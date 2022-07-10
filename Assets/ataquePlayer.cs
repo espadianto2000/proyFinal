@@ -22,7 +22,9 @@ public class ataquePlayer : MonoBehaviour
         if(collision.tag == "RecibeDaño")
         {
             Debug.Log("ataque");
+            collision.GetComponentInParent<enemyController>().vida -= 1;
         }
+        
     }
     private void activarSlash()
     {
