@@ -389,6 +389,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8817641779722346845}
   - component: {fileID: 507108714391817554}
+  - component: {fileID: 7434090756083413486}
+  - component: {fileID: 8735289626295980760}
   m_Layer: 0
   m_Name: Bringer Of Death GO
   m_TagString: Enemy
@@ -425,8 +427,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   auxVolteado: 1
-  velocidad: 3
+  rb: {fileID: 0}
+  velocidad: 10
   vidaMax: 0
   vida: 0
   distanciaX: 2
   distanciaY: 2
+--- !u!58 &7434090756083413486
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601886408204610647}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.3}
+  serializedVersion: 2
+  m_Radius: 0.8
+--- !u!50 &8735289626295980760
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601886408204610647}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 5
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4

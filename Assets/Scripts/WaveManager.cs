@@ -26,12 +26,14 @@ public class WaveManager : MonoBehaviour
     public int nivelDificultad = 0;
     public int cantidadMaximaEnemigos = 30;
     public int iteracionOleada = 1;
+    public GameObject player = null;
 
     // Start is called before the first frame update
     void Start()
     {
         spawnEnemigos();
         enemigosPorOleada = 2f;
+        //player = GameObject.Find("Heroe");
     }
 
     // Update is called once per frame
@@ -85,37 +87,37 @@ public class WaveManager : MonoBehaviour
             switch (nivelDificultad)
             {
                 case 0:
-                    Instantiate(prefabsEnemigosNiv0[Random.RandomRange(0, prefabsEnemigosNiv0.Length)], new Vector2(x, y), Quaternion.identity);
+                    Instantiate(prefabsEnemigosNiv0[Random.RandomRange(0, prefabsEnemigosNiv0.Length)], new Vector2(player.transform.position.x+x, player.transform.position.y+y), Quaternion.identity);
                     break;
                 case 1:
-                    Instantiate(prefabsEnemigosNiv1[Random.RandomRange(0, prefabsEnemigosNiv1.Length)], new Vector2(x, y), Quaternion.identity);
+                    Instantiate(prefabsEnemigosNiv1[Random.RandomRange(0, prefabsEnemigosNiv1.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     break;
                 case 2:
-                    Instantiate(prefabsEnemigosNiv2[Random.RandomRange(0, prefabsEnemigosNiv2.Length)], new Vector2(x, y), Quaternion.identity);
+                    Instantiate(prefabsEnemigosNiv2[Random.RandomRange(0, prefabsEnemigosNiv2.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     break;
                 case 3:
-                    Instantiate(prefabsEnemigosNiv3[Random.RandomRange(0, prefabsEnemigosNiv3.Length)], new Vector2(x, y), Quaternion.identity);
+                    Instantiate(prefabsEnemigosNiv3[Random.RandomRange(0, prefabsEnemigosNiv3.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     break;
                 case 4:
-                    Instantiate(prefabsEnemigosNiv4[Random.RandomRange(0, prefabsEnemigosNiv4.Length)], new Vector2(x, y), Quaternion.identity);
+                    Instantiate(prefabsEnemigosNiv4[Random.RandomRange(0, prefabsEnemigosNiv4.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     break;
                 case 5:
-                    Instantiate(prefabsEnemigosNiv5[Random.RandomRange(0, prefabsEnemigosNiv5.Length)], new Vector2(x, y), Quaternion.identity);
+                    Instantiate(prefabsEnemigosNiv5[Random.RandomRange(0, prefabsEnemigosNiv5.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     break;
                 case 6:
-                    Instantiate(prefabsEnemigosNiv6[Random.RandomRange(0, prefabsEnemigosNiv6.Length)], new Vector2(x, y), Quaternion.identity);
+                    Instantiate(prefabsEnemigosNiv6[Random.RandomRange(0, prefabsEnemigosNiv6.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     break;
                 case 7:
-                    Instantiate(prefabsEnemigosNiv7[Random.RandomRange(0, prefabsEnemigosNiv1.Length)], new Vector2(x, y), Quaternion.identity);
+                    Instantiate(prefabsEnemigosNiv7[Random.RandomRange(0, prefabsEnemigosNiv1.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     break;
                 case 8:
-                    Instantiate(prefabsEnemigosNiv8[Random.RandomRange(0, prefabsEnemigosNiv2.Length)], new Vector2(x, y), Quaternion.identity);
+                    Instantiate(prefabsEnemigosNiv8[Random.RandomRange(0, prefabsEnemigosNiv2.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     break;
                 case 9:
-                    Instantiate(prefabsEnemigosNiv9[Random.RandomRange(0, prefabsEnemigosNiv3.Length)], new Vector2(x, y), Quaternion.identity);
+                    Instantiate(prefabsEnemigosNiv9[Random.RandomRange(0, prefabsEnemigosNiv3.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     break;
                 case 10:
-                    Instantiate(prefabsEnemigosNiv10[Random.RandomRange(0, prefabsEnemigosNiv4.Length)], new Vector2(x, y), Quaternion.identity);
+                    Instantiate(prefabsEnemigosNiv10[Random.RandomRange(0, prefabsEnemigosNiv4.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     break;
             }
         }

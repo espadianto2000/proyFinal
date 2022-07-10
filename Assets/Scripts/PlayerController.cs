@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("movimiento")]
     public Vector2 destinoAtaque = new Vector2(0,0);
+    public Renderer rd;
 
     [Header("ataque")]
     public GameObject slash;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         vivo = true;
+        rd = GetComponentInChildren<Renderer>();
     }
     void Update()
     {
@@ -71,5 +73,9 @@ public class PlayerController : MonoBehaviour
         float angle = Mathf.Atan2(newdir.y,newdir.x)*Mathf.Rad2Deg;
         slash.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         slash.transform.GetChild(0).GetComponent<Animator>().SetTrigger("atacar");
+    }
+    private void FixedUpdate()
+    {
+        rd.sortingOrder = -(int)(GetComponent<Collider2D>().bounds.min.y * 100);
     }
 }
