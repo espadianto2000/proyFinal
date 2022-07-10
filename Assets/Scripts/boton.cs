@@ -31,16 +31,39 @@ public class boton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             }
         }
     }
+    private void Update()
+    {
+        if(transform.tag == "boton2")
+        {
+            if (GameObject.Find("gameManager").GetComponent<gameManager>().desbloquearPersonaje2)
+            {
+                GetComponent<Button>().interactable = true;
+            }
+            else
+            {
+                GetComponent<Button>().interactable = false;
+                Color cl = GetComponent<Image>().color;
+                cl.a = 0.5f;
+                GetComponent<Image>().color = cl;
+            }
+        }
+    }
 
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
-        aparecer = true;
-        desvanecer=false;
+        if (GetComponent<Button>().interactable)
+        {
+            aparecer = true;
+            desvanecer = false;
+        }
     }
     public void OnPointerExit(PointerEventData pointerEventData)
     {
-        aparecer=false;
-        desvanecer=true;
+        if (GetComponent<Button>().interactable)
+        {
+            aparecer = false;
+            desvanecer = true;
+        }
     }
     public void OnPointerClick(PointerEventData pointerEvent)
     {
@@ -48,7 +71,7 @@ public class boton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         if(transform.tag == "boton1")
         {
             GameObject.Find("gameManager").GetComponent<gameManager>().empezarPartida(1);
-        }else if (transform.tag == "boton2")
+        }else if (transform.tag == "boton2" && GetComponent<Button>().interactable)
         {
             GameObject.Find("gameManager").GetComponent<gameManager>().empezarPartida(2);
         }
