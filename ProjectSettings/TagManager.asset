@@ -9,8 +9,9 @@ TagManager:
   - boton1
   - boton2
   - Enemy
-  - "RecibeDa\xF1o"
   - botonUI
+  - RecibeDano
+  - "RecibeDa\xF1o"
   layers:
   - Default
   - TransparentFX

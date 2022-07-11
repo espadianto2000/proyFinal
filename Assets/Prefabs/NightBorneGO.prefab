@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7299021646835099667}
   m_Layer: 8
   m_Name: "AreaRecibeDa\xF1o"
-  m_TagString: "RecibeDa\xF1o"
+  m_TagString: RecibeDano
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,11 +107,11 @@ MonoBehaviour:
   auxVolteado: 0
   rb: {fileID: 0}
   rd: {fileID: 0}
-  velocidad: 6
-  vidaMax: 10
+  velocidad: 9
+  vidaMax: 90
   vida: 0
-  distanciaX: 2
-  distanciaY: 2
+  distanciaX: 0.1
+  distanciaY: 0.1
 --- !u!58 &4562182358135009311
 CircleCollider2D:
   m_ObjectHideFlags: 0

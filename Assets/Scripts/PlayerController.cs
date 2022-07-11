@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool vulnerable = true;
     [Header("Stats")]
     public float VelocidadBase;
     public float DanoBase;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         vivo = true;
         rd = GetComponentInChildren<Renderer>();
+        vidaActual = vidaMax;
     }
     void Update()
     {
@@ -59,6 +61,12 @@ public class PlayerController : MonoBehaviour
                 atacar(destinoAtaq);
                 timerAtaque = 0;
             }
+
+
+        }
+        if(vidaActual <= 0)
+        {
+            vivo = false;
         }
     }
     
@@ -77,5 +85,27 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         rd.sortingOrder = -(int)(GetComponent<Collider2D>().bounds.min.y * 100);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.tag == "Enemy" && vulnerable)
+        {
+            vidaActual -= 10;
+
+            Invoke("HacerInvulnerable", 0f);
+
+
+        }
+
+    }
+    void HacerInvulnerable()
+    {
+        vulnerable = false;
+        Invoke("HacerVulnerable", 2.0f);
+    }
+    void HacerVulnerable()
+    {
+        vulnerable = true;
     }
 }
