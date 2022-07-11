@@ -11,7 +11,7 @@ public class enemyController : MonoBehaviour
     public Rigidbody2D rb;
     public Renderer rd;
     [Header("stats")]
-    public float velocidad = 9;
+    public float velocidad;
     public float vidaMax;
     public float vida;
     public float distanciaX;

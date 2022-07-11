@@ -5,6 +5,7 @@ using UnityEngine;
 public class ataquePlayer : MonoBehaviour
 {
     public Collider2D areaAtaque;
+    public PlayerController pc;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class ataquePlayer : MonoBehaviour
         if(collision.tag == "RecibeDaño")
         {
             Debug.Log("ataque");
-            collision.GetComponentInParent<enemyController>().vida -= 1;
+            collision.GetComponentInParent<enemyController>().vida -= pc.DanoBase;
         }
         
     }

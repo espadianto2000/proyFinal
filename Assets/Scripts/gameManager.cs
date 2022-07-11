@@ -19,6 +19,7 @@ public class gameManager : MonoBehaviour
     public int nivelVelocidadAtaqueExtra = 0;
     public bool desbloquearPersonaje2 = false;
     public bool desbloquearUlti = false;
+    public Texture2D cursorNormal;
     
     // Start is called before the first frame update
     void Start()
@@ -80,5 +81,9 @@ public class gameManager : MonoBehaviour
     public void irMenuPrincipal()
     {
         SceneManager.LoadScene("menu", LoadSceneMode.Single);
+    }
+    public void cambiarCursorMain()
+    {
+        Cursor.SetCursor(cursorNormal, Vector2.zero, CursorMode.ForceSoftware);
     }
 }
