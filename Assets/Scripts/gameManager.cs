@@ -25,6 +25,7 @@ public class gameManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
+        cambiarCursorMain();
         irMenuPrincipal();
     }
 
@@ -84,6 +85,6 @@ public class gameManager : MonoBehaviour
     }
     public void cambiarCursorMain()
     {
-        Cursor.SetCursor(cursorNormal, Vector2.zero, CursorMode.ForceSoftware);
+        Cursor.SetCursor(cursorNormal, new Vector2(24,24), CursorMode.ForceSoftware);
     }
 }

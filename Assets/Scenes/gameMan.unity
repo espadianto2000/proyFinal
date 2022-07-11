@@ -767,7 +767,7 @@ MonoBehaviour:
   nivelVelocidadAtaqueExtra: 0
   desbloquearPersonaje2: 0
   desbloquearUlti: 0
-  cursorNormal: {fileID: 2800000, guid: f75349a286817b6479976a10636d3b2c, type: 3}
+  cursorNormal: {fileID: 2800000, guid: 34e451941ecbccd41b871668489cecbf, type: 3}
 --- !u!4 &949441765
 Transform:
   m_ObjectHideFlags: 0
