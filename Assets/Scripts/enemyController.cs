@@ -10,6 +10,8 @@ public class enemyController : MonoBehaviour
     bool derecha = true;
     public Rigidbody2D rb;
     public Renderer rd;
+    public WaveManager waveM;
+    public GameObject corazon;
     [Header("stats")]
     public float velocidad;
     public float vidaMax;
@@ -23,6 +25,7 @@ public class enemyController : MonoBehaviour
         vida = vidaMax;
         rb = GetComponent<Rigidbody2D>();
         rd = GetComponentInChildren<Renderer>();
+        waveM = GameObject.Find("waveManager").GetComponent<WaveManager>();
     }
 
     // Update is called once per frame
@@ -30,6 +33,11 @@ public class enemyController : MonoBehaviour
     {
         if(vida<=0)
         {
+            Instantiate(waveM.exps[(waveM.nivelDificultad)<waveM.exps.Length?waveM.nivelDificultad:waveM.exps.Length-1], transform.position,Quaternion.identity);
+            if(Random.Range(0,100) < 5)
+            {
+                Instantiate(waveM.corazon, transform.position, Quaternion.identity);
+            }
             Destroy(transform.gameObject);
         }
         //Debug.Log(transform.position.x);

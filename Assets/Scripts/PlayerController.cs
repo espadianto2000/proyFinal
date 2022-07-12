@@ -94,10 +94,7 @@ public class PlayerController : MonoBehaviour
             vidaActual -= 10;
 
             Invoke("HacerInvulnerable", 0f);
-
-
         }
-
     }
     void HacerInvulnerable()
     {
@@ -107,5 +104,14 @@ public class PlayerController : MonoBehaviour
     void HacerVulnerable()
     {
         vulnerable = true;
+    }
+    public void getExp(float exp)
+    {
+
+    }
+    public void curar(float curacion)
+    {
+        vidaActual += curacion;
+        vidaActual = vidaActual > vidaMax ? vidaMax : vidaActual;
     }
 }

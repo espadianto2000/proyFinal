@@ -27,6 +27,8 @@ public class WaveManager : MonoBehaviour
     public int cantidadMaximaEnemigos = 30;
     public int iteracionOleada = 1;
     public GameObject player = null;
+    public GameObject[] exps;
+    public GameObject corazon;
 
     // Start is called before the first frame update
     void Start()
@@ -48,15 +50,18 @@ public class WaveManager : MonoBehaviour
             }
             oleadaAnterior++;
         }
-        if (Mathf.Floor(timeTotal / 360) > nivelDificultad)
+        if (Mathf.Floor(timeTotal / 300) > nivelDificultad)
         {
             if (nivelDificultad >= 10)
             {
                 nivelDificultad = 0;
                 iteracionOleada++;
                 cantidadMaximaEnemigos = 30;
+                enemigosPorOleada = 1;
             }
-            else { nivelDificultad++; }
+            else { nivelDificultad++;
+                enemigosPorOleada = 1;
+            }
             cantidadMaximaEnemigos+=5;
         }
     }
@@ -121,6 +126,6 @@ public class WaveManager : MonoBehaviour
                     break;
             }
         }
-        enemigosPorOleada = (enemigosPorOleada * 1.2f) < 20 ? (enemigosPorOleada * 1.2f) : 20;
+        enemigosPorOleada = (enemigosPorOleada * 1.1f) < 15 ? (enemigosPorOleada * 1.1f) : 15;
     }
 }

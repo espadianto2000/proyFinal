@@ -3,7 +3,12 @@ guid: efda9cd7ead9acd41b51c2bafd7f05e4
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player: {instanceID: 0}
+  - rb: {instanceID: 0}
+  - rd: {instanceID: 0}
+  - waveM: {instanceID: 0}
+  - corazon: {fileID: 8443182894587363548, guid: bd3d54a8fb4b1914b8d34d3cdc8c2f50, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

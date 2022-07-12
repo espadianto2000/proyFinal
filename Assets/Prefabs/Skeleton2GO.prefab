@@ -107,7 +107,8 @@ MonoBehaviour:
   auxVolteado: 0
   rb: {fileID: 0}
   rd: {fileID: 0}
-  velocidad: 6
+  waveM: {fileID: 0}
+  velocidad: 4
   vidaMax: 100
   vida: 0
   distanciaX: 0.1

@@ -50,8 +50,9 @@ MonoBehaviour:
   auxVolteado: 0
   rb: {fileID: 0}
   rd: {fileID: 0}
-  velocidad: 6
-  vidaMax: 40
+  waveM: {fileID: 0}
+  velocidad: 4
+  vidaMax: 10
   vida: 0
   distanciaX: 0.1
   distanciaY: 0.1
