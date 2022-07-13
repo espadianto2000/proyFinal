@@ -402,6 +402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c891553109b03c046aa3adca8845ab68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 03750a0e0084e4bf4b89bcd72606ab6c, type: 2}
+  vulnerable: 1
   VelocidadBase: 5
   DanoBase: 0
   vidaMax: 0

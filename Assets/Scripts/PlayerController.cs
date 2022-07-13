@@ -32,6 +32,20 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        if(!vulnerable)
+        {
+            if (transform.GetChild(0).GetComponent<SpriteRenderer>().enabled)
+            {
+                transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+
+            }
+            else
+            {
+                transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+
+            }
+        }
+
         if (vivo)
         {
             float movVertical = Input.GetAxis("Vertical") * VelocidadBase * Time.deltaTime;
@@ -98,6 +112,7 @@ public class PlayerController : MonoBehaviour
 
             HacerInvulnerable();
             recibeDano();
+
         }
     }
     void HacerInvulnerable()
@@ -108,6 +123,8 @@ public class PlayerController : MonoBehaviour
     void HacerVulnerable()
     {
         vulnerable = true;
+        transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+
     }
     public void getExp(float exp)
     {
@@ -126,5 +143,6 @@ public class PlayerController : MonoBehaviour
     void quitarDano()
     {
         transform.GetChild(0).GetComponent<SpriteRenderer>().material = origMaterial;
+
     }
 }
