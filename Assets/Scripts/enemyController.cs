@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class enemyController : MonoBehaviour
 {
+    private Material origMaterial;
+    public Material flashMaterial;
     public GameObject player;
     int estado = 1;
     public bool auxVolteado;
@@ -21,6 +23,7 @@ public class enemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        origMaterial = transform.GetChild(0).GetComponent<SpriteRenderer>().material;
         player = GameObject.Find("Heroe");
         vida = vidaMax;
         rb = GetComponent<Rigidbody2D>();
@@ -111,5 +114,22 @@ public class enemyController : MonoBehaviour
     private void FixedUpdate()
     {
         rd.sortingOrder = -(int)(GetComponent<Collider2D>().bounds.min.y*100);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "slash")
+        {
+            efectoFlash();
+        }
+    }
+    void efectoFlash()
+    {
+        transform.GetChild(0).GetComponent<SpriteRenderer>().material = flashMaterial;
+        Invoke("quitarFlash", 0.3f);
+    }
+    void quitarFlash()
+    {
+        transform.GetChild(0).GetComponent<SpriteRenderer>().material = origMaterial;
+
     }
 }

@@ -149,11 +149,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efda9cd7ead9acd41b51c2bafd7f05e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 2234f93644e764b348e2cad4908e2653, type: 2}
   player: {fileID: 0}
   auxVolteado: 0
   rb: {fileID: 0}
   rd: {fileID: 0}
   waveM: {fileID: 0}
+  corazon: {fileID: 0}
   velocidad: 4
   vidaMax: 10
   vida: 0

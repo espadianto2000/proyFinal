@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private Material origMaterial;
+    public Material flashMaterial;
     public bool vulnerable = true;
     [Header("Stats")]
     public float VelocidadBase;
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public float timerAtaque=0;
     void Start()
     {
+        origMaterial = transform.GetChild(0).GetComponent<SpriteRenderer>().material;
         vivo = true;
         rd = GetComponentInChildren<Renderer>();
         vidaActual = vidaMax;
@@ -93,7 +96,8 @@ public class PlayerController : MonoBehaviour
         {
             vidaActual -= 10;
 
-            Invoke("HacerInvulnerable", 0f);
+            HacerInvulnerable();
+            recibeDano();
         }
     }
     void HacerInvulnerable()
@@ -113,5 +117,14 @@ public class PlayerController : MonoBehaviour
     {
         vidaActual += curacion;
         vidaActual = vidaActual > vidaMax ? vidaMax : vidaActual;
+    }
+    void recibeDano()
+    {
+        transform.GetChild(0).GetComponent<SpriteRenderer>().material = flashMaterial;
+        Invoke("quitarDano", 0.3f);
+    }
+    void quitarDano()
+    {
+        transform.GetChild(0).GetComponent<SpriteRenderer>().material = origMaterial;
     }
 }
