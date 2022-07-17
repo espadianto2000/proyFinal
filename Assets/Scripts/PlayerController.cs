@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public Material flashMaterial;
     public bool vulnerable = true;
     public Rigidbody2D rb;
+    public gameManager gm;
     [Header("Stats")]
     public float VelocidadBase;
     public float DanoBase;
@@ -16,6 +17,12 @@ public class PlayerController : MonoBehaviour
     public bool vivo;
     public float tamanoAtaque;
     public float velocidadAtaque;
+    public float probCritico;
+    public float porcentajeExp;
+    public float porcentajePuntos;
+    public float porcentajeDinero;
+    public float porcentajeAparicionCorazones;
+    public float porcentajeCuraciones;
 
     [Header("movimiento")]
     public Vector2 destinoAtaque = new Vector2(0,0);
@@ -26,6 +33,21 @@ public class PlayerController : MonoBehaviour
     public float timerAtaque=0;
     void Start()
     {
+        if (GameObject.Find("gameManager") != null)
+        {
+            gm = GameObject.Find("gameManager").GetComponent<gameManager>();
+            vidaMax = vidaMax * (1 + (0.04f * gm.nivelVidaExtra));
+            DanoBase = DanoBase * (1 + (0.05f * gm.nivelDanoExtra));
+            VelocidadBase = VelocidadBase * (1 + (0.06f * gm.nivelVelocidadExtra));
+            probCritico = probCritico + (0.04f * gm.nivelCritExtra);
+            porcentajeExp = porcentajeExp + (0.05f*gm.nivelExpExtra);
+            porcentajePuntos = porcentajePuntos + (0.05f * gm.nivelPuntosExtra);
+            porcentajeDinero = porcentajeDinero + (0.05f * gm.nivelDineroExtra);
+            porcentajeAparicionCorazones = porcentajeAparicionCorazones + (0.03f * gm.nivelSpawnVida);
+            porcentajeCuraciones = porcentajeCuraciones + (0.04f * gm.nivelCuracionExtra);
+            velocidadAtaque = velocidadAtaque * (1 - (0.05f * gm.nivelVelocidadAtaqueExtra));
+            velocidadAtaque = velocidadAtaque < 0.3f ? 0.3f : velocidadAtaque;
+        }
         origMaterial = transform.GetChild(0).GetComponent<SpriteRenderer>().material;
         vivo = true;
         rd = GetComponentInChildren<Renderer>();
@@ -135,7 +157,7 @@ public class PlayerController : MonoBehaviour
     }
     public void curar(float curacion)
     {
-        vidaActual += curacion;
+        vidaActual += curacion*porcentajeCuraciones;
         vidaActual = vidaActual > vidaMax ? vidaMax : vidaActual;
     }
     void recibeDano()

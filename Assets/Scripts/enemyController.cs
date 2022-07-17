@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class enemyController : MonoBehaviour
@@ -13,7 +14,8 @@ public class enemyController : MonoBehaviour
     public Rigidbody2D rb;
     public Renderer rd;
     public WaveManager waveM;
-    public GameObject corazon;
+    //public GameObject corazon;
+    public GameObject hm;
     [Header("stats")]
     public float velocidad;
     public float vidaMax;
@@ -120,6 +122,8 @@ public class enemyController : MonoBehaviour
         if(collision.tag == "slash")
         {
             efectoFlash();
+            GameObject obj = Instantiate(hm, transform.position, Quaternion.identity);
+            obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = player.GetComponent<PlayerController>().DanoBase+"";
         }
     }
     void efectoFlash()
