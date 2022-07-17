@@ -20,7 +20,7 @@ public class WaveManager : MonoBehaviour
 
     [Header("Wave")]
     public float timeTotal=0f;
-    public float timeEntreOleadas = 4f;
+    public float timeEntreOleadas = 5f;
     public float enemigosPorOleada = 1f;
     public int oleadaAnterior = 0;
     public int nivelDificultad = 0;
@@ -50,7 +50,7 @@ public class WaveManager : MonoBehaviour
             }
             oleadaAnterior++;
         }
-        if (Mathf.Floor(timeTotal / 120) > nivelDificultad)
+        if (Mathf.Floor(timeTotal / 180) > nivelDificultad)
         {
             if (nivelDificultad >= 10)
             {

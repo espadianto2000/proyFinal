@@ -16,16 +16,19 @@ public class expOrb : MonoBehaviour
     }
     private void Update()
     {
+        if(Vector2.Distance(player.transform.position, transform.position) < rangoRecojo)
+        {
+            moverse = true;
+        }
+    }
+    private void FixedUpdate()
+    {
         if (moverse)
         {
             float x = player.transform.position.x - transform.position.x;
             float y = player.transform.position.y - transform.position.y;
-            Vector2 dir = new Vector2(x,y).normalized;
-            GetComponent<Rigidbody2D>().MovePosition(new Vector2(transform.position.x +dir.x *Time.deltaTime*13, transform.position.y + dir.y*Time.deltaTime*13));
-        }
-        if(Vector2.Distance(player.transform.position, transform.position) < rangoRecojo)
-        {
-            moverse = true;
+            Vector2 dir = new Vector2(x, y).normalized;
+            GetComponent<Rigidbody2D>().MovePosition(new Vector2(transform.position.x + dir.x * Time.deltaTime * 13, transform.position.y + dir.y * Time.deltaTime * 13));
         }
     }
 

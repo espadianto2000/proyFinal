@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class menuImprovesManager : MonoBehaviour
 {
@@ -49,5 +50,9 @@ public class menuImprovesManager : MonoBehaviour
         botones[botones.Length - 1].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = (gm.desbloquearUlti ? "desbloqueado" : "bloqueado");
         botones[botones.Length - 2].transform.GetChild(3).gameObject.SetActive(gm.desbloquearPersonaje2 ? false : true);
         botones[botones.Length - 1].transform.GetChild(3).gameObject.SetActive(gm.desbloquearUlti ? false : true);
+        botones[botones.Length - 2].transform.GetChild(4).GetComponent<Button>().interactable = gm.desbloquearPersonaje2 ? false : true;
+        botones[botones.Length - 1].transform.GetChild(4).GetComponent<Button>().interactable = gm.desbloquearUlti ? false : true;
+        botones[botones.Length - 2].transform.GetChild(4).GetComponent<boton>().enabled = gm.desbloquearPersonaje2 ? false : true;
+        botones[botones.Length - 1].transform.GetChild(4).GetComponent<boton>().enabled = gm.desbloquearUlti ? false : true;
     }
 }

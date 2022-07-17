@@ -16,6 +16,7 @@ public class enemyController : MonoBehaviour
     public WaveManager waveM;
     //public GameObject corazon;
     public GameObject hm;
+    public GameObject interfazManager;
     [Header("stats")]
     public float velocidad;
     public float vidaMax;
@@ -31,6 +32,7 @@ public class enemyController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rd = GetComponentInChildren<Renderer>();
         waveM = GameObject.Find("waveManager").GetComponent<WaveManager>();
+        interfazManager = GameObject.Find("interfazJuego");
     }
 
     // Update is called once per frame
@@ -39,13 +41,19 @@ public class enemyController : MonoBehaviour
         if(vida<=0)
         {
             Instantiate(waveM.exps[(waveM.nivelDificultad)<waveM.exps.Length?waveM.nivelDificultad:waveM.exps.Length-1], transform.position,Quaternion.identity);
-            if(Random.Range(0,100) < 5)
+            if(Random.Range(0,100) < player.GetComponent<PlayerController>().porcentajeAparicionCorazones*100)
             {
                 Instantiate(waveM.corazon, transform.position, Quaternion.identity);
             }
+            interfazManager.GetComponent<interfazInGameManager>().puntos += 1*player.GetComponent<PlayerController>().porcentajePuntos;
             Destroy(transform.gameObject);
         }
         //Debug.Log(transform.position.x);
+        
+    }
+    private void FixedUpdate()
+    {
+        rd.sortingOrder = -(int)(GetComponent<Collider2D>().bounds.min.y*100);
         if (Mathf.Abs(transform.position.x - player.transform.GetChild(0).transform.position.x) >= distanciaX || Mathf.Abs(transform.position.y - player.transform.GetChild(0).transform.position.y) >= distanciaY)
         {
             float dirx = player.transform.position.x - transform.position.x;
@@ -71,8 +79,8 @@ public class enemyController : MonoBehaviour
                     case 0:
                         break;
                     case 1:
-                        rb.MovePosition((Vector2)transform.position + (new Vector2(dirx, diry).normalized) * velocidad * Time.deltaTime);
-                        //transform.position = Vector3.MoveTowards(transform.position, player.GetComponent<PlayerController>().slash.transform.position, velocidad * Time.deltaTime);
+                        rb.MovePosition((Vector2)transform.position + (new Vector2(dirx, diry).normalized) * velocidad * Time.fixedDeltaTime);
+                        //transform.position = Vector3.MoveTowards(transform.position, player.GetComponent<PlayerController>().slash.transform.position, velocidad * Time.fixedDeltaTime);
                         break;
                     case 2:
                         break;
@@ -99,8 +107,8 @@ public class enemyController : MonoBehaviour
                     case 0:
                         break;
                     case 1:
-                        rb.MovePosition((Vector2)transform.position + (new Vector2(dirx, diry).normalized) * velocidad * Time.deltaTime);
-                        //transform.position = Vector3.MoveTowards(transform.position, player.GetComponent<PlayerController>().slash.transform.position, velocidad * Time.deltaTime);
+                        rb.MovePosition((Vector2)transform.position + (new Vector2(dirx, diry).normalized) * velocidad * Time.fixedDeltaTime);
+                        //transform.position = Vector3.MoveTowards(transform.position, player.GetComponent<PlayerController>().slash.transform.position, velocidad * Time.fixedDeltaTime);
                         break;
                     case 2:
                         break;
@@ -112,10 +120,6 @@ public class enemyController : MonoBehaviour
             transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 0);
             rb.velocity = Vector2.zero;
         }
-    }
-    private void FixedUpdate()
-    {
-        rd.sortingOrder = -(int)(GetComponent<Collider2D>().bounds.min.y*100);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
