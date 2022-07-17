@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ataquePlayer : MonoBehaviour
 {
     public Collider2D areaAtaque;
     public PlayerController pc;
+    public GameObject hmHeal;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,8 @@ public class ataquePlayer : MonoBehaviour
             if(pc.roboVida && Random.value<=0.05f)
             {
                 pc.curar(pc.DanoBase*0.3f);
+                GameObject obj = Instantiate(hmHeal,transform.parent.position, Quaternion.identity);
+                obj.GetComponentInChildren<TextMeshProUGUI>().text = (pc.DanoBase * 0.3f) + "";
             }
         }
         

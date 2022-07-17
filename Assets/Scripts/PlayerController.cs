@@ -69,12 +69,10 @@ public class PlayerController : MonoBehaviour
             if (transform.GetChild(0).GetComponent<SpriteRenderer>().enabled)
             {
                 transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
-
             }
             else
             {
                 transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
-
             }
         }
         
