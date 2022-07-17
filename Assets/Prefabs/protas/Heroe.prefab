@@ -153,6 +153,7 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: 03750a0e0084e4bf4b89bcd72606ab6c, type: 2}
   vulnerable: 1
   rb: {fileID: 2109756388229665191}
+  gm: {fileID: 0}
   VelocidadBase: 0
   DanoBase: 0
   vidaMax: 200
@@ -160,10 +161,20 @@ MonoBehaviour:
   vivo: 1
   tamanoAtaque: 1
   velocidadAtaque: 3.5
+  probCritico: 0
+  porcentajeExp: 0
+  porcentajePuntos: 0
+  porcentajeDinero: 0
+  porcentajeAparicionCorazones: 0
+  porcentajeCuraciones: 0
+  vidaSlider: {fileID: 0}
   destinoAtaque: {x: 325.95645, y: -39.350983}
   rd: {fileID: 0}
   slash: {fileID: 3216211496783763100}
   timerAtaque: 2.752571
+  xpNecesaria: 200
+  exp: 0
+  armaduraEspinas: 0
 --- !u!70 &929944562
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

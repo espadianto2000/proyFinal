@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour
     [Header("subidaNivel")]
     public float xpNecesaria=200;
     public float exp;
+    [Header("Poderes")]
+    public bool armaduraEspinas;
+    public bool roboVida;
     void Start()
     {
         if (GameObject.Find("gameManager") != null)
@@ -74,6 +77,7 @@ public class PlayerController : MonoBehaviour
 
             }
         }
+        
         if(vidaActual <= 0)
         {
             vivo = false;
@@ -105,21 +109,21 @@ public class PlayerController : MonoBehaviour
         rd.sortingOrder = -(int)(GetComponent<Collider2D>().bounds.min.y * 100);
         if (vivo)
         {
-            float movVertical = Input.GetAxis("Vertical");
-            float movHorizontal = Input.GetAxis("Horizontal");
+            float movVertical = Input.GetAxisRaw("Vertical");
+            float movHorizontal = Input.GetAxisRaw("Horizontal");
             Vector2 movimiento = new Vector2(movHorizontal, movVertical).normalized;
             rb.MovePosition((Vector2)transform.position + (movimiento * VelocidadBase * Time.fixedDeltaTime));
             timerAtaque += Time.fixedDeltaTime;
             //transform.Translate(movHorizontal, movVertical, 0);
-            if (Input.GetAxis("Horizontal") > 0)
+            if (Input.GetAxisRaw("Horizontal") > 0)
             {
                 transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
             }
-            else if (Input.GetAxis("Horizontal") < 0)
+            else if (Input.GetAxisRaw("Horizontal") < 0)
             {
                 transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
             }
-            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
                 transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 1);
             }
@@ -146,7 +150,11 @@ public class PlayerController : MonoBehaviour
         if(collision.tag == "Enemy" && vulnerable)
         {
             vidaActual -= 10;
-
+            if(armaduraEspinas)
+            {
+                collision.gameObject.GetComponent<enemyController>().vida -= DanoBase/4;
+                collision.gameObject.GetComponent<enemyController>().efectoFlash();
+            }
             HacerInvulnerable();
             recibeDano();
         }

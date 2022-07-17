@@ -130,7 +130,7 @@ public class enemyController : MonoBehaviour
             obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = player.GetComponent<PlayerController>().DanoBase+"";
         }
     }
-    void efectoFlash()
+    public void efectoFlash()
     {
         transform.GetChild(0).GetComponent<SpriteRenderer>().material = flashMaterial;
         Invoke("quitarFlash", 0.3f);

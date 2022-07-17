@@ -24,6 +24,10 @@ public class ataquePlayer : MonoBehaviour
         {
             Debug.Log("ataque");
             collision.GetComponentInParent<enemyController>().vida -= pc.DanoBase;
+            if(pc.roboVida && Random.value<=0.05f)
+            {
+                pc.curar(pc.DanoBase*0.3f);
+            }
         }
         
     }
