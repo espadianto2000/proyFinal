@@ -110,7 +110,7 @@ MonoBehaviour:
   rd: {fileID: 0}
   waveM: {fileID: 0}
   corazon: {fileID: 0}
-  velocidad: 4
+  velocidad: 2.5
   vidaMax: 100
   vida: 0
   distanciaX: 0.1

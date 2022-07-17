@@ -50,7 +50,7 @@ public class WaveManager : MonoBehaviour
             }
             oleadaAnterior++;
         }
-        if (Mathf.Floor(timeTotal / 300) > nivelDificultad)
+        if (Mathf.Floor(timeTotal / 120) > nivelDificultad)
         {
             if (nivelDificultad >= 10)
             {

@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private Material origMaterial;
     public Material flashMaterial;
     public bool vulnerable = true;
+    public Rigidbody2D rb;
     [Header("Stats")]
     public float VelocidadBase;
     public float DanoBase;
@@ -48,10 +49,12 @@ public class PlayerController : MonoBehaviour
 
         if (vivo)
         {
-            float movVertical = Input.GetAxis("Vertical") * VelocidadBase * Time.deltaTime;
-            float movHorizontal = Input.GetAxis("Horizontal") * VelocidadBase * Time.deltaTime;
+            float movVertical = Input.GetAxis("Vertical");
+            float movHorizontal = Input.GetAxis("Horizontal");
+            Vector2 movimiento = new Vector2(movHorizontal, movVertical).normalized;
+            rb.MovePosition((Vector2)transform.position + ( movimiento * VelocidadBase * Time.deltaTime));
             timerAtaque += Time.deltaTime;
-            transform.Translate(movHorizontal, movVertical, 0);
+            //transform.Translate(movHorizontal, movVertical, 0);
             if (Input.GetAxis("Horizontal") > 0)
             {
                 transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
