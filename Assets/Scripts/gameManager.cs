@@ -20,10 +20,12 @@ public class gameManager : MonoBehaviour
     public bool desbloquearPersonaje2 = false;
     public bool desbloquearUlti = false;
     public Texture2D cursorNormal;
-    
+    public int[] statsArr;
+
     // Start is called before the first frame update
     void Start()
     {
+        statsArr = new int[10] { 0,0,0,0,0,0,0,0,0,0};
         DontDestroyOnLoad(gameObject);
         cambiarCursorMain();
         irMenuPrincipal();
@@ -86,5 +88,121 @@ public class gameManager : MonoBehaviour
     public void cambiarCursorMain()
     {
         Cursor.SetCursor(cursorNormal, new Vector2(24,24), CursorMode.ForceSoftware);
+    }
+    public void desbloquear(int orden)
+    {
+        switch (orden)
+        {
+            case 0:
+                if (dinero >= 2500)
+                {
+                    desbloquearPersonaje2 = true;
+                    dinero -= 2500;
+                }
+                
+                break;
+            case 1:
+                if(dinero >= 1000)
+                {
+                    desbloquearUlti = true;
+                    dinero -= 1000;
+                }
+                
+                break;
+        }
+    }
+    public void mejorar(int orden)
+    {
+        switch (orden)
+        {
+            case 0:
+                if(dinero>=(100+ 100 * (nivelVidaExtra * nivelVidaExtra))){
+                    dinero -= 100 + 100 * (nivelVidaExtra * nivelVidaExtra);
+                    nivelVidaExtra++;
+                    statsArr[orden] = nivelVidaExtra;
+                }
+                break;
+            case 1:
+                if (dinero >= (100 + 100 * (nivelDanoExtra * nivelDanoExtra)))
+                {
+                    dinero -= 100 + 100 * (nivelDanoExtra * nivelDanoExtra);
+                    nivelDanoExtra++;
+                    statsArr[orden] = nivelDanoExtra;
+                }
+                    
+                break;
+            case 2:
+                if (dinero >= (100 + 100 * (nivelVelocidadExtra * nivelVelocidadExtra)))
+                {
+                    dinero -= 100 + 100 * (nivelVelocidadExtra * nivelVelocidadExtra);
+                    nivelVelocidadExtra++;
+                    statsArr[orden] = nivelVelocidadExtra;
+                }
+                    
+                break;
+            case 3:
+                if (dinero >= (100 + 100 * (nivelCritExtra * nivelCritExtra)))
+                {
+                    dinero -= 100 + 100 * (nivelCritExtra * nivelCritExtra);
+                    nivelCritExtra++;
+                    statsArr[orden] = nivelCritExtra;
+                }
+                    
+                break;
+            case 4:
+                if (dinero >= (100 + 100 * (nivelExpExtra * nivelExpExtra)))
+                {
+                    dinero -= 100 + 100 * (nivelExpExtra * nivelExpExtra);
+                    nivelExpExtra++;
+                    statsArr[orden] = nivelExpExtra;
+                }
+                    
+                break;
+            case 5:
+                if (dinero >= (100 + 100 * (nivelPuntosExtra * nivelPuntosExtra)))
+                {
+                    dinero -= 100 + 100 * (nivelPuntosExtra * nivelPuntosExtra);
+                    nivelPuntosExtra++;
+                    statsArr[orden] = nivelPuntosExtra;
+                }
+                    
+                break;
+            case 6:
+                if (dinero >= (100 + 100 * (nivelDineroExtra * nivelDineroExtra)))
+                {
+                    dinero -= 100 + 100 * (nivelDineroExtra * nivelDineroExtra);
+                    nivelDineroExtra++;
+                    statsArr[orden] = nivelDineroExtra;
+                }
+                    
+                break;
+            case 7:
+                if (dinero >= (100 + 100 * (nivelSpawnVida * nivelSpawnVida)))
+                {
+                    dinero -= 100 + 100 * (nivelSpawnVida * nivelSpawnVida);
+                    nivelSpawnVida++;
+                    statsArr[orden] = nivelSpawnVida;
+                }
+                    
+                break;
+            case 8:
+                if (dinero >= (100 + 100 * (nivelCuracionExtra * nivelCuracionExtra)))
+                {
+                    dinero -= 100 + 100 * (nivelCuracionExtra * nivelCuracionExtra);
+                    nivelCuracionExtra++;
+                    statsArr[orden] = nivelCuracionExtra;
+                }
+                    
+                break;
+            case 9:
+                if (dinero >= (100 + 100 * (nivelVelocidadAtaqueExtra * nivelVelocidadAtaqueExtra)))
+                {   
+                    dinero -= 100 + 100 * (nivelVelocidadAtaqueExtra * nivelVelocidadAtaqueExtra);
+                    nivelVelocidadAtaqueExtra++;
+                    statsArr[orden] = nivelVelocidadAtaqueExtra;
+                }
+                    
+                break;
+        }
     }
 }

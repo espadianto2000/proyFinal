@@ -24,6 +24,7 @@ public class botonUIMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             if (GetComponent<Image>().color.a < 0.3f)
             {
+                Debug.Log("intentando subir la transparencia");
                 Color cl = GetComponent<Image>().color;
                 cl.a = cl.a + Time.fixedDeltaTime * 2;
                 GetComponent<Image>().color = cl;
