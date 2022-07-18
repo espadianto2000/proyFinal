@@ -5,6 +5,7 @@ using UnityEngine;
 public class cactus : MonoBehaviour
 {
     public float vida = 50;
+    public float tiempoVida = 30;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +16,15 @@ public class cactus : MonoBehaviour
     void Update()
     {
         if(vida <= 0)
+        {
+            Destroy(gameObject);
+        }
+        if(tiempoVida>0)
+        {
+            tiempoVida -= Time.deltaTime;
+
+        }
+        if (tiempoVida<=0)
         {
             Destroy(gameObject);
         }
