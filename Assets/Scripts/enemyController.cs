@@ -87,7 +87,7 @@ public class enemyController : MonoBehaviour
                         break;
                 }
             }
-            else
+            else if(player.GetComponent<PlayerController>().esVisible)
             {
                 if (transform.GetChild(0).GetComponent<Animator>().GetInteger("estado") != estado)
                 {
@@ -120,6 +120,10 @@ public class enemyController : MonoBehaviour
         {
             transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 0);
             rb.velocity = Vector2.zero;
+        }
+        if(!player.GetComponent<PlayerController>().esVisible)
+        {
+            transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 0);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

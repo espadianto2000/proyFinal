@@ -54,6 +54,10 @@ public class PlayerController : MonoBehaviour
     public bool escudoInmortal;
     public float delayInmortal;
     public bool activadoInmortal;
+    public bool invisibilidad;
+    public bool invisibilidadActiva;
+    public bool esVisible = true;
+    public float inviDelay;
     void Start()
     {
         if (GameObject.Find("gameManager") != null)
@@ -126,8 +130,30 @@ public class PlayerController : MonoBehaviour
             delayInmortal = 0;
             activadoInmortal = false;
         }
+        if(invisibilidad && Input.GetKeyDown(KeyCode.J) && !invisibilidadActiva)
+        {
+            transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 0.5f);
+            invisibilidadActiva = true;
+            esVisible = false;
+            Invoke("hacerVisible", 5);
+            Debug.Log("Invisible");
+        }
+        if(invisibilidadActiva)
+        {
+            inviDelay += Time.deltaTime;
+        }
+        if(inviDelay >= 60)
+        {
+            inviDelay = 0;
+            invisibilidadActiva = false;
+
+        }
     }
-    
+    void hacerVisible()
+    {
+        transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 1f);
+        esVisible = true;
+    }
     public void atacar(Vector2 pos)
     {
         Vector3 newdir = pos;
