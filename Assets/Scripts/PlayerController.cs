@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     public float porcentajeAparicionCorazones;
     public float porcentajeCuraciones;
     public Slider vidaSlider;
+    public GameObject dagaPrefab;
+    public GameObject cactusPrefab;
 
     [Header("movimiento")]
     public Vector2 destinoAtaque = new Vector2(0,0);
@@ -52,21 +54,19 @@ public class PlayerController : MonoBehaviour
     public float escudoProtectorVida = 50;
     public float delayEscudo;
     public bool escudoInmortal;
-    public float delayInmortal;
-    public bool activadoInmortal;
+    private float delayInmortal;
+    private bool activadoInmortal;
     public bool invisibilidad;
-    public bool invisibilidadActiva;
+    private bool invisibilidadActiva;
     public bool esVisible = true;
-    public float inviDelay;
+    private float inviDelay;
     public bool cactusPoder;
-    public bool cactusActivado;
+    private bool cactusActivado;
     public float cactusDelay;
-    public GameObject cactusPrefab;
     public bool evadirAtaque;
-    public float probEvadir;
-    public GameObject dagaPrefab;
+    private float probEvadir = 0.3f;
     public bool dagaPoder;
-    public float dagaDelay;
+    private float dagaDelay;
     void Start()
     {
         if (GameObject.Find("gameManager") != null)
@@ -262,7 +262,7 @@ public class PlayerController : MonoBehaviour
                     }
                     else if (escudoProtector && escudoProtectorVida > 0)
                     {
-                        vidaActual -= collision.GetComponent<enemyController>().dano;
+                        escudoProtectorVida -= collision.GetComponent<enemyController>().dano;
                         if (armaduraEspinas)
                         {
                             collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 4;
