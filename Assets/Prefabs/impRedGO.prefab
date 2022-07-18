@@ -109,13 +109,14 @@ MonoBehaviour:
   rb: {fileID: 0}
   rd: {fileID: 0}
   waveM: {fileID: 0}
-  corazon: {fileID: 0}
   hm: {fileID: 7099049707023095260, guid: 5816a839936978249b0f4c2a55ec216c, type: 3}
+  interfazManager: {fileID: 0}
   velocidad: 2.5
   vidaMax: 10
   vida: 0
   distanciaX: 0.1
   distanciaY: 0.1
+  dano: 10
 --- !u!58 &8417114335303779380
 CircleCollider2D:
   m_ObjectHideFlags: 0

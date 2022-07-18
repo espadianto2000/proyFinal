@@ -23,6 +23,7 @@ public class enemyController : MonoBehaviour
     public float vida;
     public float distanciaX;
     public float distanciaY;
+    public float dano;
     // Start is called before the first frame update
     void Start()
     {

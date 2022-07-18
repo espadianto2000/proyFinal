@@ -51,6 +51,9 @@ public class PlayerController : MonoBehaviour
     public bool escudoProtector;
     public float escudoProtectorVida = 50;
     public float delayEscudo;
+    public bool escudoInmortal;
+    public float delayInmortal;
+    public bool activadoInmortal;
     void Start()
     {
         if (GameObject.Find("gameManager") != null)
@@ -114,6 +117,15 @@ public class PlayerController : MonoBehaviour
             escudoProtectorVida = 50;
             delayEscudo = 0;
         }
+        if(escudoInmortal && activadoInmortal)
+        {
+            delayInmortal += Time.deltaTime;
+        }
+        if(delayInmortal >= 180)
+        {
+            delayInmortal = 0;
+            activadoInmortal = false;
+        }
     }
     
     public void atacar(Vector2 pos)
@@ -173,31 +185,40 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag == "Enemy" && vulnerable)
         {
-            if (!escudoProtector || escudoProtectorVida <= 0)
+            if (!escudoInmortal || vidaActual>collision.GetComponent<enemyController>().dano || activadoInmortal)
             {
-                vidaActual -= 10;
-                if (armaduraEspinas)
+                if (!escudoProtector || escudoProtectorVida <= 0)
                 {
-                    collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 4;
-                    collision.gameObject.GetComponent<enemyController>().efectoFlash();
-                    GameObject obj = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y+0.5f, collision.transform.position.z), Quaternion.identity);
-                    obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (DanoBase/4) + "";
+                    vidaActual -= collision.GetComponent<enemyController>().dano;
+                    if (armaduraEspinas)
+                    {
+                        collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 4;
+                        collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                        GameObject obj = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
+                        obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (DanoBase / 4) + "";
+                    }
+                    HacerInvulnerable();
+                    recibeDano();
                 }
-                HacerInvulnerable();
-                recibeDano();
-            }
-            else if (escudoProtector && escudoProtectorVida > 0)
-            {
-                escudoProtectorVida -= 10;
-                if (armaduraEspinas)
+                else if (escudoProtector && escudoProtectorVida > 0)
                 {
-                    collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 4;
-                    collision.gameObject.GetComponent<enemyController>().efectoFlash();
-                    GameObject obj = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
-                    obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (DanoBase / 4) + "";
-                }
-                HacerInvulnerable();
+                    vidaActual -= collision.GetComponent<enemyController>().dano;
+                    if (armaduraEspinas)
+                    {
+                        collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 4;
+                        collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                        GameObject obj = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
+                        obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (DanoBase / 4) + "";
+                    }
+                    HacerInvulnerable();
 
+                }
+            }
+            else if(escudoInmortal && collision.GetComponent<enemyController>().dano>=vidaActual && !activadoInmortal)
+            {
+                activadoInmortal = true;
+                vidaActual = 1;
+                HacerInvulnerableEscudo();
             }
         }
     }
@@ -211,6 +232,11 @@ public class PlayerController : MonoBehaviour
         vulnerable = true;
         transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
 
+    }
+    void HacerInvulnerableEscudo()
+    {
+        vulnerable = false;
+        Invoke("HacerVulnerable", 5.0f);
     }
     public void getExp(float expGained)
     {
