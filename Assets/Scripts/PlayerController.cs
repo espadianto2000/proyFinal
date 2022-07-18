@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour
     [Header("Poderes")]
     public bool armaduraEspinas;
     public bool roboVida;
+    public bool escudoProtector;
+    public float escudoProtectorVida = 50;
+    public float delayEscudo;
     void Start()
     {
         if (GameObject.Find("gameManager") != null)
@@ -88,6 +91,16 @@ public class PlayerController : MonoBehaviour
             xpNecesaria = xpNecesaria * 1.5f;
         }
         vidaSlider.value = vidaActual / vidaMax;
+        if(escudoProtector && escudoProtectorVida<=0)
+        {
+            //escudoProtector = false;
+            delayEscudo += Time.deltaTime;
+        }
+        if(delayEscudo >= 60)
+        {
+            escudoProtectorVida = 50;
+            delayEscudo = 0;
+        }
     }
     
     public void atacar(Vector2 pos)
@@ -147,14 +160,28 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.tag == "Enemy" && vulnerable)
         {
-            vidaActual -= 10;
-            if(armaduraEspinas)
+            if (escudoProtectorVida<=0)
             {
-                collision.gameObject.GetComponent<enemyController>().vida -= DanoBase/4;
-                collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                vidaActual -= 10;
+                if (armaduraEspinas)
+                {
+                    collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 4;
+                    collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                }
+                HacerInvulnerable();
+                recibeDano();
             }
-            HacerInvulnerable();
-            recibeDano();
+            else if(escudoProtectorVida>0)
+            {
+                escudoProtectorVida -= 10;
+                if (armaduraEspinas)
+                {
+                    collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 4;
+                    collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                }
+                HacerInvulnerable();
+
+            }
         }
     }
     void HacerInvulnerable()
