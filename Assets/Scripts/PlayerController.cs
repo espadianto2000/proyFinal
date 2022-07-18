@@ -40,8 +40,11 @@ public class PlayerController : MonoBehaviour
     public float timerAtaque=0;
 
     [Header("subidaNivel")]
-    public float xpNecesaria=200;
+    public float xpNecesaria;
     public float exp;
+    public GameObject menuSubidaNivel;
+    public Slider xpSlider;
+
     [Header("Poderes")]
     public bool armaduraEspinas;
     public bool roboVida;
@@ -72,7 +75,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        if(!vulnerable)
+        if(!vulnerable & vivo)
         {
             if (transform.GetChild(0).GetComponent<SpriteRenderer>().enabled)
             {
@@ -87,15 +90,19 @@ public class PlayerController : MonoBehaviour
         if(vidaActual <= 0 && vivo)
         {
             vivo = false;
+            transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 2);
             Invoke("desplegarMenuMuerte",2.5f);
         }
         if (exp >= xpNecesaria)
         {
             exp = exp - xpNecesaria;
             Debug.Log("se sube de nivel");
-            //manejar subida de nivel
             xpNecesaria = xpNecesaria * 1.5f;
+            //manejar subida de nivel
+            menuSubidaNivel.SetActive(true);
+            Time.timeScale = 0;
         }
+        xpSlider.value = exp / xpNecesaria;
         vidaSlider.value = vidaActual / vidaMax;
         if(escudoProtector && escudoProtectorVida<=0)
         {
@@ -214,7 +221,7 @@ public class PlayerController : MonoBehaviour
         vidaActual += curacion*porcentajeCuraciones;
         vidaActual = vidaActual > vidaMax ? vidaMax : vidaActual;
         GameObject obj = Instantiate(hmHeal, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
-        obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (DanoBase * 0.3f) + "";
+        obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = curacion + "";
     }
     void recibeDano()
     {
@@ -233,6 +240,5 @@ public class PlayerController : MonoBehaviour
         menuMuerte.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = Mathf.Round(menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos / 5f) + "$";
         menuMuerte.SetActive(true);
         Time.timeScale = 0;
-        gm.estadoPausa = true;
     }
 }

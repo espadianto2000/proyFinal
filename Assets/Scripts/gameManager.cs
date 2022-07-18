@@ -19,6 +19,7 @@ public class gameManager : MonoBehaviour
     public int nivelVelocidadAtaqueExtra = 0;
     public bool desbloquearPersonaje2 = false;
     public bool desbloquearUlti = false;
+    public float highScore=0;
     public Texture2D cursorNormal;
     public int[] statsArr;
 
@@ -36,15 +37,17 @@ public class gameManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P) && (SceneManager.GetActiveScene().name == "jugador1" || SceneManager.GetActiveScene().name == "jugador2"))
         {
-            if (estadoPausa)
+            if((Time.timeScale == 0 && estadoPausa) || (Time.timeScale == 1 && !estadoPausa))
             {
-                outPausa();
+                if (estadoPausa)
+                {
+                    outPausa();
+                }
+                else
+                {
+                    pausa();
+                }
             }
-            else
-            {
-                pausa();
-            }
-
         }
     }
     public void pausa()
