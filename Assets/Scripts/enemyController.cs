@@ -39,6 +39,7 @@ public class enemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if(vida<=0)
         {
             Instantiate(waveM.exps[(waveM.nivelDificultad)<waveM.exps.Length?waveM.nivelDificultad:waveM.exps.Length-1], transform.position,Quaternion.identity);
@@ -133,6 +134,13 @@ public class enemyController : MonoBehaviour
             efectoFlash();
             GameObject obj = Instantiate(hm, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
             obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = player.GetComponent<PlayerController>().DanoBase+"";
+        }
+        if(collision.tag == "cactus")
+        {
+            collision.GetComponent<cactus>().vida -= 10;
+            efectoFlash();
+            vida -= 10;
+
         }
     }
     public void efectoFlash()

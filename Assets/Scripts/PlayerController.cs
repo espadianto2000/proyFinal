@@ -58,6 +58,10 @@ public class PlayerController : MonoBehaviour
     public bool invisibilidadActiva;
     public bool esVisible = true;
     public float inviDelay;
+    public bool cactusPoder;
+    public bool cactusActivado;
+    public float cactusDelay;
+    public GameObject cactusPrefab;
     void Start()
     {
         if (GameObject.Find("gameManager") != null)
@@ -147,6 +151,20 @@ public class PlayerController : MonoBehaviour
             inviDelay = 0;
             invisibilidadActiva = false;
 
+        }
+        if(cactusPoder && Input.GetKeyDown(KeyCode.Space) && !cactusActivado)
+        {
+            Instantiate(cactusPrefab, transform.position, Quaternion.identity);
+            cactusActivado = true;
+        }
+        if(cactusActivado)
+        {
+            cactusDelay += Time.deltaTime;
+        }
+        if(cactusDelay>=20)
+        {
+            cactusDelay = 0;
+            cactusActivado = false;
         }
     }
     void hacerVisible()
