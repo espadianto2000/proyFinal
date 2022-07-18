@@ -154,6 +154,10 @@ MonoBehaviour:
   vulnerable: 1
   rb: {fileID: 2109756388229665191}
   gm: {fileID: 0}
+  hmThorns: {fileID: 0}
+  menuMuerte: {fileID: 0}
+  wm: {fileID: 0}
+  hmHeal: {fileID: 0}
   VelocidadBase: 0
   DanoBase: 0
   vidaMax: 200
@@ -174,7 +178,26 @@ MonoBehaviour:
   timerAtaque: 2.752571
   xpNecesaria: 200
   exp: 0
+  menuSubidaNivel: {fileID: 0}
+  xpSlider: {fileID: 0}
   armaduraEspinas: 0
+  roboVida: 0
+  escudoProtector: 0
+  escudoProtectorVida: 50
+  delayEscudo: 0
+  escudoInmortal: 0
+  delayInmortal: 0
+  activadoInmortal: 0
+  invisibilidad: 0
+  invisibilidadActiva: 0
+  esVisible: 1
+  inviDelay: 0
+  cactusPoder: 0
+  cactusActivado: 0
+  cactusDelay: 0
+  cactusPrefab: {fileID: 5623412627835413981, guid: b3a1aafb6efa34dd0b9706ba5027e99f, type: 3}
+  evadirAtaque: 0
+  probEvadir: 0.3
 --- !u!70 &929944562
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -502,3 +525,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   areaAtaque: {fileID: 6062015503451426185}
   pc: {fileID: 3216211495730839933}
+  hmHeal: {fileID: 0}
