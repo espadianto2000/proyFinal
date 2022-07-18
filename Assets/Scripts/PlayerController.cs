@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,9 @@ public class PlayerController : MonoBehaviour
     public bool vulnerable = true;
     public Rigidbody2D rb;
     public gameManager gm;
+    public GameObject hmThorns;
+    public GameObject menuMuerte;
+    public WaveManager wm;
     [Header("Stats")]
     public float VelocidadBase;
     public float DanoBase;
@@ -79,9 +83,10 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        if(vidaActual <= 0)
+        if(vidaActual <= 0 && vivo)
         {
             vivo = false;
+            Invoke("desplegarMenuMuerte",2.5f);
         }
         if (exp >= xpNecesaria)
         {
@@ -158,9 +163,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy" && vulnerable)
+        if (collision.tag == "Enemy" && vulnerable)
         {
-            if (escudoProtectorVida<=0)
+            if (!escudoProtector || escudoProtectorVida <= 0)
             {
                 vidaActual -= 10;
                 if (armaduraEspinas)
@@ -171,7 +176,7 @@ public class PlayerController : MonoBehaviour
                 HacerInvulnerable();
                 recibeDano();
             }
-            else if(escudoProtectorVida>0)
+            else if (escudoProtector && escudoProtectorVida > 0)
             {
                 escudoProtectorVida -= 10;
                 if (armaduraEspinas)
@@ -213,5 +218,14 @@ public class PlayerController : MonoBehaviour
     {
         transform.GetChild(0).GetComponent<SpriteRenderer>().material = origMaterial;
 
+    }
+    void desplegarMenuMuerte()
+    {
+        menuMuerte.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = ((Mathf.Round(wm.timeTotal*100))/100)+"s";
+        menuMuerte.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos + "";
+        menuMuerte.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = Mathf.Round(menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos / 5f) + "$";
+        menuMuerte.SetActive(true);
+        Time.timeScale = 0;
+        gm.estadoPausa = true;
     }
 }
