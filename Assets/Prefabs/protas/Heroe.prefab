@@ -198,6 +198,9 @@ MonoBehaviour:
   cactusPrefab: {fileID: 5623412627835413981, guid: b3a1aafb6efa34dd0b9706ba5027e99f, type: 3}
   evadirAtaque: 0
   probEvadir: 0.3
+  dagaPrefab: {fileID: 4102780300526632790, guid: 7897a50c520d04802a36cadf1cfe010a, type: 3}
+  dagaPoder: 0
+  dagaDelay: 0
 --- !u!70 &929944562
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

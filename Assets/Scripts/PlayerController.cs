@@ -64,6 +64,9 @@ public class PlayerController : MonoBehaviour
     public GameObject cactusPrefab;
     public bool evadirAtaque;
     public float probEvadir;
+    public GameObject dagaPrefab;
+    public bool dagaPoder;
+    public float dagaDelay;
     void Start()
     {
         if (GameObject.Find("gameManager") != null)
@@ -167,6 +170,15 @@ public class PlayerController : MonoBehaviour
         {
             cactusDelay = 0;
             cactusActivado = false;
+        }
+        if(dagaPoder)
+        {
+            dagaDelay += Time.deltaTime;
+        }
+        if(dagaDelay >= 3)
+        {
+            dagaDelay = 0;
+            Instantiate(dagaPrefab, transform.position, transform.rotation * Quaternion.identity);
         }
     }
     void hacerVisible()
