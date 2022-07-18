@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public GameObject hmThorns;
     public GameObject menuMuerte;
     public WaveManager wm;
+    public GameObject hmHeal;
     [Header("Stats")]
     public float VelocidadBase;
     public float DanoBase;
@@ -172,6 +173,8 @@ public class PlayerController : MonoBehaviour
                 {
                     collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 4;
                     collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                    GameObject obj = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y+0.5f, collision.transform.position.z), Quaternion.identity);
+                    obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (DanoBase/4) + "";
                 }
                 HacerInvulnerable();
                 recibeDano();
@@ -183,6 +186,8 @@ public class PlayerController : MonoBehaviour
                 {
                     collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 4;
                     collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                    GameObject obj = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
+                    obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (DanoBase / 4) + "";
                 }
                 HacerInvulnerable();
 
@@ -208,6 +213,8 @@ public class PlayerController : MonoBehaviour
     {
         vidaActual += curacion*porcentajeCuraciones;
         vidaActual = vidaActual > vidaMax ? vidaMax : vidaActual;
+        GameObject obj = Instantiate(hmHeal, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+        obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (DanoBase * 0.3f) + "";
     }
     void recibeDano()
     {

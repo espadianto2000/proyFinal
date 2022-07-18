@@ -29,8 +29,7 @@ public class ataquePlayer : MonoBehaviour
             if(pc.roboVida && Random.value<=0.05f)
             {
                 pc.curar(pc.DanoBase*0.3f);
-                GameObject obj = Instantiate(hmHeal,transform.parent.position, Quaternion.identity);
-                obj.GetComponentInChildren<TextMeshProUGUI>().text = (pc.DanoBase * 0.3f) + "";
+                
             }
         }
         
