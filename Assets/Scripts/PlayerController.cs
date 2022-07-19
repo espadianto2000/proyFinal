@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public Slider vidaSlider;
     public GameObject dagaPrefab;
     public GameObject cactusPrefab;
+    public GameObject bombaPrefab;
     public int nivelVidaMejora = 0;
     public int nivelDanoMejora = 0;
     public int nivelVelocidadMejora = 0;
@@ -79,6 +80,9 @@ public class PlayerController : MonoBehaviour
     private float dagaDelay;
     public float cargaUlti=0;
     public bool ultiUsado = false;
+    public bool bombaPoder;
+    public bool bombaActivada;
+    public float bombaDelay;
     [Header("Nivel Poderes")]
     public int armEspLVL;
     public int roboVidaLVL;
@@ -88,7 +92,7 @@ public class PlayerController : MonoBehaviour
     public int cactusLVL;
     public int evasionLVL;
     public int dagaLVL;
-
+    public int bombaLVL;
     void Start()
     {
         if (GameObject.Find("gameManager") != null)
@@ -565,7 +569,93 @@ public class PlayerController : MonoBehaviour
                     break;          
             }
         }
-        
+        if (bombaLVL >= 1)
+        {
+            switch (bombaLVL)
+            {
+                case 1:
+                    if (bombaPoder && Input.GetKeyDown(KeyCode.L) && !bombaActivada)
+                    {
+                        Instantiate(bombaPrefab, transform.position, Quaternion.identity);
+                        bombaActivada = true;
+                    }
+                    if (bombaActivada)
+                    {
+                        bombaDelay += Time.deltaTime;
+                    }
+                    if (bombaDelay >= 20)
+                    {
+                        bombaDelay = 0;
+                        bombaActivada = false;
+                    }
+                    break;
+                case 2:
+                    if (bombaPoder && Input.GetKeyDown(KeyCode.L) && !bombaActivada)
+                    {
+                        Instantiate(bombaPrefab, transform.position, Quaternion.identity);
+                        bombaActivada = true;
+                    }
+                    if (bombaActivada)
+                    {
+                        bombaDelay += Time.deltaTime;
+                    }
+                    if (bombaDelay >= 18)
+                    {
+                        bombaDelay = 0;
+                        bombaActivada = false;
+                    }
+                    break;
+                case 3:
+                    if (bombaPoder && Input.GetKeyDown(KeyCode.L) && !bombaActivada)
+                    {
+                        Instantiate(bombaPrefab, transform.position, Quaternion.identity);
+                        bombaActivada = true;
+                    }
+                    if (bombaActivada)
+                    {
+                        bombaDelay += Time.deltaTime;
+                    }
+                    if (bombaDelay >= 16)
+                    {
+                        bombaDelay = 0;
+                        bombaActivada = false;
+                    }
+                    break;
+                case 4:
+                    if (bombaPoder && Input.GetKeyDown(KeyCode.L) && !bombaActivada)
+                    {
+                        Instantiate(bombaPrefab, transform.position, Quaternion.identity);
+                        bombaActivada = true;
+                    }
+                    if (bombaActivada)
+                    {
+                        bombaDelay += Time.deltaTime;
+                    }
+                    if (bombaDelay >= 14)
+                    {
+                        bombaDelay = 0;
+                        bombaActivada = false;
+                    }
+                    break;
+                case 5:
+                    if (bombaPoder && Input.GetKeyDown(KeyCode.L) && !bombaActivada)
+                    {
+                        Instantiate(bombaPrefab, transform.position, Quaternion.identity);
+                        bombaActivada = true;
+                    }
+                    if (bombaActivada)
+                    {
+                        bombaDelay += Time.deltaTime;
+                    }
+                    if (bombaDelay >= 12)
+                    {
+                        bombaDelay = 0;
+                        bombaActivada = false;
+                    }
+                    break;
+            }
+        }
+
     }
     void hacerVisible()
     {
