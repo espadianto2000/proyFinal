@@ -33,6 +33,15 @@ public class PlayerController : MonoBehaviour
     public Slider vidaSlider;
     public GameObject dagaPrefab;
     public GameObject cactusPrefab;
+    public int nivelVidaMejora = 0;
+    public int nivelDanoMejora = 0;
+    public int nivelVelocidadMejora = 0;
+    public int nivelCriticoMejora = 0;
+    public int nivelVelocidadAtaqueMejora = 0;
+    public int nivelAlcanceMejora = 0;
+    public int nivelXPMejora = 0;
+    public int nivelPtsMejora = 0;
+    public int nivelDineroMejora = 0;
 
     [Header("movimiento")]
     public Vector2 destinoAtaque = new Vector2(0,0);
