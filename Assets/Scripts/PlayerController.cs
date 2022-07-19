@@ -387,30 +387,154 @@ public class PlayerController : MonoBehaviour
 
             }
         }
+        if(cactusLVL>=1)
+        {
+            switch(cactusLVL)
+            {
+                case 1:
+                    if (cactusPoder && Input.GetKeyDown(KeyCode.K) && !cactusActivado)
+                    {
+                        Instantiate(cactusPrefab, transform.position, Quaternion.identity);
+                        cactusActivado = true;
+                    }
+                    if (cactusActivado)
+                    {
+                        cactusDelay += Time.deltaTime;
+                    }
+                    if (cactusDelay >= 17.5)
+                    {
+                        cactusDelay = 0;
+                        cactusActivado = false;
+                    }
+                    break;
+                case 2:
+                    if (cactusPoder && Input.GetKeyDown(KeyCode.K) && !cactusActivado)
+                    {
+                        Instantiate(cactusPrefab, transform.position, Quaternion.identity);
+                        cactusActivado = true;
+                    }
+                    if (cactusActivado)
+                    {
+                        cactusDelay += Time.deltaTime;
+                    }
+                    if (cactusDelay >= 15)
+                    {
+                        cactusDelay = 0;
+                        cactusActivado = false;
+                    }
+                    break;
+                case 3:
+                    if (cactusPoder && Input.GetKeyDown(KeyCode.K) && !cactusActivado)
+                    {
+                        Instantiate(cactusPrefab, transform.position, Quaternion.identity);
+                        cactusActivado = true;
+                    }
+                    if (cactusActivado)
+                    {
+                        cactusDelay += Time.deltaTime;
+                    }
+                    if (cactusDelay >= 12.5)
+                    {
+                        cactusDelay = 0;
+                        cactusActivado = false;
+                    }
+                    break;
+                case 4:
+                    if (cactusPoder && Input.GetKeyDown(KeyCode.K) && !cactusActivado)
+                    {
+                        Instantiate(cactusPrefab, transform.position, Quaternion.identity);
+                        cactusActivado = true;
+                    }
+                    if (cactusActivado)
+                    {
+                        cactusDelay += Time.deltaTime;
+                    }
+                    if (cactusDelay >= 10)
+                    {
+                        cactusDelay = 0;
+                        cactusActivado = false;
+                    }
+                    break;
+                case 5:
+                    if (cactusPoder && Input.GetKeyDown(KeyCode.K) && !cactusActivado)
+                    {
+                        Instantiate(cactusPrefab, transform.position, Quaternion.identity);
+                        cactusActivado = true;
+                    }
+                    if (cactusActivado)
+                    {
+                        cactusDelay += Time.deltaTime;
+                    }
+                    if (cactusDelay >= 7.5)
+                    {
+                        cactusDelay = 0;
+                        cactusActivado = false;
+                    }
+                    break;
+            }
+        }
+       if(dagaLVL>=1)
+        {
+            switch (dagaLVL)
+            {
+                case 1:
+                    if (dagaPoder)
+                    {
+                        dagaDelay += Time.deltaTime;
+                    }
+                    if (dagaDelay >= 3)
+                    {
+                        dagaDelay = 0;
+                        Instantiate(dagaPrefab, transform.position, transform.rotation * Quaternion.identity);
+                    }
+                    break;
+                case 2:
+                    if (dagaPoder)
+                    {
+                        dagaDelay += Time.deltaTime;
+                    }
+                    if (dagaDelay >= 2.75f)
+                    {
+                        dagaDelay = 0;
+                        Instantiate(dagaPrefab, transform.position, transform.rotation * Quaternion.identity);
+                    }
+                    break;
+                case 3:
+                    if (dagaPoder)
+                    {
+                        dagaDelay += Time.deltaTime;
+                    }
+                    if (dagaDelay >= 2.5f)
+                    {
+                        dagaDelay = 0;
+                        Instantiate(dagaPrefab, transform.position, transform.rotation * Quaternion.identity);
+                    }
+                    break;
+                case 4:
+                    if (dagaPoder)
+                    {
+                        dagaDelay += Time.deltaTime;
+                    }
+                    if (dagaDelay >= 2.25f)
+                    {
+                        dagaDelay = 0;
+                        Instantiate(dagaPrefab, transform.position, transform.rotation * Quaternion.identity);
+                    }
+                    break;
+                case 5:
+                    if (dagaPoder)
+                    {
+                        dagaDelay += Time.deltaTime;
+                    }
+                    if (dagaDelay >= 2)
+                    {
+                        dagaDelay = 0;
+                        Instantiate(dagaPrefab, transform.position, transform.rotation * Quaternion.identity);
+                    }
+                    break;          
+            }
+        }
         
-        if(cactusPoder && Input.GetKeyDown(KeyCode.Space) && !cactusActivado)
-        {
-            Instantiate(cactusPrefab, transform.position, Quaternion.identity);
-            cactusActivado = true;
-        }
-        if(cactusActivado)
-        {
-            cactusDelay += Time.deltaTime;
-        }
-        if(cactusDelay>=20)
-        {
-            cactusDelay = 0;
-            cactusActivado = false;
-        }
-        if(dagaPoder)
-        {
-            dagaDelay += Time.deltaTime;
-        }
-        if(dagaDelay >= 3)
-        {
-            dagaDelay = 0;
-            Instantiate(dagaPrefab, transform.position, transform.rotation * Quaternion.identity);
-        }
     }
     void hacerVisible()
     {

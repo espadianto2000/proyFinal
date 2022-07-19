@@ -61,9 +61,39 @@ public class daga : MonoBehaviour
     {
         if(collision.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<enemyController>().vida -= player.GetComponent<PlayerController>().DanoBase/3;
-            collision.gameObject.GetComponent<enemyController>().efectoFlash();
-            Destroy(gameObject);
+            if(player.GetComponent<PlayerController>().dagaLVL>=1)
+            {
+                switch(player.GetComponent<PlayerController>().dagaLVL)
+                {
+                    case 1:
+                        collision.gameObject.GetComponent<enemyController>().vida -= player.GetComponent<PlayerController>().DanoBase / 3;
+                        collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                        Destroy(gameObject);
+                        break;
+                    case 2:
+                        collision.gameObject.GetComponent<enemyController>().vida -= player.GetComponent<PlayerController>().DanoBase / 2.75f;
+                        collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                        Destroy(gameObject);
+                        break;
+                    case 3:
+                        collision.gameObject.GetComponent<enemyController>().vida -= player.GetComponent<PlayerController>().DanoBase / 2.5f;
+                        collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                        Destroy(gameObject);
+                        break;
+                    case 4:
+                        collision.gameObject.GetComponent<enemyController>().vida -= player.GetComponent<PlayerController>().DanoBase / 2;
+                        collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                        Destroy(gameObject);
+                        break;
+                    case 5:
+                        collision.gameObject.GetComponent<enemyController>().vida -= player.GetComponent<PlayerController>().DanoBase / 1.75f;
+                        collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                        Destroy(gameObject);
+                        break;
+
+                }
+            }
+            
         }
     }
 }
