@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     public float escudoProtectorVida = 50;
     public float delayEscudo;
     public bool escudoInmortal;
-    private float delayInmortal;
+    public float delayInmortal;
     private bool activadoInmortal;
     public bool invisibilidad;
     private bool invisibilidadActiva;
@@ -70,6 +70,16 @@ public class PlayerController : MonoBehaviour
     private float dagaDelay;
     public float cargaUlti=0;
     public bool ultiUsado = false;
+    [Header("Nivel Poderes")]
+    public int armEspLVL;
+    public int roboVidaLVL;
+    public int escudoProtLVL;
+    public int escudoInmLVL;
+    public int invLVL;
+    public int cactusLVL;
+    public int evasionLVL;
+    public int dagaLVL;
+
     void Start()
     {
         if (GameObject.Find("gameManager") != null)
@@ -149,25 +159,128 @@ public class PlayerController : MonoBehaviour
         }
         xpSlider.value = exp / xpNecesaria;
         vidaSlider.value = vidaActual / vidaMax;
-        if(escudoProtector && escudoProtectorVida<=0)
-        {
-            //escudoProtector = false;
-            delayEscudo += Time.deltaTime;
+            if(escudoProtLVL>=1)
+            {
+                switch (escudoProtLVL)
+                        {
+                    case 1:
+                        if (escudoProtector && escudoProtectorVida <= 0)
+                        {
+                            //escudoProtector = false;
+                            delayEscudo += Time.deltaTime;
+                        }
+                        if (delayEscudo >= 60)
+                        {
+                            escudoProtectorVida = 50;
+                            delayEscudo = 0;
+                        }break;
+                    case 2:
+                        if (escudoProtector && escudoProtectorVida <= 0)
+                        {
+                            //escudoProtector = false;
+                            delayEscudo += Time.deltaTime;
+                        }
+                        if (delayEscudo >= 55)
+                        {
+                            escudoProtectorVida = 60;
+                            delayEscudo = 0;
+                        }break;
+                    case 3:
+                        if (escudoProtector && escudoProtectorVida <= 0)
+                        {
+                            //escudoProtector = false;
+                            delayEscudo += Time.deltaTime;
+                        }
+                        if (delayEscudo >= 50)
+                        {
+                            escudoProtectorVida = 70;
+                            delayEscudo = 0;
+                        } break;
+                    case 4:
+                        if (escudoProtector && escudoProtectorVida <= 0)
+                        {
+                            //escudoProtector = false;
+                            delayEscudo += Time.deltaTime;
+                        }
+                        if (delayEscudo >= 45)
+                        {
+                            escudoProtectorVida = 80;
+                            delayEscudo = 0;
+                        }break;
+                    case 5:
+                        if (escudoProtector && escudoProtectorVida <= 0)
+                        {
+                            //escudoProtector = false;
+                            delayEscudo += Time.deltaTime;
+                        }
+                        if (delayEscudo >= 40)
+                        {
+                            escudoProtectorVida = 90;
+                            delayEscudo = 0;
+                        }break;
+                }
+            
         }
-        if(delayEscudo >= 60)
+        if(escudoInmLVL>=1)
         {
-            escudoProtectorVida = 50;
-            delayEscudo = 0;
+            switch(escudoInmLVL)
+            {
+                case 1:
+                    if (escudoInmortal && activadoInmortal)
+                    {
+                        delayInmortal += Time.deltaTime;
+                    }
+                    if (delayInmortal >= 180)
+                    {
+                        delayInmortal = 0;
+                        activadoInmortal = false;
+                    }break;
+                case 2:
+                    if (escudoInmortal && activadoInmortal)
+                    {
+                        delayInmortal += Time.deltaTime;
+                    }
+                    if (delayInmortal >= 170)
+                    {
+                        delayInmortal = 0;
+                        activadoInmortal = false;
+                    }break;
+                case 3:
+                    if (escudoInmortal && activadoInmortal)
+                    {
+                        delayInmortal += Time.deltaTime;
+                    }
+                    if (delayInmortal >= 160)
+                    {
+                        delayInmortal = 0;
+                        activadoInmortal = false;
+                    }break;
+                case 4:
+                    if (escudoInmortal && activadoInmortal)
+                    {
+                        delayInmortal += Time.deltaTime;
+                    }
+                    if (delayInmortal >= 150)
+                    {
+                        delayInmortal = 0;
+                        activadoInmortal = false;
+                    }break;
+                case 5:
+                    if (escudoInmortal && activadoInmortal)
+                    {
+                        delayInmortal += Time.deltaTime;
+                    }
+                    if (delayInmortal >= 140)
+                    {
+                        delayInmortal = 0;
+                        activadoInmortal = false;
+                    }break;
+
+
+            }
+
         }
-        if(escudoInmortal && activadoInmortal)
-        {
-            delayInmortal += Time.deltaTime;
-        }
-        if(delayInmortal >= 180)
-        {
-            delayInmortal = 0;
-            activadoInmortal = false;
-        }
+       
         if(invisibilidad && Input.GetKeyDown(KeyCode.J) && !invisibilidadActiva)
         {
             transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 0.5f);
@@ -274,9 +387,9 @@ public class PlayerController : MonoBehaviour
         {
             if (!evadirAtaque || Random.value >= probEvadir)
             {
-                if (!escudoInmortal || vidaActual > collision.GetComponent<enemyController>().dano || activadoInmortal)
+                if (!escudoInmortal || vidaActual > collision.GetComponent<enemyController>().dano || activadoInmortal || escudoInmLVL<=0)
                 {
-                    if (!escudoProtector || escudoProtectorVida <= 0)
+                    if (!escudoProtector || escudoProtectorVida <= 0 || escudoProtLVL<=0)
                     {
                         vidaActual -= collision.GetComponent<enemyController>().dano;
                         if (armaduraEspinas)
@@ -289,7 +402,7 @@ public class PlayerController : MonoBehaviour
                         HacerInvulnerable();
                         recibeDano();
                     }
-                    else if (escudoProtector && escudoProtectorVida > 0)
+                    else if (escudoProtector && escudoProtectorVida > 0 && escudoProtLVL>=1)
                     {
                         escudoProtectorVida -= collision.GetComponent<enemyController>().dano;
                         if (armaduraEspinas)
@@ -303,7 +416,7 @@ public class PlayerController : MonoBehaviour
 
                     }
                 }
-                else if (escudoInmortal && collision.GetComponent<enemyController>().dano >= vidaActual && !activadoInmortal)
+                else if (escudoInmortal && collision.GetComponent<enemyController>().dano >= vidaActual && !activadoInmortal && escudoInmLVL>=1)
                 {
                     activadoInmortal = true;
                     vidaActual = 1;
@@ -330,7 +443,24 @@ public class PlayerController : MonoBehaviour
     void HacerInvulnerableEscudo()
     {
         vulnerable = false;
-        Invoke("HacerVulnerable", 5.0f);
+        switch (escudoInmLVL)
+        {
+            case 1:
+                Invoke("HacerVulnerable", 5.0f);
+                break;
+            case 2:
+                Invoke("HacerVulnerable", 5.5f);
+                break;
+            case 3:
+                Invoke("HacerVulnerable", 6.0f);
+                break;
+            case 4:
+                Invoke("HacerVulnerable", 6.5f);
+                break;
+            case 5:
+                Invoke("HacerVulnerable", 7.0f);
+                break;
+        }
     }
     public void getExp(float expGained)
     {
