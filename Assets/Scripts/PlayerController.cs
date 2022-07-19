@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
             porcentajeExp = porcentajeExp + (0.05f*gm.nivelExpExtra);
             porcentajePuntos = porcentajePuntos + (0.05f * gm.nivelPuntosExtra);
             porcentajeDinero = porcentajeDinero + (0.05f * gm.nivelDineroExtra);
-            porcentajeAparicionCorazones = porcentajeAparicionCorazones + (0.03f * gm.nivelSpawnVida);
+            porcentajeAparicionCorazones = porcentajeAparicionCorazones + (0.01f * gm.nivelSpawnVida);
             porcentajeCuraciones = porcentajeCuraciones + (0.04f * gm.nivelCuracionExtra);
             velocidadAtaque = velocidadAtaque * (1 - (0.05f * gm.nivelVelocidadAtaqueExtra));
             velocidadAtaque = velocidadAtaque < 0.3f ? 0.3f : velocidadAtaque;
@@ -189,6 +189,8 @@ public class PlayerController : MonoBehaviour
             xpNecesaria = xpNecesaria * 1.25f;
             //manejar subida de nivel
             menuSubidaNivel.SetActive(true);
+            //menuSubidaNivel.transform.GetChild(4).gameObject.SetActive(true);
+            menuSubidaNivel.transform.GetChild(4).GetComponent<improvementsManager>().generarMejoras();
             menuSubidaNivel.transform.parent.GetComponent<interfazInGameManager>().updateStats(vidaMax, DanoBase, VelocidadBase, probCritico, velocidadAtaque, tamanoAtaque, porcentajeExp, porcentajePuntos, porcentajeDinero);
             Time.timeScale = 0;
         }
