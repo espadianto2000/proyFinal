@@ -280,25 +280,114 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-       
-        if(invisibilidad && Input.GetKeyDown(KeyCode.J) && !invisibilidadActiva)
+        if(invLVL>=1)
         {
-            transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 0.5f);
-            invisibilidadActiva = true;
-            esVisible = false;
-            Invoke("hacerVisible", 5);
-            Debug.Log("Invisible");
-        }
-        if(invisibilidadActiva)
-        {
-            inviDelay += Time.deltaTime;
-        }
-        if(inviDelay >= 60)
-        {
-            inviDelay = 0;
-            invisibilidadActiva = false;
+            switch(invLVL)
+            {
+                case 1:
+                    if (invisibilidad && Input.GetKeyDown(KeyCode.J) && !invisibilidadActiva)
+                    {
+                        transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 0.5f);
+                        invisibilidadActiva = true;
+                        esVisible = false;
+                        Invoke("hacerVisible", 5);
+                        Debug.Log("Invisible");
+                    }
+                    if (invisibilidadActiva)
+                    {
+                        inviDelay += Time.deltaTime;
+                    }
+                    if (inviDelay >= 60)
+                    {
+                        inviDelay = 0;
+                        invisibilidadActiva = false;
 
+                    }
+                    break;
+                case 2:
+                    if (invisibilidad && Input.GetKeyDown(KeyCode.J) && !invisibilidadActiva)
+                    {
+                        transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 0.5f);
+                        invisibilidadActiva = true;
+                        esVisible = false;
+                        Invoke("hacerVisible", 5.5f);
+                        Debug.Log("Invisible");
+                    }
+                    if (invisibilidadActiva)
+                    {
+                        inviDelay += Time.deltaTime;
+                    }
+                    if (inviDelay >= 57.5f)
+                    {
+                        inviDelay = 0;
+                        invisibilidadActiva = false;
+
+                    }
+                    break;
+                case 3:
+                    if (invisibilidad && Input.GetKeyDown(KeyCode.J) && !invisibilidadActiva)
+                    {
+                        transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 0.5f);
+                        invisibilidadActiva = true;
+                        esVisible = false;
+                        Invoke("hacerVisible", 6);
+                        Debug.Log("Invisible");
+                    }
+                    if (invisibilidadActiva)
+                    {
+                        inviDelay += Time.deltaTime;
+                    }
+                    if (inviDelay >= 55)
+                    {
+                        inviDelay = 0;
+                        invisibilidadActiva = false;
+
+                    }
+                    break;
+                case 4:
+                    if (invisibilidad && Input.GetKeyDown(KeyCode.J) && !invisibilidadActiva)
+                    {
+                        transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 0.5f);
+                        invisibilidadActiva = true;
+                        esVisible = false;
+                        Invoke("hacerVisible", 6.5f);
+                        Debug.Log("Invisible");
+                    }
+                    if (invisibilidadActiva)
+                    {
+                        inviDelay += Time.deltaTime;
+                    }
+                    if (inviDelay >= 52.5f)
+                    {
+                        inviDelay = 0;
+                        invisibilidadActiva = false;
+
+                    }
+                    break;
+                case 5:
+                    if (invisibilidad && Input.GetKeyDown(KeyCode.J) && !invisibilidadActiva)
+                    {
+                        transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 0.5f);
+                        invisibilidadActiva = true;
+                        esVisible = false;
+                        Invoke("hacerVisible", 7);
+                        Debug.Log("Invisible");
+                    }
+                    if (invisibilidadActiva)
+                    {
+                        inviDelay += Time.deltaTime;
+                    }
+                    if (inviDelay >= 50)
+                    {
+                        inviDelay = 0;
+                        invisibilidadActiva = false;
+
+                    }
+                    break;
+
+            }
         }
+        
         if(cactusPoder && Input.GetKeyDown(KeyCode.Space) && !cactusActivado)
         {
             Instantiate(cactusPrefab, transform.position, Quaternion.identity);
@@ -392,12 +481,43 @@ public class PlayerController : MonoBehaviour
                     if (!escudoProtector || escudoProtectorVida <= 0 || escudoProtLVL<=0)
                     {
                         vidaActual -= collision.GetComponent<enemyController>().dano;
-                        if (armaduraEspinas)
+                        if (armaduraEspinas && armEspLVL>=1)
                         {
-                            collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 4;
-                            collision.gameObject.GetComponent<enemyController>().efectoFlash();
-                            GameObject obj = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
-                            obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (DanoBase / 4) + "";
+                            switch(armEspLVL)
+                            {
+                                case 1:
+                                    collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 4;
+                                    collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                                    GameObject obj = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
+                                    obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Mathf.Round((DanoBase / 4)*100)/100f + "";
+                                    break;
+                                case 2:
+                                    collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 3.5f;
+                                    collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                                    GameObject obj2 = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
+                                    obj2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Mathf.Round((DanoBase / 3.5f) * 100) / 100f + "";
+                                    break;
+                                case 3:
+                                    collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 2;
+                                    collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                                    GameObject obj3 = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
+                                    obj3.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Mathf.Round((DanoBase / 2) * 100) / 100f + "";
+                                    break;
+                                case 4:
+                                    collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 1.5f;
+                                    collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                                    GameObject obj4 = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
+                                    obj4.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Mathf.Round((DanoBase / 1.5f) * 100) / 100f + "";
+                                    break;
+                                case 5:
+                                    collision.gameObject.GetComponent<enemyController>().vida -= DanoBase;
+                                    collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                                    GameObject obj5 = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
+                                    obj5.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (DanoBase) + "";
+                                    break;
+
+                            }
+
                         }
                         HacerInvulnerable();
                         recibeDano();
@@ -405,12 +525,43 @@ public class PlayerController : MonoBehaviour
                     else if (escudoProtector && escudoProtectorVida > 0 && escudoProtLVL>=1)
                     {
                         escudoProtectorVida -= collision.GetComponent<enemyController>().dano;
-                        if (armaduraEspinas)
+                        if (armaduraEspinas && armEspLVL >= 1)
                         {
-                            collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 4;
-                            collision.gameObject.GetComponent<enemyController>().efectoFlash();
-                            GameObject obj = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
-                            obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (DanoBase / 4) + "";
+                            switch (armEspLVL)
+                            {
+                                case 1:
+                                    collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 4;
+                                    collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                                    GameObject obj = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
+                                    obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Mathf.Round((DanoBase / 4) * 100) / 100f + "";
+                                    break;
+                                case 2:
+                                    collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 3.5f;
+                                    collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                                    GameObject obj2 = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
+                                    obj2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Mathf.Round((DanoBase / 3.5f) * 100) / 100f + "";
+                                    break;
+                                case 3:
+                                    collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 2;
+                                    collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                                    GameObject obj3 = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
+                                    obj3.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Mathf.Round((DanoBase / 2) * 100) / 100f + "";
+                                    break;
+                                case 4:
+                                    collision.gameObject.GetComponent<enemyController>().vida -= DanoBase / 1.5f;
+                                    collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                                    GameObject obj4 = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
+                                    obj4.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Mathf.Round((DanoBase / 1.5f) * 100) / 100f + "";
+                                    break;
+                                case 5:
+                                    collision.gameObject.GetComponent<enemyController>().vida -= DanoBase;
+                                    collision.gameObject.GetComponent<enemyController>().efectoFlash();
+                                    GameObject obj5 = Instantiate(hmThorns, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
+                                    obj5.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (DanoBase) + "";
+                                    break;
+
+                            }
+
                         }
                         HacerInvulnerable();
 
