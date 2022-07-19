@@ -88,6 +88,11 @@ public class gameManager : MonoBehaviour
     {
         SceneManager.LoadScene("menu", LoadSceneMode.Single);
     }
+    public void acabarPartida()
+    {
+        GameObject.Find("salir").SetActive(false);
+        GameObject.Find("Heroe").GetComponent<PlayerController>().vidaActual = -1;
+    }
     public void cambiarCursorMain()
     {
         Cursor.SetCursor(cursorNormal, new Vector2(24,24), CursorMode.ForceSoftware);

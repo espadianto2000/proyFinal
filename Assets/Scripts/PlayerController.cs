@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -67,6 +68,8 @@ public class PlayerController : MonoBehaviour
     private float probEvadir = 0.3f;
     public bool dagaPoder;
     private float dagaDelay;
+    public float cargaUlti=0;
+    public bool ultiUsado = false;
     void Start()
     {
         if (GameObject.Find("gameManager") != null)
@@ -102,6 +105,31 @@ public class PlayerController : MonoBehaviour
                 transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
             }
         }
+        if (ultiUsado)
+        {
+            cargaUlti -= Time.deltaTime / 5;
+            if (cargaUlti <= 0)
+            {
+                ultiUsado = false;
+                GameObject.Find("Ulti").transform.GetChild(1).gameObject.SetActive(false);
+                slash.transform.localScale = new Vector3(tamanoAtaque, tamanoAtaque, tamanoAtaque);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && cargaUlti >=1 && !ultiUsado)
+        {
+            ultiUsado = true;
+            if(SceneManager.GetActiveScene().name == "jugador1")
+            {
+                //ulti galahad
+                slash.transform.localScale = new Vector3(tamanoAtaque, tamanoAtaque, tamanoAtaque) * 2.5f;
+            }
+            else
+            {
+                //ulti beatriz
+
+            }
+            
+        }
         
         if(vidaActual <= 0 && vivo)
         {
@@ -113,9 +141,10 @@ public class PlayerController : MonoBehaviour
         {
             exp = exp - xpNecesaria;
             Debug.Log("se sube de nivel");
-            xpNecesaria = xpNecesaria * 1.5f;
+            xpNecesaria = xpNecesaria * 1.25f;
             //manejar subida de nivel
             menuSubidaNivel.SetActive(true);
+            menuSubidaNivel.transform.parent.GetComponent<interfazInGameManager>().updateStats(vidaMax, DanoBase, VelocidadBase, probCritico, velocidadAtaque, tamanoAtaque, porcentajeExp, porcentajePuntos, porcentajeDinero);
             Time.timeScale = 0;
         }
         xpSlider.value = exp / xpNecesaria;
@@ -328,7 +357,8 @@ public class PlayerController : MonoBehaviour
     {
         menuMuerte.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = ((Mathf.Round(wm.timeTotal*100))/100)+"s";
         menuMuerte.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos + "";
-        menuMuerte.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = Mathf.Round(menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos / 5f) + "$";
+        menuMuerte.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = (int)Mathf.Round(menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos / 5f) + "$";
+        gm.dinero += (int)Mathf.Round(menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos / 5f);
         menuMuerte.SetActive(true);
         Time.timeScale = 0;
     }

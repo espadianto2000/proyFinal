@@ -940,6 +940,7 @@ MonoBehaviour:
   nivelVelocidadAtaqueExtra: 0
   desbloquearPersonaje2: 0
   desbloquearUlti: 0
+  highScore: 0
   cursorNormal: {fileID: 2800000, guid: 34e451941ecbccd41b871668489cecbf, type: 3}
   statsArr: 
 --- !u!4 &949441765
@@ -1412,7 +1413,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 949441764}
         m_TargetAssemblyTypeName: gameManager, Assembly-CSharp
-        m_MethodName: irMenuPrincipal
+        m_MethodName: acabarPartida
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1636,7 +1637,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 949441764}
         m_TargetAssemblyTypeName: gameManager, Assembly-CSharp
-        m_MethodName: irMenuPrincipal
+        m_MethodName: acabarPartida
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

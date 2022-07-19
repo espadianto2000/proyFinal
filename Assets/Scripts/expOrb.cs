@@ -39,6 +39,7 @@ public class expOrb : MonoBehaviour
             if(transform.tag == "Exp")
             {
                 collision.GetComponent<PlayerController>().getExp(exp);
+                collision.GetComponent<PlayerController>().cargaUlti += collision.GetComponent<PlayerController>().cargaUlti < 1 ? 0.01f : 0; ;
                 Destroy(gameObject);
             }
             if(transform.tag == "Corazon")
