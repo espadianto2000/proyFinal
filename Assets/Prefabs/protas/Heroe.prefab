@@ -172,6 +172,8 @@ MonoBehaviour:
   porcentajeAparicionCorazones: 0
   porcentajeCuraciones: 0
   vidaSlider: {fileID: 0}
+  dagaPrefab: {fileID: 4102780300526632790, guid: 7897a50c520d04802a36cadf1cfe010a, type: 3}
+  cactusPrefab: {fileID: 5623412627835413981, guid: b3a1aafb6efa34dd0b9706ba5027e99f, type: 3}
   destinoAtaque: {x: 325.95645, y: -39.350983}
   rd: {fileID: 0}
   slash: {fileID: 3216211496783763100}
@@ -187,20 +189,23 @@ MonoBehaviour:
   delayEscudo: 0
   escudoInmortal: 0
   delayInmortal: 0
-  activadoInmortal: 0
   invisibilidad: 0
-  invisibilidadActiva: 0
   esVisible: 1
-  inviDelay: 0
   cactusPoder: 0
-  cactusActivado: 0
   cactusDelay: 0
-  cactusPrefab: {fileID: 5623412627835413981, guid: b3a1aafb6efa34dd0b9706ba5027e99f, type: 3}
   evadirAtaque: 0
-  probEvadir: 0.3
-  dagaPrefab: {fileID: 4102780300526632790, guid: 7897a50c520d04802a36cadf1cfe010a, type: 3}
+  probEvadir: 0
   dagaPoder: 0
-  dagaDelay: 0
+  cargaUlti: 0
+  ultiUsado: 0
+  armEspLVL: 0
+  roboVidaLVL: 0
+  escudoProtLVL: 0
+  escudoInmLVL: 0
+  invLVL: 0
+  cactusLVL: 0
+  evasionLVL: 0
+  dagaLVL: 0
 --- !u!70 &929944562
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

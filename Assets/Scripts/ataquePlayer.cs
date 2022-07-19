@@ -26,11 +26,50 @@ public class ataquePlayer : MonoBehaviour
         {
             Debug.Log("ataque");
             collision.GetComponentInParent<enemyController>().vida -= pc.DanoBase;
-            if(pc.roboVida && Random.value<=0.05f)
+            if(pc.roboVidaLVL>=1)
             {
-                pc.curar(pc.DanoBase*0.3f);
+                switch(pc.roboVidaLVL)
+                {
+                    case 1:
+                        if (pc.roboVida && Random.value <= 0.05f)
+                        {
+                            pc.curar(pc.DanoBase * 0.3f);
+
+                        }
+                        break;
+                    case 2:
+                        if (pc.roboVida && Random.value <= 0.08f)
+                        {
+                            pc.curar(pc.DanoBase * 0.35f);
+
+                        }
+                        break;
+                    case 3:
+                        if (pc.roboVida && Random.value <= 0.11f)
+                        {
+                            pc.curar(pc.DanoBase * 0.4f);
+
+                        }
+                        break;
+                    case 4:
+                        if (pc.roboVida && Random.value <= 0.14f)
+                        {
+                            pc.curar(pc.DanoBase * 0.45f);
+
+                        }
+                        break;
+                    case 5:
+                        if (pc.roboVida && Random.value <= 0.17f)
+                        {
+                            pc.curar(pc.DanoBase * 0.5f);
+
+                        }
+                        break;
+
+                }
                 
             }
+            
         }
         
     }

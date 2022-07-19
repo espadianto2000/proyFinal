@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     private bool cactusActivado;
     public float cactusDelay;
     public bool evadirAtaque;
-    private float probEvadir = 0.3f;
+    public float probEvadir;
     public bool dagaPoder;
     private float dagaDelay;
     public float cargaUlti=0;
@@ -101,10 +101,32 @@ public class PlayerController : MonoBehaviour
         vivo = true;
         rd = GetComponentInChildren<Renderer>();
         vidaActual = vidaMax;
+        probEvadir = 0;
     }
     void Update()
     {
-        if(!vulnerable & vivo)
+       
+            switch (evasionLVL)
+            {
+                case 1:
+                    probEvadir = 0.3f;
+                    break;
+                case 2:
+                    probEvadir = 0.35f;
+                    break;
+                case 3:
+                    probEvadir = 0.4f;
+                    break;
+                case 4:
+                    probEvadir = 0.45f;
+                    break;
+                case 5:
+                    probEvadir = 0.5f;
+                    break;
+            }
+         
+        
+        if (!vulnerable & vivo)
         {
             if (transform.GetChild(0).GetComponent<SpriteRenderer>().enabled)
             {
@@ -596,6 +618,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        
         if (collision.tag == "Enemy" && vulnerable)
         {
             if (!evadirAtaque || Random.value >= probEvadir)
