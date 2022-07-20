@@ -22,6 +22,7 @@ public class gameManager : MonoBehaviour
     public float highScore=0;
     public Texture2D cursorNormal;
     public int[] statsArr;
+    public GameObject menuPausa;
 
     // Start is called before the first frame update
     void Start()
@@ -54,11 +55,11 @@ public class gameManager : MonoBehaviour
     {
         estadoPausa = true;
         Time.timeScale = 0;
-        transform.GetChild(0).gameObject.SetActive(true);
+        menuPausa.SetActive(true);
     }
     public void outPausa()
     {
-        transform.GetChild(0).gameObject.SetActive(false);
+        menuPausa.SetActive(false);
         estadoPausa = false;
         Time.timeScale = 1;
     }
@@ -90,7 +91,7 @@ public class gameManager : MonoBehaviour
     }
     public void acabarPartida()
     {
-        GameObject.Find("salir").SetActive(false);
+        //GameObject.Find("salir").SetActive(false);
         GameObject.Find("Heroe").GetComponent<PlayerController>().vidaActual = -1;
     }
     public void cambiarCursorMain()

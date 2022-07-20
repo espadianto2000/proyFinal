@@ -46,9 +46,9 @@ public class improvementsManager : MonoBehaviour
             case 5:
                 pc.nivelAlcanceMejora++;
                 pc.tamanoAtaque = pc.tamanoAtaque * 1.1f;
-                if(SceneManager.GetActiveScene().name == "jugador1")
+                if(SceneManager.GetActiveScene().name == "jugador1" && pc.slash.transform.localScale.x < pc.tamanoAtaque)
                 {
-                    pc.slash.transform.localScale = new Vector3(pc.tamanoAtaque, pc.tamanoAtaque, pc.tamanoAtaque);
+                    pc.slash.transform.localScale = new Vector3(pc.tamanoAtaque, pc.tamanoAtaque, 1);
                 }
                 break;
             case 6:

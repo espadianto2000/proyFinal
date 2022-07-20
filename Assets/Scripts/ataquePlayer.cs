@@ -28,11 +28,11 @@ public class ataquePlayer : MonoBehaviour
     {
         if(collision.tag == "RecibeDano" && collision.name == "AreaRecibeDaño")
         {
-            Debug.Log("ataque");
-            collision.GetComponentInParent<enemyController>().vida -= pc.DanoBase;
-            collision.GetComponentInParent<enemyController>().efectoFlash();
-            GameObject obj = Instantiate(collision.GetComponentInParent<enemyController>().hm, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
-            obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = collision.GetComponentInParent<enemyController>().player.GetComponentInParent<PlayerController>().DanoBase + "";
+            //Debug.Log("ataque");
+            collision.GetComponentInParent<enemyController>().vida -= pc.DanoBase * pc.multiplicadorDanoUlti;
+            //collision.GetComponentInParent<enemyController>().efectoFlash();
+            //GameObject obj = Instantiate(collision.GetComponentInParent<enemyController>().hm, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+            //obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = pc.DanoBase * pc.multiplicadorDanoUlti + "";
             if (pc.roboVidaLVL>=1)
             {
                 switch(pc.roboVidaLVL)

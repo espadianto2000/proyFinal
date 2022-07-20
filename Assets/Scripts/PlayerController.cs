@@ -52,6 +52,9 @@ public class PlayerController : MonoBehaviour
     public GameObject slash;
     public float timerAtaque=0;
     public GameObject flecha;
+    public float multiplicadorDanoUlti = 1;
+    public float multiplicadorTamanoUlti = 1;
+    public float reduccionVelocidadAtaqueUlti = 1;
 
     [Header("subidaNivel")]
     public float xpNecesaria;
@@ -153,12 +156,15 @@ public class PlayerController : MonoBehaviour
         }
         if (ultiUsado)
         {
-            cargaUlti -= Time.deltaTime / 5;
+            cargaUlti -= Time.deltaTime / 10;
             if (cargaUlti <= 0)
             {
                 ultiUsado = false;
                 GameObject.Find("Ulti").transform.GetChild(1).gameObject.SetActive(false);
-                slash.transform.localScale = new Vector3(tamanoAtaque, tamanoAtaque, tamanoAtaque);
+                slash.transform.localScale = new Vector3(tamanoAtaque, tamanoAtaque, 1);
+                multiplicadorDanoUlti = 1;
+                multiplicadorTamanoUlti = 1;
+                reduccionVelocidadAtaqueUlti = 1;
             }
         }
         if (Input.GetKeyDown(KeyCode.Space) && cargaUlti >=1 && !ultiUsado && gm.desbloquearUlti)                               
@@ -168,11 +174,15 @@ public class PlayerController : MonoBehaviour
             {
                 //ulti galahad
                 slash.transform.localScale = new Vector3(tamanoAtaque, tamanoAtaque, tamanoAtaque) * 2.5f;
+                multiplicadorDanoUlti = 2.5f;
+                reduccionVelocidadAtaqueUlti = 0.3f;
             }
             else
             {
                 //ulti beatriz
-
+                multiplicadorDanoUlti = 2.5f;
+                multiplicadorTamanoUlti = 2.5f;
+                reduccionVelocidadAtaqueUlti = 0.3f;
             }
             
         }
@@ -686,7 +696,7 @@ public class PlayerController : MonoBehaviour
 
             angle = Mathf.Atan2(targ.y, targ.x) * Mathf.Rad2Deg;
             GameObject obj = Instantiate(flecha, slash.transform.GetChild(0).position, Quaternion.identity);
-            obj.transform.localScale = new Vector3(tamanoAtaque, tamanoAtaque,1);
+            obj.transform.localScale = new Vector3(tamanoAtaque*multiplicadorTamanoUlti, tamanoAtaque * multiplicadorTamanoUlti, 1);
             obj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             obj.GetComponent<flecha>().destino = targ.normalized;
         }
@@ -730,7 +740,7 @@ public class PlayerController : MonoBehaviour
             pos.y = pos.y - (Screen.height / 2f);
             Vector2 destinoAtaq = new Vector2(transform.position.x + (pos.x), transform.position.y + (pos.y));
             destinoAtaque = destinoAtaq;
-            if (timerAtaque > velocidadAtaque)
+            if (timerAtaque > velocidadAtaque*reduccionVelocidadAtaqueUlti)
             {
                 atacar(destinoAtaq);
                 timerAtaque = 0;

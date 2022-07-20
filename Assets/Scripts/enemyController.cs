@@ -42,8 +42,10 @@ public class enemyController : MonoBehaviour
         
         if(vida<=0)
         {
-            Instantiate(waveM.exps[(waveM.nivelDificultad)<waveM.exps.Length?waveM.nivelDificultad:waveM.exps.Length-1], transform.position,Quaternion.identity);
-            if(Random.Range(0,100) < player.GetComponent<PlayerController>().porcentajeAparicionCorazones*100)
+            GameObject obj = Instantiate(waveM.exps[(waveM.nivelDificultad)<waveM.exps.Length?waveM.nivelDificultad:waveM.exps.Length-1], transform.position,Quaternion.identity);
+            obj.GetComponent<expOrb>().exp += 1000 * waveM.iteracionOleada;
+            obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (1 * waveM.iteracionOleada)), obj.transform.localScale.y * (1 + (1 * waveM.iteracionOleada)), 1);
+            if (Random.Range(0,100) < player.GetComponent<PlayerController>().porcentajeAparicionCorazones*100)
             {
                 Instantiate(waveM.corazon, transform.position, Quaternion.identity);
             }
@@ -129,12 +131,12 @@ public class enemyController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /*if(collision.tag == "slash")
+        if(collision.tag == "slash")
         {
             efectoFlash();
             GameObject obj = Instantiate(hm, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
-            obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = player.GetComponent<PlayerController>().DanoBase+"";
-        }*/
+            obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (player.GetComponent<PlayerController>().DanoBase * player.GetComponent<PlayerController>().multiplicadorDanoUlti) + "";
+        }
         if(collision.tag == "cactus")
         {
             collision.GetComponent<cactus>().vida -= 10;

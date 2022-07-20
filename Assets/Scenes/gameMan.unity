@@ -1070,6 +1070,7 @@ MonoBehaviour:
   highScore: 0
   cursorNormal: {fileID: 2800000, guid: 34e451941ecbccd41b871668489cecbf, type: 3}
   statsArr: 
+  menuPausa: {fileID: 1011351157}
 --- !u!4 &949441765
 Transform:
   m_ObjectHideFlags: 0
@@ -1468,7 +1469,7 @@ GameObject:
   - component: {fileID: 1411982714}
   - component: {fileID: 1411982713}
   m_Layer: 5
-  m_Name: salir
+  m_Name: salirBoton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
