@@ -29,10 +29,20 @@ public class ataquePlayer : MonoBehaviour
         if(collision.tag == "RecibeDano" && collision.name == "AreaRecibeDano")
         {
             //Debug.Log("ataque");
-            collision.GetComponentInParent<enemyController>().vida -= pc.DanoBase * pc.multiplicadorDanoUlti;
-            //collision.GetComponentInParent<enemyController>().efectoFlash();
-            //GameObject obj = Instantiate(collision.GetComponentInParent<enemyController>().hm, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
-            //obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = pc.DanoBase * pc.multiplicadorDanoUlti + "";
+            if (Random.Range(0, 100) < (pc.probCritico * 100))
+            {
+                collision.GetComponentInParent<enemyController>().efectoFlash();
+                GameObject obj = Instantiate(collision.GetComponentInParent<enemyController>().hmCrit, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
+                obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (pc.DanoBase * pc.multiplicadorDanoUlti * 3) + "";
+                collision.GetComponentInParent<enemyController>().vida -= (pc.DanoBase * pc.multiplicadorDanoUlti * 3);
+            }
+            else
+            {
+                collision.GetComponentInParent<enemyController>().efectoFlash();
+                GameObject obj = Instantiate(collision.GetComponentInParent<enemyController>().hm, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
+                obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = pc.DanoBase * pc.multiplicadorDanoUlti + "";
+                collision.GetComponentInParent<enemyController>().vida -= pc.DanoBase * pc.multiplicadorDanoUlti;
+            }
             if (pc.roboVidaLVL>=1)
             {
                 switch(pc.roboVidaLVL)

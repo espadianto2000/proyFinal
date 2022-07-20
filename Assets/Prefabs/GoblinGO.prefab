@@ -110,6 +110,7 @@ MonoBehaviour:
   rd: {fileID: 0}
   waveM: {fileID: 0}
   hm: {fileID: 7099049707023095260, guid: 5816a839936978249b0f4c2a55ec216c, type: 3}
+  hmCrit: {fileID: 3390254785990143363, guid: f034fe4b1d5627043b684a69328090e5, type: 3}
   interfazManager: {fileID: 0}
   velocidad: 2.85
   vidaMax: 40
