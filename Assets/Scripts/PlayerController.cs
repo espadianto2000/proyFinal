@@ -97,6 +97,17 @@ public class PlayerController : MonoBehaviour
     public int evasionLVL;
     public int dagaLVL;
     public int bombaLVL;
+    [Header("Iconos")]
+    public Image itemEspinas;
+    public Image itemRoboVida;
+    public Image escudo;
+    public Image inmortalidad;
+    public Image invisibilidadI;
+    public Image cuchillo;
+    public Image evasion;
+    public Image cactus;
+    public Image bomba;
+
     void Start()
     {
         if (GameObject.Find("gameManager") != null)
@@ -207,6 +218,29 @@ public class PlayerController : MonoBehaviour
         }
         xpSlider.value = exp / xpNecesaria;
         vidaSlider.value = vidaActual / vidaMax;
+        if(escudoProtector && delayEscudo == 0)
+
+        {
+            switch(escudoProtLVL)
+            {
+                case 1:
+                    escudo.fillAmount = escudoProtectorVida / 50;
+                    break;
+                case 2:
+                    escudo.fillAmount = escudoProtectorVida / 60;
+                    break;
+                case 3:
+                    escudo.fillAmount = escudoProtectorVida / 70;
+                    break;
+                case 4:
+                    escudo.fillAmount = escudoProtectorVida / 80;
+                    break;
+                case 5:
+                    escudo.fillAmount = escudoProtectorVida / 90;
+                    break;
+
+            }
+        }
             if(escudoProtLVL>=1)
             {
                 switch (escudoProtLVL)
@@ -216,6 +250,10 @@ public class PlayerController : MonoBehaviour
                         {
                             //escudoProtector = false;
                             delayEscudo += Time.deltaTime;
+                        if(escudoProtectorVida<50)
+                        {
+                            escudo.fillAmount = delayEscudo / 60;
+                        }
                         }
                         if (delayEscudo >= 60)
                         {
@@ -227,7 +265,11 @@ public class PlayerController : MonoBehaviour
                         {
                             //escudoProtector = false;
                             delayEscudo += Time.deltaTime;
+                        if (escudoProtectorVida < 60)
+                        {
+                            escudo.fillAmount = delayEscudo / 55;
                         }
+                    }
                         if (delayEscudo >= 55)
                         {
                             escudoProtectorVida = 60;
@@ -238,7 +280,11 @@ public class PlayerController : MonoBehaviour
                         {
                             //escudoProtector = false;
                             delayEscudo += Time.deltaTime;
+                        if (escudoProtectorVida < 70)
+                        {
+                            escudo.fillAmount = delayEscudo / 50;
                         }
+                    }
                         if (delayEscudo >= 50)
                         {
                             escudoProtectorVida = 70;
@@ -249,7 +295,11 @@ public class PlayerController : MonoBehaviour
                         {
                             //escudoProtector = false;
                             delayEscudo += Time.deltaTime;
+                        if (escudoProtectorVida < 80)
+                        {
+                            escudo.fillAmount = delayEscudo / 45;
                         }
+                    }
                         if (delayEscudo >= 45)
                         {
                             escudoProtectorVida = 80;
@@ -260,7 +310,11 @@ public class PlayerController : MonoBehaviour
                         {
                             //escudoProtector = false;
                             delayEscudo += Time.deltaTime;
+                        if (escudoProtectorVida < 90)
+                        {
+                            escudo.fillAmount = delayEscudo / 40;
                         }
+                    }
                         if (delayEscudo >= 40)
                         {
                             escudoProtectorVida = 90;
@@ -277,6 +331,7 @@ public class PlayerController : MonoBehaviour
                     if (escudoInmortal && activadoInmortal)
                     {
                         delayInmortal += Time.deltaTime;
+                        inmortalidad.fillAmount = delayInmortal / 180;
                     }
                     if (delayInmortal >= 180)
                     {
@@ -287,6 +342,7 @@ public class PlayerController : MonoBehaviour
                     if (escudoInmortal && activadoInmortal)
                     {
                         delayInmortal += Time.deltaTime;
+                        inmortalidad.fillAmount = delayInmortal / 170;
                     }
                     if (delayInmortal >= 170)
                     {
@@ -297,6 +353,7 @@ public class PlayerController : MonoBehaviour
                     if (escudoInmortal && activadoInmortal)
                     {
                         delayInmortal += Time.deltaTime;
+                        inmortalidad.fillAmount = delayInmortal / 160;
                     }
                     if (delayInmortal >= 160)
                     {
@@ -307,6 +364,7 @@ public class PlayerController : MonoBehaviour
                     if (escudoInmortal && activadoInmortal)
                     {
                         delayInmortal += Time.deltaTime;
+                        inmortalidad.fillAmount = delayInmortal / 150;
                     }
                     if (delayInmortal >= 150)
                     {
@@ -317,6 +375,7 @@ public class PlayerController : MonoBehaviour
                     if (escudoInmortal && activadoInmortal)
                     {
                         delayInmortal += Time.deltaTime;
+                        inmortalidad.fillAmount = delayInmortal / 140;
                     }
                     if (delayInmortal >= 140)
                     {
@@ -333,7 +392,7 @@ public class PlayerController : MonoBehaviour
             switch(invLVL)
             {
                 case 1:
-                    if (invisibilidad && Input.GetKeyDown(KeyCode.J) && !invisibilidadActiva)
+                    if (invisibilidad && Input.GetKeyDown(KeyCode.Q) && !invisibilidadActiva)
                     {
                         transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 0.5f);
                         invisibilidadActiva = true;
@@ -344,6 +403,11 @@ public class PlayerController : MonoBehaviour
                     if (invisibilidadActiva)
                     {
                         inviDelay += Time.deltaTime;
+                        if(inviDelay!=0)
+                        {
+                            invisibilidadI.fillAmount = inviDelay / 60;
+
+                        }
                     }
                     if (inviDelay >= 60)
                     {
@@ -353,7 +417,7 @@ public class PlayerController : MonoBehaviour
                     }
                     break;
                 case 2:
-                    if (invisibilidad && Input.GetKeyDown(KeyCode.J) && !invisibilidadActiva)
+                    if (invisibilidad && Input.GetKeyDown(KeyCode.Q) && !invisibilidadActiva)
                     {
                         transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 0.5f);
                         invisibilidadActiva = true;
@@ -364,6 +428,11 @@ public class PlayerController : MonoBehaviour
                     if (invisibilidadActiva)
                     {
                         inviDelay += Time.deltaTime;
+                        if (inviDelay != 0)
+                        {
+                            invisibilidadI.fillAmount = inviDelay / 57.5f;
+
+                        }
                     }
                     if (inviDelay >= 57.5f)
                     {
@@ -373,7 +442,7 @@ public class PlayerController : MonoBehaviour
                     }
                     break;
                 case 3:
-                    if (invisibilidad && Input.GetKeyDown(KeyCode.J) && !invisibilidadActiva)
+                    if (invisibilidad && Input.GetKeyDown(KeyCode.Q) && !invisibilidadActiva)
                     {
                         transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 0.5f);
                         invisibilidadActiva = true;
@@ -384,6 +453,11 @@ public class PlayerController : MonoBehaviour
                     if (invisibilidadActiva)
                     {
                         inviDelay += Time.deltaTime;
+                        if (inviDelay != 0)
+                        {
+                            invisibilidadI.fillAmount = inviDelay / 55;
+
+                        }
                     }
                     if (inviDelay >= 55)
                     {
@@ -393,7 +467,7 @@ public class PlayerController : MonoBehaviour
                     }
                     break;
                 case 4:
-                    if (invisibilidad && Input.GetKeyDown(KeyCode.J) && !invisibilidadActiva)
+                    if (invisibilidad && Input.GetKeyDown(KeyCode.Q) && !invisibilidadActiva)
                     {
                         transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 0.5f);
                         invisibilidadActiva = true;
@@ -404,6 +478,11 @@ public class PlayerController : MonoBehaviour
                     if (invisibilidadActiva)
                     {
                         inviDelay += Time.deltaTime;
+                        if (inviDelay != 0)
+                        {
+                            invisibilidadI.fillAmount = inviDelay / 52.5f;
+
+                        }
                     }
                     if (inviDelay >= 52.5f)
                     {
@@ -413,7 +492,7 @@ public class PlayerController : MonoBehaviour
                     }
                     break;
                 case 5:
-                    if (invisibilidad && Input.GetKeyDown(KeyCode.J) && !invisibilidadActiva)
+                    if (invisibilidad && Input.GetKeyDown(KeyCode.Q) && !invisibilidadActiva)
                     {
                         transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 0.5f);
                         invisibilidadActiva = true;
@@ -424,6 +503,11 @@ public class PlayerController : MonoBehaviour
                     if (invisibilidadActiva)
                     {
                         inviDelay += Time.deltaTime;
+                        if (inviDelay != 0)
+                        {
+                            invisibilidadI.fillAmount = inviDelay / 50;
+
+                        }
                     }
                     if (inviDelay >= 50)
                     {
@@ -440,83 +524,68 @@ public class PlayerController : MonoBehaviour
             switch(cactusLVL)
             {
                 case 1:
-                    if (cactusPoder && Input.GetKeyDown(KeyCode.K) && !cactusActivado)
-                    {
-                        Instantiate(cactusPrefab, transform.position, Quaternion.identity);
-                        cactusActivado = true;
-                    }
-                    if (cactusActivado)
+                    if (cactusPoder)
                     {
                         cactusDelay += Time.deltaTime;
+                        cactus.fillAmount = cactusDelay / 17.5f;
+
                     }
-                    if (cactusDelay >= 17.5)
+                    if (cactusDelay >= 17.5f)
                     {
                         cactusDelay = 0;
-                        cactusActivado = false;
+                        Instantiate(cactusPrefab, transform.position, Quaternion.identity);
                     }
                     break;
                 case 2:
-                    if (cactusPoder && Input.GetKeyDown(KeyCode.K) && !cactusActivado)
-                    {
-                        Instantiate(cactusPrefab, transform.position, Quaternion.identity);
-                        cactusActivado = true;
-                    }
-                    if (cactusActivado)
+                    if (cactusPoder)
                     {
                         cactusDelay += Time.deltaTime;
+                        cactus.fillAmount = cactusDelay / 15;
+
                     }
                     if (cactusDelay >= 15)
                     {
                         cactusDelay = 0;
-                        cactusActivado = false;
+                        Instantiate(cactusPrefab, transform.position, Quaternion.identity);
                     }
                     break;
                 case 3:
-                    if (cactusPoder && Input.GetKeyDown(KeyCode.K) && !cactusActivado)
-                    {
-                        Instantiate(cactusPrefab, transform.position, Quaternion.identity);
-                        cactusActivado = true;
-                    }
-                    if (cactusActivado)
+                    if (cactusPoder)
                     {
                         cactusDelay += Time.deltaTime;
+                        cactus.fillAmount = cactusDelay / 12.5f;
+
                     }
-                    if (cactusDelay >= 12.5)
+                    if (cactusDelay >= 12.5f)
                     {
                         cactusDelay = 0;
-                        cactusActivado = false;
+                        Instantiate(cactusPrefab, transform.position, Quaternion.identity);
                     }
                     break;
                 case 4:
-                    if (cactusPoder && Input.GetKeyDown(KeyCode.K) && !cactusActivado)
-                    {
-                        Instantiate(cactusPrefab, transform.position, Quaternion.identity);
-                        cactusActivado = true;
-                    }
-                    if (cactusActivado)
+                    if (cactusPoder)
                     {
                         cactusDelay += Time.deltaTime;
+                        cactus.fillAmount = cactusDelay / 10f;
+
                     }
-                    if (cactusDelay >= 10)
+                    if (cactusDelay >= 10f)
                     {
                         cactusDelay = 0;
-                        cactusActivado = false;
+                        Instantiate(cactusPrefab, transform.position, Quaternion.identity);
                     }
                     break;
                 case 5:
-                    if (cactusPoder && Input.GetKeyDown(KeyCode.K) && !cactusActivado)
-                    {
-                        Instantiate(cactusPrefab, transform.position, Quaternion.identity);
-                        cactusActivado = true;
-                    }
-                    if (cactusActivado)
+                    if (cactusPoder)
                     {
                         cactusDelay += Time.deltaTime;
+                        cactus.fillAmount = cactusDelay / 7.5f;
+
                     }
-                    if (cactusDelay >= 7.5)
+                    if (cactusDelay >= 7.5f)
                     {
                         cactusDelay = 0;
-                        cactusActivado = false;
+                        Instantiate(cactusPrefab, transform.position, Quaternion.identity);
                     }
                     break;
             }
@@ -529,6 +598,8 @@ public class PlayerController : MonoBehaviour
                     if (dagaPoder)
                     {
                         dagaDelay += Time.deltaTime;
+                        cuchillo.fillAmount = dagaDelay / 3;
+
                     }
                     if (dagaDelay >= 3)
                     {
@@ -540,6 +611,8 @@ public class PlayerController : MonoBehaviour
                     if (dagaPoder)
                     {
                         dagaDelay += Time.deltaTime;
+                        cuchillo.fillAmount = dagaDelay / 2.75f;
+
                     }
                     if (dagaDelay >= 2.75f)
                     {
@@ -551,6 +624,8 @@ public class PlayerController : MonoBehaviour
                     if (dagaPoder)
                     {
                         dagaDelay += Time.deltaTime;
+                        cuchillo.fillAmount = dagaDelay / 2.5f;
+
                     }
                     if (dagaDelay >= 2.5f)
                     {
@@ -562,6 +637,8 @@ public class PlayerController : MonoBehaviour
                     if (dagaPoder)
                     {
                         dagaDelay += Time.deltaTime;
+                        cuchillo.fillAmount = dagaDelay / 2.25f;
+
                     }
                     if (dagaDelay >= 2.25f)
                     {
@@ -573,6 +650,8 @@ public class PlayerController : MonoBehaviour
                     if (dagaPoder)
                     {
                         dagaDelay += Time.deltaTime;
+                        cuchillo.fillAmount = dagaDelay / 2;
+
                     }
                     if (dagaDelay >= 2)
                     {
@@ -587,83 +666,64 @@ public class PlayerController : MonoBehaviour
             switch (bombaLVL)
             {
                 case 1:
-                    if (bombaPoder && Input.GetKeyDown(KeyCode.L) && !bombaActivada)
-                    {
-                        Instantiate(bombaPrefab, transform.position, Quaternion.identity);
-                        bombaActivada = true;
-                    }
-                    if (bombaActivada)
+                    if (bombaPoder)
                     {
                         bombaDelay += Time.deltaTime;
+                        bomba.fillAmount = bombaDelay / 20;
                     }
                     if (bombaDelay >= 20)
                     {
                         bombaDelay = 0;
-                        bombaActivada = false;
+                        Instantiate(bombaPrefab, transform.position, Quaternion.identity);
                     }
                     break;
                 case 2:
-                    if (bombaPoder && Input.GetKeyDown(KeyCode.L) && !bombaActivada)
-                    {
-                        Instantiate(bombaPrefab, transform.position, Quaternion.identity);
-                        bombaActivada = true;
-                    }
-                    if (bombaActivada)
+                    if (bombaPoder)
                     {
                         bombaDelay += Time.deltaTime;
+                        bomba.fillAmount = bombaDelay / 18;
                     }
                     if (bombaDelay >= 18)
                     {
                         bombaDelay = 0;
-                        bombaActivada = false;
+                        Instantiate(bombaPrefab, transform.position, Quaternion.identity);
                     }
                     break;
                 case 3:
-                    if (bombaPoder && Input.GetKeyDown(KeyCode.L) && !bombaActivada)
-                    {
-                        Instantiate(bombaPrefab, transform.position, Quaternion.identity);
-                        bombaActivada = true;
-                    }
-                    if (bombaActivada)
+                    if (bombaPoder)
                     {
                         bombaDelay += Time.deltaTime;
+                        bomba.fillAmount = bombaDelay / 16;
                     }
                     if (bombaDelay >= 16)
                     {
                         bombaDelay = 0;
-                        bombaActivada = false;
+                        Instantiate(bombaPrefab, transform.position, Quaternion.identity);
                     }
                     break;
                 case 4:
-                    if (bombaPoder && Input.GetKeyDown(KeyCode.L) && !bombaActivada)
-                    {
-                        Instantiate(bombaPrefab, transform.position, Quaternion.identity);
-                        bombaActivada = true;
-                    }
-                    if (bombaActivada)
+                    if (bombaPoder)
                     {
                         bombaDelay += Time.deltaTime;
+                        bomba.fillAmount = bombaDelay / 14;
                     }
                     if (bombaDelay >= 14)
                     {
                         bombaDelay = 0;
-                        bombaActivada = false;
+                        Instantiate(bombaPrefab, transform.position, Quaternion.identity);
                     }
                     break;
                 case 5:
-                    if (bombaPoder && Input.GetKeyDown(KeyCode.L) && !bombaActivada)
-                    {
-                        Instantiate(bombaPrefab, transform.position, Quaternion.identity);
-                        bombaActivada = true;
-                    }
-                    if (bombaActivada)
+                    if (bombaPoder)
                     {
                         bombaDelay += Time.deltaTime;
+                        bomba.fillAmount = bombaDelay / 12;
+                        Debug.Log(bomba.fillAmount);
                     }
                     if (bombaDelay >= 12)
                     {
                         bombaDelay = 0;
-                        bombaActivada = false;
+                        Instantiate(bombaPrefab, transform.position, Quaternion.identity);
                     }
                     break;
             }

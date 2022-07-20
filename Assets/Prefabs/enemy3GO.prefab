@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 7729400148834839584}
   - component: {fileID: 9180706880455848851}
   m_Layer: 8
-  m_Name: "AreaRecibeDa\xF1o"
+  m_Name: AreaRecibeDano
   m_TagString: RecibeDano
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

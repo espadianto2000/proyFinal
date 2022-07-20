@@ -26,7 +26,7 @@ public class ataquePlayer : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "RecibeDano" && collision.name == "AreaRecibeDaño")
+        if(collision.tag == "RecibeDano" && collision.name == "AreaRecibeDano")
         {
             //Debug.Log("ataque");
             collision.GetComponentInParent<enemyController>().vida -= pc.DanoBase * pc.multiplicadorDanoUlti;
