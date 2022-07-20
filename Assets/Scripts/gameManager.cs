@@ -23,6 +23,7 @@ public class gameManager : MonoBehaviour
     public Texture2D cursorNormal;
     public int[] statsArr;
     public GameObject menuPausa;
+    public musicaManager mm;
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +76,7 @@ public class gameManager : MonoBehaviour
     }
     public void empezarPartida(int personaje)
     {
+        mm.cambiarAJugador();
         if(personaje == 1)
         {
             SceneManager.LoadScene("jugador1", LoadSceneMode.Single);
@@ -87,6 +89,7 @@ public class gameManager : MonoBehaviour
     }
     public void irMenuPrincipal()
     {
+        if (mm != null) { mm.cambiarAMenu(); }
         SceneManager.LoadScene("menu", LoadSceneMode.Single);
     }
     public void acabarPartida()

@@ -707,8 +707,9 @@ GameObject:
   m_Component:
   - component: {fileID: 456112936}
   - component: {fileID: 456112937}
+  - component: {fileID: 456112938}
   m_Layer: 0
-  m_Name: sonidosUI
+  m_Name: musica
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -738,9 +739,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cc7b7e2721875284398754bae9a62312, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7f44aea66d33a02448994d3e6726a953, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.175
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -824,6 +825,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &456112938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456112935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3efdaf9689c54f44fba79942b239c39e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 456112937}
+  musicaMenu: {fileID: 8300000, guid: 7f44aea66d33a02448994d3e6726a953, type: 3}
+  musicaGame:
+  - {fileID: 8300000, guid: 5999111b3deddc64f887ba79988f2b43, type: 3}
+  - {fileID: 8300000, guid: 0eb6dcd98f5cd434cbe68c68acc0ff9d, type: 3}
+  - {fileID: 8300000, guid: 701ccde4ad36646438b02fde280d9562, type: 3}
+  - {fileID: 8300000, guid: a0c123ba47e2a254e9d51e1e5ee0e516, type: 3}
+  - {fileID: 8300000, guid: 2458fc9147ffa2741b5d467b372e8e31, type: 3}
+  - {fileID: 8300000, guid: 5b898a0be9c8968499b5ee5c4f4b79c2, type: 3}
+  - {fileID: 8300000, guid: 7fca9da14a47f164fa5c09f482cb5109, type: 3}
+  - {fileID: 8300000, guid: 5848adf38dffefd4988e796b53fc08ea, type: 3}
+  - {fileID: 8300000, guid: 53e1ce58ddca31d438cfb46dc5ed70c8, type: 3}
+  - {fileID: 8300000, guid: a3ff925d97ac4114488c5a036a0eda88, type: 3}
+  - {fileID: 8300000, guid: 7ded99024e5cd6b40a37cf312483f66b, type: 3}
 --- !u!1 &846830304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,6 +1098,7 @@ MonoBehaviour:
   cursorNormal: {fileID: 2800000, guid: 34e451941ecbccd41b871668489cecbf, type: 3}
   statsArr: 
   menuPausa: {fileID: 1011351157}
+  mm: {fileID: 456112938}
 --- !u!4 &949441765
 Transform:
   m_ObjectHideFlags: 0
