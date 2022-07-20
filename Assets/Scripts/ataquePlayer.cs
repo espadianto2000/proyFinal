@@ -33,14 +33,14 @@ public class ataquePlayer : MonoBehaviour
             {
                 collision.GetComponentInParent<enemyController>().efectoFlash();
                 GameObject obj = Instantiate(collision.GetComponentInParent<enemyController>().hmCrit, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
-                obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (pc.DanoBase * pc.multiplicadorDanoUlti * 3) + "";
+                obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (Mathf.Round((pc.DanoBase * pc.multiplicadorDanoUlti * 3)*100)/100) + "";
                 collision.GetComponentInParent<enemyController>().vida -= (pc.DanoBase * pc.multiplicadorDanoUlti * 3);
             }
             else
             {
                 collision.GetComponentInParent<enemyController>().efectoFlash();
                 GameObject obj = Instantiate(collision.GetComponentInParent<enemyController>().hm, new Vector3(collision.transform.position.x, collision.transform.position.y + 0.5f, collision.transform.position.z), Quaternion.identity);
-                obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = pc.DanoBase * pc.multiplicadorDanoUlti + "";
+                obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (Mathf.Round(pc.DanoBase * pc.multiplicadorDanoUlti*100)/100) + "";
                 collision.GetComponentInParent<enemyController>().vida -= pc.DanoBase * pc.multiplicadorDanoUlti;
             }
             if (pc.roboVidaLVL>=1)

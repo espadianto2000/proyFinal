@@ -961,7 +961,7 @@ public class PlayerController : MonoBehaviour
         vidaActual += curacion*porcentajeCuraciones;
         vidaActual = vidaActual > vidaMax ? vidaMax : vidaActual;
         GameObject obj = Instantiate(hmHeal, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
-        obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = curacion + "";
+        obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (Mathf.Round(curacion*porcentajeCuraciones*100)/100) + "";
     }
     void recibeDano()
     {
