@@ -24,6 +24,7 @@ public class gameManager : MonoBehaviour
     public int[] statsArr;
     public GameObject menuPausa;
     public musicaManager mm;
+    public AudioSource audioNivel;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class gameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         cambiarCursorMain();
         irMenuPrincipal();
+        audioNivel = GameObject.Find("AudioNivel").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -132,6 +134,7 @@ public class gameManager : MonoBehaviour
                     dinero -= 100 + 100 * (nivelVidaExtra * nivelVidaExtra);
                     nivelVidaExtra++;
                     statsArr[orden] = nivelVidaExtra;
+                    audioNivel.Play();
                 }
                 break;
             case 1:
@@ -140,8 +143,9 @@ public class gameManager : MonoBehaviour
                     dinero -= 100 + 100 * (nivelDanoExtra * nivelDanoExtra);
                     nivelDanoExtra++;
                     statsArr[orden] = nivelDanoExtra;
+                    audioNivel.Play();
                 }
-                    
+
                 break;
             case 2:
                 if (dinero >= (100 + 100 * (nivelVelocidadExtra * nivelVelocidadExtra)))
@@ -149,8 +153,9 @@ public class gameManager : MonoBehaviour
                     dinero -= 100 + 100 * (nivelVelocidadExtra * nivelVelocidadExtra);
                     nivelVelocidadExtra++;
                     statsArr[orden] = nivelVelocidadExtra;
+                    audioNivel.Play();
                 }
-                    
+
                 break;
             case 3:
                 if (dinero >= (100 + 100 * (nivelCritExtra * nivelCritExtra)))
@@ -158,8 +163,9 @@ public class gameManager : MonoBehaviour
                     dinero -= 100 + 100 * (nivelCritExtra * nivelCritExtra);
                     nivelCritExtra++;
                     statsArr[orden] = nivelCritExtra;
+                    audioNivel.Play();
                 }
-                    
+
                 break;
             case 4:
                 if (dinero >= (100 + 100 * (nivelExpExtra * nivelExpExtra)))
@@ -167,8 +173,9 @@ public class gameManager : MonoBehaviour
                     dinero -= 100 + 100 * (nivelExpExtra * nivelExpExtra);
                     nivelExpExtra++;
                     statsArr[orden] = nivelExpExtra;
+                    audioNivel.Play();
                 }
-                    
+
                 break;
             case 5:
                 if (dinero >= (100 + 100 * (nivelPuntosExtra * nivelPuntosExtra)))
@@ -176,8 +183,9 @@ public class gameManager : MonoBehaviour
                     dinero -= 100 + 100 * (nivelPuntosExtra * nivelPuntosExtra);
                     nivelPuntosExtra++;
                     statsArr[orden] = nivelPuntosExtra;
+                    audioNivel.Play();
                 }
-                    
+
                 break;
             case 6:
                 if (dinero >= (100 + 100 * (nivelDineroExtra * nivelDineroExtra)))
@@ -185,8 +193,9 @@ public class gameManager : MonoBehaviour
                     dinero -= 100 + 100 * (nivelDineroExtra * nivelDineroExtra);
                     nivelDineroExtra++;
                     statsArr[orden] = nivelDineroExtra;
+                    audioNivel.Play();
                 }
-                    
+
                 break;
             case 7:
                 if (dinero >= (100 + 100 * (nivelSpawnVida * nivelSpawnVida)))
@@ -194,8 +203,9 @@ public class gameManager : MonoBehaviour
                     dinero -= 100 + 100 * (nivelSpawnVida * nivelSpawnVida);
                     nivelSpawnVida++;
                     statsArr[orden] = nivelSpawnVida;
+                    audioNivel.Play();
                 }
-                    
+
                 break;
             case 8:
                 if (dinero >= (100 + 100 * (nivelCuracionExtra * nivelCuracionExtra)))
@@ -203,8 +213,9 @@ public class gameManager : MonoBehaviour
                     dinero -= 100 + 100 * (nivelCuracionExtra * nivelCuracionExtra);
                     nivelCuracionExtra++;
                     statsArr[orden] = nivelCuracionExtra;
+                    audioNivel.Play();
                 }
-                    
+
                 break;
             case 9:
                 if (dinero >= (100 + 100 * (nivelVelocidadAtaqueExtra * nivelVelocidadAtaqueExtra)))
@@ -212,8 +223,9 @@ public class gameManager : MonoBehaviour
                     dinero -= 100 + 100 * (nivelVelocidadAtaqueExtra * nivelVelocidadAtaqueExtra);
                     nivelVelocidadAtaqueExtra++;
                     statsArr[orden] = nivelVelocidadAtaqueExtra;
+                    audioNivel.Play();
                 }
-                    
+
                 break;
         }
     }
