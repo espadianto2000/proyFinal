@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public AudioSource espadaAudio;
+    public AudioSource audioDaga;
+
     private Material origMaterial;
     public Material flashMaterial;
     public bool vulnerable = true;
@@ -605,6 +608,7 @@ public class PlayerController : MonoBehaviour
                     {
                         dagaDelay = 0;
                         Instantiate(dagaPrefab, transform.position, transform.rotation * Quaternion.identity);
+                        audioDaga.Play();
                     }
                     break;
                 case 2:
@@ -618,6 +622,7 @@ public class PlayerController : MonoBehaviour
                     {
                         dagaDelay = 0;
                         Instantiate(dagaPrefab, transform.position, transform.rotation * Quaternion.identity);
+                        audioDaga.Play();
                     }
                     break;
                 case 3:
@@ -631,6 +636,7 @@ public class PlayerController : MonoBehaviour
                     {
                         dagaDelay = 0;
                         Instantiate(dagaPrefab, transform.position, transform.rotation * Quaternion.identity);
+                        audioDaga.Play();
                     }
                     break;
                 case 4:
@@ -644,6 +650,7 @@ public class PlayerController : MonoBehaviour
                     {
                         dagaDelay = 0;
                         Instantiate(dagaPrefab, transform.position, transform.rotation * Quaternion.identity);
+                        audioDaga.Play();
                     }
                     break;
                 case 5:
@@ -657,6 +664,7 @@ public class PlayerController : MonoBehaviour
                     {
                         dagaDelay = 0;
                         Instantiate(dagaPrefab, transform.position, transform.rotation * Quaternion.identity);
+                        audioDaga.Play();
                     }
                     break;          
             }
@@ -759,11 +767,14 @@ public class PlayerController : MonoBehaviour
             obj.transform.localScale = new Vector3(tamanoAtaque*multiplicadorTamanoUlti, tamanoAtaque * multiplicadorTamanoUlti, 1);
             obj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             obj.GetComponent<flecha>().destino = targ.normalized;
+            espadaAudio.Play();
+
         }
         if (SceneManager.GetActiveScene().name == "jugador1")
         {
             
             slash.transform.GetChild(0).GetComponent<Animator>().SetTrigger("atacar");
+            espadaAudio.Play();
         }
         
     }

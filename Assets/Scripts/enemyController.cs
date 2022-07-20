@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class enemyController : MonoBehaviour
 {
+    public AudioSource sonidoMuerte;
     private Material origMaterial;
     public Material flashMaterial;
     public GameObject player;
@@ -35,6 +36,7 @@ public class enemyController : MonoBehaviour
         rd = GetComponentInChildren<Renderer>();
         waveM = GameObject.Find("waveManager").GetComponent<WaveManager>();
         interfazManager = GameObject.Find("interfazJuego");
+        sonidoMuerte = GameObject.Find("AudioMuerteEnemigo").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -51,7 +53,9 @@ public class enemyController : MonoBehaviour
                 Instantiate(waveM.corazon, transform.position, Quaternion.identity);
             }
             interfazManager.GetComponent<interfazInGameManager>().puntos += 1*player.GetComponent<PlayerController>().porcentajePuntos;
+            sonidoMuerte.Play();
             Destroy(transform.gameObject);
+
         }
         //Debug.Log(transform.position.x);
         
