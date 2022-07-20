@@ -12,7 +12,11 @@ public class ataquePlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        pc = GameObject.Find("Heroe").GetComponent<PlayerController>();
+        if(transform.name == "flecha(Clone)")
+        {
+            GetComponent<Collider2D>().enabled = true;
+        }
     }
 
     // Update is called once per frame
@@ -22,11 +26,14 @@ public class ataquePlayer : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "RecibeDano")
+        if(collision.tag == "RecibeDano" && collision.name == "AreaRecibeDaño")
         {
             Debug.Log("ataque");
             collision.GetComponentInParent<enemyController>().vida -= pc.DanoBase;
-            if(pc.roboVidaLVL>=1)
+            collision.GetComponentInParent<enemyController>().efectoFlash();
+            GameObject obj = Instantiate(collision.GetComponentInParent<enemyController>().hm, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+            obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = collision.GetComponentInParent<enemyController>().player.GetComponentInParent<PlayerController>().DanoBase + "";
+            if (pc.roboVidaLVL>=1)
             {
                 switch(pc.roboVidaLVL)
                 {

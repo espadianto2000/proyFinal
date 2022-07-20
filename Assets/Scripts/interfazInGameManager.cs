@@ -13,6 +13,17 @@ public class interfazInGameManager : MonoBehaviour
     public GameObject ulti;
     public GameObject player;
 
+    [Header("itemsIcon")]
+    public GameObject espinas;
+    public GameObject roboVida;
+    public GameObject escudo;
+    public GameObject inmortalidad;
+    public GameObject invisibilidad;
+    public GameObject cuchillo;
+    public GameObject evasion;
+    public GameObject cactus;
+    public GameObject bomba;
+
     [Header("valoresStats")]
     public GameObject vidaMax;
     public GameObject atk;
@@ -46,6 +57,42 @@ public class interfazInGameManager : MonoBehaviour
         if (player.GetComponent<PlayerController>().cargaUlti >= 1)
         {
             ulti.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        if (!espinas.active && player.GetComponent<PlayerController>().armaduraEspinas)
+        {
+            espinas.SetActive(true);
+        }
+        if (!roboVida.active && player.GetComponent<PlayerController>().roboVida)
+        {
+            roboVida.SetActive(true);
+        }
+        if (!escudo.active && player.GetComponent<PlayerController>().escudoProtector)
+        {
+            escudo.SetActive(true);
+        }
+        if (!inmortalidad.active && player.GetComponent<PlayerController>().escudoInmortal)
+        {
+            inmortalidad.SetActive(true);
+        }
+        if (!invisibilidad.active && player.GetComponent<PlayerController>().invisibilidad)
+        {
+            invisibilidad.SetActive(true);
+        }
+        if (!cuchillo.active && player.GetComponent<PlayerController>().dagaPoder)
+        {
+            cuchillo.SetActive(true);
+        }
+        if (!evasion.active && player.GetComponent<PlayerController>().evadirAtaque)
+        {
+            evasion.SetActive(true);
+        }
+        if (!cactus.active && player.GetComponent<PlayerController>().cactusPoder)
+        {
+            cactus.SetActive(true);
+        }
+        if (!bomba.active && player.GetComponent<PlayerController>().bombaPoder)
+        {
+            bomba.SetActive(true);
         }
     }
     public void reiniciar()

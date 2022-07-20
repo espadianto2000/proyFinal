@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class improvementsManager : MonoBehaviour
 {
@@ -45,7 +46,10 @@ public class improvementsManager : MonoBehaviour
             case 5:
                 pc.nivelAlcanceMejora++;
                 pc.tamanoAtaque = pc.tamanoAtaque * 1.1f;
-                pc.slash.transform.localScale = new Vector3(pc.tamanoAtaque, pc.tamanoAtaque, pc.tamanoAtaque);
+                if(SceneManager.GetActiveScene().name == "jugador1")
+                {
+                    pc.slash.transform.localScale = new Vector3(pc.tamanoAtaque, pc.tamanoAtaque, pc.tamanoAtaque);
+                }
                 break;
             case 6:
                 pc.nivelXPMejora++;

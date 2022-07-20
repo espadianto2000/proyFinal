@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/jugador1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/jugador2.unity
-    guid: 36834e9348d6f114b896aa3b79c68600
+    guid: 2b801b8e423b559448299e5de07007ee
   m_configObjects: {}

@@ -129,12 +129,12 @@ public class enemyController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "slash")
+        /*if(collision.tag == "slash")
         {
             efectoFlash();
             GameObject obj = Instantiate(hm, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
             obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = player.GetComponent<PlayerController>().DanoBase+"";
-        }
+        }*/
         if(collision.tag == "cactus")
         {
             collision.GetComponent<cactus>().vida -= 10;

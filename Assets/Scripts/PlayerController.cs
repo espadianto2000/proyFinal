@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     [Header("ataque")]
     public GameObject slash;
     public float timerAtaque=0;
+    public GameObject flecha;
 
     [Header("subidaNivel")]
     public float xpNecesaria;
@@ -160,7 +161,7 @@ public class PlayerController : MonoBehaviour
                 slash.transform.localScale = new Vector3(tamanoAtaque, tamanoAtaque, tamanoAtaque);
             }
         }
-        if (Input.GetKeyDown(KeyCode.Space) && cargaUlti >=1 && !ultiUsado)
+        if (Input.GetKeyDown(KeyCode.Space) && cargaUlti >=1 && !ultiUsado && gm.desbloquearUlti)                               
         {
             ultiUsado = true;
             if(SceneManager.GetActiveScene().name == "jugador1")
@@ -672,9 +673,29 @@ public class PlayerController : MonoBehaviour
         newdir.x = pos.x - slash.transform.position.x;
         newdir.y = pos.y - slash.transform.position.y;
 
-        float angle = Mathf.Atan2(newdir.y,newdir.x)*Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(newdir.y, newdir.x) * Mathf.Rad2Deg;
         slash.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        slash.transform.GetChild(0).GetComponent<Animator>().SetTrigger("atacar");
+        if (SceneManager.GetActiveScene().name == "jugador2")
+        {
+            Vector3 targ = pos;
+            targ.z = 0f;
+
+            Vector3 objectPos = slash.transform.GetChild(0).position;
+            targ.x = targ.x - objectPos.x;
+            targ.y = targ.y - objectPos.y;
+
+            angle = Mathf.Atan2(targ.y, targ.x) * Mathf.Rad2Deg;
+            GameObject obj = Instantiate(flecha, slash.transform.GetChild(0).position, Quaternion.identity);
+            obj.transform.localScale = new Vector3(tamanoAtaque, tamanoAtaque,1);
+            obj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            obj.GetComponent<flecha>().destino = targ.normalized;
+        }
+        if (SceneManager.GetActiveScene().name == "jugador1")
+        {
+            
+            slash.transform.GetChild(0).GetComponent<Animator>().SetTrigger("atacar");
+        }
+        
     }
     private void FixedUpdate()
     {
@@ -707,13 +728,13 @@ public class PlayerController : MonoBehaviour
             //Debug.Log(Input.mousePosition);
             pos.x = pos.x - (Screen.width / 2f);
             pos.y = pos.y - (Screen.height / 2f);
-            Vector2 destinoAtaq = new Vector2(transform.position.x + (pos.x), slash.transform.position.y + (pos.y));
+            Vector2 destinoAtaq = new Vector2(transform.position.x + (pos.x), transform.position.y + (pos.y));
             destinoAtaque = destinoAtaq;
             if (timerAtaque > velocidadAtaque)
             {
                 atacar(destinoAtaq);
                 timerAtaque = 0;
-            }
+            }            
         }
     }
 
