@@ -205,6 +205,8 @@ public class PlayerController : MonoBehaviour
         {
             vivo = false;
             transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 2);
+            transform.GetChild(0).GetComponent<SpriteRenderer>().material = origMaterial;
+            transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
             Invoke("desplegarMenuMuerte",2.5f);
         }
         if (exp >= xpNecesaria)
@@ -988,7 +990,7 @@ public class PlayerController : MonoBehaviour
     {
         menuMuerte.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = ((Mathf.Round(wm.timeTotal*100))/100)+"s";
         menuMuerte.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos + "";
-        menuMuerte.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = (int)Mathf.Round(menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos / 5f) + "$";
+        menuMuerte.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = (int)Mathf.Round(menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos / 3f) + "$";
         gm.dinero += (int)Mathf.Round((menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos / 5f) * porcentajeDinero);
         menuMuerte.SetActive(true);
         Time.timeScale = 0;
