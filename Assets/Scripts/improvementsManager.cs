@@ -71,38 +71,182 @@ public class improvementsManager : MonoBehaviour
         {
             case 0:
                 pc.armEspLVL++;
+                if (pc.armEspLVL >= 5)
+                {
+                    int tempi = 0;
+                    GameObject[] tempPosMej = new GameObject[posiblesMejoras.Length - 1];
+                    for (int i=0; i<posiblesMejoras.Length;i++)
+                    {
+                        if(posiblesMejoras[i].name != "itemEspinas")
+                        {
+                            Debug.Log(posiblesMejoras[i].name);
+                            Debug.Log(orden);
+                            tempPosMej[tempi]=posiblesMejoras[i];
+                            tempi++;
+                        }
+                    }
+                    posiblesMejoras = tempPosMej;
+                }
                 pc.armaduraEspinas = true;
                 break;
             case 1:
                 pc.roboVidaLVL++;
+                if (pc.roboVidaLVL >= 5)
+                {
+                    int tempi = 0;
+                    GameObject[] tempPosMej = new GameObject[posiblesMejoras.Length - 1];
+                    for (int i = 0; i < posiblesMejoras.Length; i++)
+                    {
+                        if (posiblesMejoras[i].name != "itemRoboVida")
+                        {
+                            Debug.Log(posiblesMejoras[i].name);
+                            Debug.Log(orden);
+                            tempPosMej[tempi] = posiblesMejoras[i];
+                            tempi++;
+                        }
+                    }
+                    posiblesMejoras = tempPosMej;
+                }
                 pc.roboVida = true;
                 break;
             case 2:
                 pc.escudoProtLVL++;
+                if (pc.escudoProtLVL >= 5)
+                {
+                    int tempi = 0;
+                    GameObject[] tempPosMej = new GameObject[posiblesMejoras.Length - 1];
+                    for (int i = 0; i < posiblesMejoras.Length; i++)
+                    {
+                        if (posiblesMejoras[i].name != "itemEscudo")
+                        {
+                            Debug.Log(posiblesMejoras[i].name);
+                            Debug.Log(orden);
+                            tempPosMej[tempi] = posiblesMejoras[i];
+                            tempi++;
+                        }
+                    }
+                    posiblesMejoras = tempPosMej;
+                }
                 pc.escudoProtector = true;
                 break;
             case 3:
                 pc.escudoInmLVL++;
+                if (pc.escudoInmLVL >= 5)
+                {
+                    int tempi = 0;
+                    GameObject[] tempPosMej = new GameObject[posiblesMejoras.Length - 1];
+                    for (int i = 0; i < posiblesMejoras.Length; i++)
+                    {
+                        if (posiblesMejoras[i].name != "itemInmortalidad")
+                        {
+                            Debug.Log(posiblesMejoras[i].name);
+                            Debug.Log(orden);
+                            tempPosMej[tempi] = posiblesMejoras[i];
+                            tempi++;
+                        }
+                    }
+                    posiblesMejoras = tempPosMej;
+                }
                 pc.escudoInmortal = true;
                 break;
             case 4:
                 pc.invLVL++;
+                if (pc.invLVL >= 5)
+                {
+                    int tempi = 0;
+                    GameObject[] tempPosMej = new GameObject[posiblesMejoras.Length - 1];
+                    for (int i = 0; i < posiblesMejoras.Length; i++)
+                    {
+                        if (posiblesMejoras[i].name != "itemInvisibilidad")
+                        {
+                            Debug.Log(posiblesMejoras[i].name);
+                            Debug.Log(orden);
+                            tempPosMej[tempi] = posiblesMejoras[i];
+                            tempi++;
+                        }
+                    }
+                    posiblesMejoras = tempPosMej;
+                }
                 pc.invisibilidad = true;
                 break;
             case 5:
                 pc.dagaLVL++;
+                if (pc.dagaLVL >= 5)
+                {
+                    int tempi = 0;
+                    GameObject[] tempPosMej = new GameObject[posiblesMejoras.Length - 1];
+                    for (int i = 0; i < posiblesMejoras.Length; i++)
+                    {
+                        if (posiblesMejoras[i].name != "itemDaga")
+                        {
+                            Debug.Log(posiblesMejoras[i].name);
+                            Debug.Log(orden);
+                            tempPosMej[tempi] = posiblesMejoras[i];
+                            tempi++;
+                        }
+                    }
+                    posiblesMejoras = tempPosMej;
+                }
                 pc.dagaPoder = true;
                 break;
             case 6:
                 pc.evasionLVL++;
+                if (pc.evasionLVL >= 5)
+                {
+                    int tempi = 0;
+                    GameObject[] tempPosMej = new GameObject[posiblesMejoras.Length - 1];
+                    for (int i = 0; i < posiblesMejoras.Length; i++)
+                    {
+                        if (posiblesMejoras[i].name != "itemEvasionAtaque")
+                        {
+                            Debug.Log(posiblesMejoras[i].name);
+                            Debug.Log(orden);
+                            tempPosMej[tempi] = posiblesMejoras[i];
+                            tempi++;
+                        }
+                    }
+                    posiblesMejoras = tempPosMej;
+                }
                 pc.evadirAtaque = true;
                 break;
             case 7:
                 pc.cactusLVL++;
+                if (pc.cactusLVL >= 5)
+                {
+                    int tempi = 0;
+                    GameObject[] tempPosMej = new GameObject[posiblesMejoras.Length - 1];
+                    for (int i = 0; i < posiblesMejoras.Length; i++)
+                    {
+                        if (posiblesMejoras[i].name != "itemCactus")
+                        {
+                            Debug.Log(posiblesMejoras[i].name);
+                            Debug.Log(orden);
+                            tempPosMej[tempi] = posiblesMejoras[i];
+                            tempi++;
+                        }
+                    }
+                    posiblesMejoras = tempPosMej;
+                }
                 pc.cactusPoder = true;
                 break;
             case 8:
                 pc.bombaLVL++;
+                if (pc.bombaLVL >= 5)
+                {
+                    int tempi = 0;
+                    GameObject[] tempPosMej = new GameObject[posiblesMejoras.Length - 1];
+                    for (int i = 0; i < posiblesMejoras.Length; i++)
+                    {
+                        if (posiblesMejoras[i].name != "itemBombas")
+                        {
+                            Debug.Log(posiblesMejoras[i].name);
+                            Debug.Log(orden);
+                            tempPosMej[tempi] = posiblesMejoras[i];
+                            tempi++;
+                        }
+                    }
+                    posiblesMejoras = tempPosMej;
+                }
                 pc.bombaPoder = true;
                 break;
         }
