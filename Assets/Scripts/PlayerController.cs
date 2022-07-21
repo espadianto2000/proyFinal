@@ -136,6 +136,27 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            armaduraEspinas = true;
+            roboVida = true;
+            escudoProtector = true;
+            escudoInmortal = true;
+            invisibilidad = true;
+            cactusPoder = true;
+            evadirAtaque = true;
+            dagaPoder = true;
+            bombaPoder = true;
+            armEspLVL = 4;
+            roboVidaLVL = 4;
+            escudoProtLVL = 4;
+            escudoInmLVL = 4;
+            invLVL = 4;
+            cactusLVL = 4;
+            evasionLVL = 4;
+            dagaLVL = 4;
+            bombaLVL = 4;
+        }
        
             switch (evasionLVL)
             {

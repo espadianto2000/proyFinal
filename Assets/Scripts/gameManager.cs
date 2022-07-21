@@ -39,6 +39,10 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            dinero += 10000;
+        }
         if(Input.GetKeyDown(KeyCode.P) && (SceneManager.GetActiveScene().name == "jugador1" || SceneManager.GetActiveScene().name == "jugador2"))
         {
             if((Time.timeScale == 0 && estadoPausa) || (Time.timeScale == 1 && !estadoPausa))
