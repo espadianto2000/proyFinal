@@ -1,10 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public class gameData
+{
+    public int dinero = 0;
+    public int nivelVidaExtra = 0;
+    public int nivelVelocidadExtra = 0;
+    public int nivelDanoExtra = 0;
+    public int nivelCritExtra = 0;
+    public int nivelExpExtra = 0;
+    public int nivelPuntosExtra = 0;
+    public int nivelDineroExtra = 0;
+    public int nivelSpawnVida = 0;
+    public int nivelCuracionExtra = 0;
+    public int nivelVelocidadAtaqueExtra = 0;
+    public bool desbloquearPersonaje2 = false;
+    public bool desbloquearUlti = false;
+    public float highScore = 0;
+    public gameData(int din, int vida, int vel, int dano, int crit, int exp, int pts, int dinex, int spvida, int cur, int velat, bool pj2, bool ulti, float hs)
+    {
+        this.dinero = din;
+        this.nivelSpawnVida = vida;
+        this.nivelVelocidadExtra = vel;
+        this.nivelDanoExtra = dano;
+        this.nivelCritExtra = crit;
+        this.nivelExpExtra = exp;
+        this.nivelPuntosExtra = pts;
+        this.nivelDineroExtra = dinex;
+        this.nivelSpawnVida = spvida;
+        this.nivelCuracionExtra = cur;
+        this.nivelVelocidadAtaqueExtra = velat;
+        this.desbloquearPersonaje2 = pj2;
+        this.desbloquearUlti = ulti;
+        this.highScore = hs;
+    }
+}
+
 public class gameManager : MonoBehaviour
 {
+    public gameData gd;
     public bool estadoPausa=false;
     public int dinero = 0;
     public int nivelVidaExtra = 0;
@@ -26,10 +61,33 @@ public class gameManager : MonoBehaviour
     public musicaManager mm;
     public AudioSource audioNivel;
 
+    private string path = "";
+    private string persistentPath="";
+
     // Start is called before the first frame update
     void Start()
     {
-        statsArr = new int[10] { 0,0,0,0,0,0,0,0,0,0};
+        path = Application.dataPath + Path.AltDirectorySeparatorChar + "saveData.json";
+        persistentPath = Application.persistentDataPath+Path.AltDirectorySeparatorChar+"saveData.json";
+        try
+        {
+            cargar();
+            
+        }
+        catch
+        {
+        }
+        statsArr = new int[10];
+        statsArr[0] = nivelVidaExtra;
+        statsArr[1] = nivelDanoExtra;
+        statsArr[2] = nivelVelocidadExtra;
+        statsArr[3] = nivelCritExtra;
+        statsArr[4] = nivelExpExtra;
+        statsArr[5] = nivelPuntosExtra;
+        statsArr[6] = nivelDineroExtra;
+        statsArr[7] = nivelSpawnVida;
+        statsArr[8] = nivelCuracionExtra;
+        statsArr[9] = nivelVelocidadExtra;
         DontDestroyOnLoad(gameObject);
         cambiarCursorMain();
         irMenuPrincipal();
@@ -112,10 +170,10 @@ public class gameManager : MonoBehaviour
         switch (orden)
         {
             case 0:
-                if (dinero >= 2500)
+                if (dinero >= 1500)
                 {
                     desbloquearPersonaje2 = true;
-                    dinero -= 2500;
+                    dinero -= 1500;
                 }
                 
                 break;
@@ -232,5 +290,34 @@ public class gameManager : MonoBehaviour
 
                 break;
         }
+    }
+    public void guardar()
+    {
+        gd = new gameData(dinero, nivelVidaExtra, nivelVelocidadExtra, nivelDanoExtra, nivelCritExtra, nivelExpExtra, nivelPuntosExtra, nivelDineroExtra, nivelSpawnVida, nivelCuracionExtra, nivelVelocidadAtaqueExtra, desbloquearPersonaje2, desbloquearUlti, highScore);
+        string json = JsonUtility.ToJson(gd);
+        using StreamWriter writer = new StreamWriter(persistentPath);
+        writer.Write(json);
+    }
+    public void cargar()
+    {
+        using StreamReader rd = new StreamReader(persistentPath);
+        string json = rd.ReadToEnd();
+
+        gd = JsonUtility.FromJson<gameData>(json);
+        dinero = gd.dinero;
+        nivelVidaExtra = gd.nivelVidaExtra;
+        nivelDanoExtra = gd.nivelDanoExtra;
+        nivelVelocidadExtra = gd.nivelVelocidadExtra;
+        nivelDanoExtra = gd.nivelDanoExtra;
+        nivelCritExtra = gd.nivelCritExtra;
+        nivelExpExtra = gd.nivelExpExtra;
+        nivelPuntosExtra = gd.nivelPuntosExtra;
+        nivelDineroExtra = gd.nivelDineroExtra;
+        nivelSpawnVida = gd.nivelSpawnVida;
+        nivelCuracionExtra = gd.nivelCuracionExtra;
+        nivelVelocidadAtaqueExtra = gd.nivelVelocidadAtaqueExtra;
+        desbloquearPersonaje2 = gd.desbloquearPersonaje2;
+        desbloquearUlti = gd.desbloquearUlti;
+        highScore = gd.highScore;
     }
 }

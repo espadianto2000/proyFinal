@@ -1011,8 +1011,13 @@ public class PlayerController : MonoBehaviour
     {
         menuMuerte.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = ((Mathf.Round(wm.timeTotal*100))/100)+"s";
         menuMuerte.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos + "";
-        menuMuerte.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = (int)Mathf.Round(menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos / 2f) + "$";
-        gm.dinero += (int)Mathf.Round((menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos / 5f) * porcentajeDinero);
+        if (menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos > gm.highScore)
+        {
+            gm.highScore = menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos;
+        }
+        menuMuerte.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = (int)Mathf.Round(menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos * 0.75f) + "$";
+        gm.dinero += (int)Mathf.Round((menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos * 0.75f) * porcentajeDinero);
+        gm.guardar();
         menuMuerte.SetActive(true);
         Time.timeScale = 0;
     }

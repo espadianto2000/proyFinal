@@ -54,5 +54,6 @@ public class menuImprovesManager : MonoBehaviour
         botones[botones.Length - 1].transform.GetChild(4).GetComponent<Button>().interactable = gm.desbloquearUlti ? false : true;
         botones[botones.Length - 2].transform.GetChild(4).GetComponent<boton>().enabled = gm.desbloquearPersonaje2 ? false : true;
         botones[botones.Length - 1].transform.GetChild(4).GetComponent<boton>().enabled = gm.desbloquearUlti ? false : true;
+        gm.guardar();
     }
 }
