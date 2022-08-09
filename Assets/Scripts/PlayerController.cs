@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public AudioSource espadaAudio;
     public AudioSource audioDaga;
 
+    [SerializeField] private FixedJoystick joystick;
+
     private Material origMaterial;
     public Material flashMaterial;
     public bool vulnerable = true;
@@ -136,7 +138,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.I))
+        /*if(Input.GetKeyDown(KeyCode.I))
         {
             armaduraEspinas = true;
             roboVida = true;
@@ -156,7 +158,7 @@ public class PlayerController : MonoBehaviour
             evasionLVL = 4;
             dagaLVL = 4;
             bombaLVL = 4;
-        }
+        }*/
        
             switch (evasionLVL)
             {
@@ -806,39 +808,77 @@ public class PlayerController : MonoBehaviour
         rd.sortingOrder = -(int)(GetComponent<Collider2D>().bounds.min.y * 100);
         if (vivo)
         {
-            float movVertical = Input.GetAxisRaw("Vertical");
-            float movHorizontal = Input.GetAxisRaw("Horizontal");
-            Vector2 movimiento = new Vector2(movHorizontal, movVertical).normalized;
-            rb.MovePosition((Vector2)transform.position + (movimiento * VelocidadBase * Time.fixedDeltaTime));
-            timerAtaque += Time.fixedDeltaTime;
-            //transform.Translate(movHorizontal, movVertical, 0);
-            if (Input.GetAxisRaw("Horizontal") > 0)
+            if(SystemInfo.deviceType == DeviceType.Handheld)
             {
-                transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
-            }
-            else if (Input.GetAxisRaw("Horizontal") < 0)
-            {
-                transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
-            }
-            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
-            {
-                transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 1);
+                float movVertical = joystick.Vertical;
+                float movHorizontal = joystick.Horizontal;
+                Vector2 movimiento = new Vector2(movHorizontal, movVertical).normalized;
+                rb.MovePosition((Vector2)transform.position + (movimiento * VelocidadBase * Time.fixedDeltaTime));
+                timerAtaque += Time.fixedDeltaTime;
+                if (movHorizontal > 0)
+                {
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+                }
+                else if (movHorizontal < 0)
+                {
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+                }
+                if (movHorizontal != 0 || movVertical != 0)
+                {
+                    transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 1);
+                }
+                else
+                {
+                    transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 0);
+                }
+                //touch
+                if (Input.touchCount > 0)
+                {
+                    Touch tc = Input.GetTouch(0);
+                    Vector2 pos = tc.position;
+                    pos.x = pos.x - (Screen.width / 2f);
+                    pos.y = pos.y - (Screen.height / 2f);
+                    Debug.Log($"posicionTouchX: {pos.x} || posicionTouchY: {pos.y}");
+                }
+                //
             }
             else
             {
-                transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 0);
+                float movVertical = Input.GetAxisRaw("Vertical");
+                float movHorizontal = Input.GetAxisRaw("Horizontal");
+                Vector2 movimiento = new Vector2(movHorizontal, movVertical).normalized;
+                rb.MovePosition((Vector2)transform.position + (movimiento * VelocidadBase * Time.fixedDeltaTime));
+                timerAtaque += Time.fixedDeltaTime;
+                //transform.Translate(movHorizontal, movVertical, 0);
+                if (Input.GetAxisRaw("Horizontal") > 0)
+                {
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+                }
+                else if (Input.GetAxisRaw("Horizontal") < 0)
+                {
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+                }
+                if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+                {
+                    transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 1);
+                }
+                else
+                {
+                    transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 0);
+                }
+                Vector2 pos = Input.mousePosition;
+                //Debug.Log(Input.mousePosition);
+                pos.x = pos.x - (Screen.width / 2f);
+                pos.y = pos.y - (Screen.height / 2f);
+                Debug.Log($"posicionMouseX: {pos.x} || posicionMouseY: {pos.y}");
+                Vector2 destinoAtaq = new Vector2(transform.position.x + (pos.x), transform.position.y + (pos.y));
+                destinoAtaque = destinoAtaq;
             }
-            Vector2 pos = Input.mousePosition;
-            //Debug.Log(Input.mousePosition);
-            pos.x = pos.x - (Screen.width / 2f);
-            pos.y = pos.y - (Screen.height / 2f);
-            Vector2 destinoAtaq = new Vector2(transform.position.x + (pos.x), transform.position.y + (pos.y));
-            destinoAtaque = destinoAtaq;
             if (timerAtaque > velocidadAtaque*reduccionVelocidadAtaqueUlti)
             {
-                atacar(destinoAtaq);
+                atacar(destinoAtaque);
                 timerAtaque = 0;
-            }            
+            }
         }
     }
 

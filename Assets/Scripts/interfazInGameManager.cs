@@ -35,8 +35,14 @@ public class interfazInGameManager : MonoBehaviour
     public GameObject PtsMultiplier;
     public GameObject DineroMultiplier;
 
+    [Header("joystick")]
+    [SerializeField] private GameObject joystick;
     void Start()
     {
+        if(SystemInfo.deviceType == DeviceType.Handheld)
+        {
+            joystick.SetActive(true);
+        }
         if (GameObject.Find("gameManager"))
         {
             gm = GameObject.Find("gameManager").GetComponent<gameManager>();
