@@ -126,6 +126,16 @@ public class gameManager : MonoBehaviour
     {
         menuPausa.SetActive(false);
         estadoPausa = false;
+        if (SystemInfo.deviceType == DeviceType.Handheld && SceneManager.GetActiveScene().name != "menu")
+        {
+            Time.timeScale = 0;
+            GameObject.Find("Heroe").GetComponent<PlayerController>().fueraPausa = true;
+        }else Time.timeScale = 1;
+    }
+    public void forceOutPausa()
+    {
+        menuPausa.SetActive(false);
+        estadoPausa = false;
         Time.timeScale = 1;
     }
     public void reiniciarPartida()

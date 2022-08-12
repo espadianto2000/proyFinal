@@ -12,6 +12,7 @@ public class interfazInGameManager : MonoBehaviour
     public TextMeshProUGUI displayPuntos;
     public GameObject ulti;
     public GameObject player;
+    [SerializeField] private GameObject pausaBut;
 
     [Header("itemsIcon")]
     public GameObject espinas;
@@ -44,6 +45,7 @@ public class interfazInGameManager : MonoBehaviour
         {
             joystick.SetActive(true);
             joystick2.SetActive(true);
+            pausaBut.SetActive(true);
         }
         if (GameObject.Find("gameManager"))
         {
@@ -114,6 +116,15 @@ public class interfazInGameManager : MonoBehaviour
     public void salirPausa()
     {
         gm.outPausa();
+        //player.GetComponent<PlayerController>().fueraPausa = true;
+    }
+    public void pausa()
+    {
+        gm.pausa();
+    }
+    public void forceSalirPausa()
+    {
+        gm.forceOutPausa();
     }
     public void updateStats(float vidaMax, float dano, float veloc, float critico, float velocAtk, float alcance, float xpMulti, float ptsMulti, float dineroMulti)
     {

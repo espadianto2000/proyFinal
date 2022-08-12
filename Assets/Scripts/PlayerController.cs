@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public GameObject menuMuerte;
     public WaveManager wm;
     public GameObject hmHeal;
+    public bool fueraPausa = false;
     [Header("Stats")]
     public float VelocidadBase;
     public float DanoBase;
@@ -160,23 +161,28 @@ public class PlayerController : MonoBehaviour
             dagaLVL = 4;
             bombaLVL = 4;
         }*/
+        if(Time.timeScale==0 && fueraPausa && (joystick.Horizontal != 0 || joystick.Vertical != 0))
+        {
+            Time.timeScale = 1;
+            fueraPausa = false;
+        }
        
             switch (evasionLVL)
             {
                 case 1:
-                    probEvadir = 0.3f;
+                    probEvadir = 0.1f;
                     break;
                 case 2:
-                    probEvadir = 0.35f;
+                    probEvadir = 0.15f;
                     break;
                 case 3:
-                    probEvadir = 0.4f;
+                    probEvadir = 0.2f;
                     break;
                 case 4:
-                    probEvadir = 0.45f;
+                    probEvadir = 0.25f;
                     break;
                 case 5:
-                    probEvadir = 0.5f;
+                    probEvadir = 0.3f;
                     break;
             }
          
