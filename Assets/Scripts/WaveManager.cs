@@ -24,11 +24,12 @@ public class WaveManager : MonoBehaviour
     public float enemigosPorOleada = 1f;
     public int oleadaAnterior = 0;
     public int nivelDificultad = 0;
-    public int cantidadMaximaEnemigos = 30;
+    public int cantidadMaximaEnemigos = 40;
     public int iteracionOleada = 1;
     public GameObject player = null;
     public GameObject[] exps;
     public GameObject corazon;
+    public GameObject iman;
 
     // Start is called before the first frame update
     void Start()
@@ -50,17 +51,17 @@ public class WaveManager : MonoBehaviour
             }
             oleadaAnterior++;
         }
-        if (Mathf.Floor(timeTotal / 120) > (nivelDificultad + (11 * iteracionOleada)))
+        if (Mathf.Floor(timeTotal / 150) > (nivelDificultad + (11 * iteracionOleada)))
         {
             if (nivelDificultad >= 10)
             {
                 nivelDificultad = 0;
                 iteracionOleada++;
-                cantidadMaximaEnemigos = 30;
-                enemigosPorOleada = 1;
+                cantidadMaximaEnemigos = 40;
+                enemigosPorOleada = 3;
             }
             else { nivelDificultad++;
-                enemigosPorOleada = 1;
+                enemigosPorOleada = 3;
             }
             cantidadMaximaEnemigos+=5;
         }
@@ -96,67 +97,67 @@ public class WaveManager : MonoBehaviour
                     obj = Instantiate(prefabsEnemigosNiv0[Random.RandomRange(0, prefabsEnemigosNiv0.Length)], new Vector2(player.transform.position.x+x, player.transform.position.y+y), Quaternion.identity);
                     obj.GetComponent<enemyController>().vidaMax = obj.GetComponent<enemyController>().vidaMax + (55 * iteracionOleada);
                     obj.GetComponent<enemyController>().dano = obj.GetComponent<enemyController>().dano + (22 * iteracionOleada);
-                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (1 * iteracionOleada)), obj.transform.localScale.y * (1 + (1 * iteracionOleada)), 1);
+                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (0.5f * iteracionOleada)), obj.transform.localScale.y * (1 + (0.5f * iteracionOleada)), 1);
                     break;
                 case 1:
                     obj = Instantiate(prefabsEnemigosNiv1[Random.RandomRange(0, prefabsEnemigosNiv1.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     obj.GetComponent<enemyController>().vidaMax = obj.GetComponent<enemyController>().vidaMax + (55 * iteracionOleada);
                     obj.GetComponent<enemyController>().dano = obj.GetComponent<enemyController>().dano + (22 * iteracionOleada);
-                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (1 * iteracionOleada)), obj.transform.localScale.y * (1 + (1 * iteracionOleada)), 1);
+                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (0.5f * iteracionOleada)), obj.transform.localScale.y * (1 + (0.5f * iteracionOleada)), 1);
                     break;
                 case 2:
                     obj = Instantiate(prefabsEnemigosNiv2[Random.RandomRange(0, prefabsEnemigosNiv2.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     obj.GetComponent<enemyController>().vidaMax = obj.GetComponent<enemyController>().vidaMax + (55 * iteracionOleada);
                     obj.GetComponent<enemyController>().dano = obj.GetComponent<enemyController>().dano + (22 * iteracionOleada);
-                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (1 * iteracionOleada)), obj.transform.localScale.y * (1 + (1 * iteracionOleada)), 1);
+                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (0.5f * iteracionOleada)), obj.transform.localScale.y * (1 + (0.5f * iteracionOleada)), 1);
                     break;
                 case 3:
                     obj = Instantiate(prefabsEnemigosNiv3[Random.RandomRange(0, prefabsEnemigosNiv3.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     obj.GetComponent<enemyController>().vidaMax = obj.GetComponent<enemyController>().vidaMax + (55 * iteracionOleada);
                     obj.GetComponent<enemyController>().dano = obj.GetComponent<enemyController>().dano + (22 * iteracionOleada);
-                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (1 * iteracionOleada)), obj.transform.localScale.y * (1 + (1 * iteracionOleada)), 1);
+                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (0.5f * iteracionOleada)), obj.transform.localScale.y * (1 + (0.5f * iteracionOleada)), 1);
                     break;
                 case 4:
                     obj = Instantiate(prefabsEnemigosNiv4[Random.RandomRange(0, prefabsEnemigosNiv4.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     obj.GetComponent<enemyController>().vidaMax = obj.GetComponent<enemyController>().vidaMax + (55 * iteracionOleada);
                     obj.GetComponent<enemyController>().dano = obj.GetComponent<enemyController>().dano + (22 * iteracionOleada);
-                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (1 * iteracionOleada)), obj.transform.localScale.y * (1 + (1 * iteracionOleada)), 1);
+                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (0.5f * iteracionOleada)), obj.transform.localScale.y * (1 + (0.5f * iteracionOleada)), 1);
                     break;
                 case 5:
                     obj = Instantiate(prefabsEnemigosNiv5[Random.RandomRange(0, prefabsEnemigosNiv5.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     obj.GetComponent<enemyController>().vidaMax = obj.GetComponent<enemyController>().vidaMax + (55 * iteracionOleada);
                     obj.GetComponent<enemyController>().dano = obj.GetComponent<enemyController>().dano + (22 * iteracionOleada);
-                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (1 * iteracionOleada)), obj.transform.localScale.y * (1 + (1 * iteracionOleada)), 1);
+                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (0.5f * iteracionOleada)), obj.transform.localScale.y * (1 + (0.5f * iteracionOleada)), 1);
                     break;
                 case 6:
                     obj = Instantiate(prefabsEnemigosNiv6[Random.RandomRange(0, prefabsEnemigosNiv6.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     obj.GetComponent<enemyController>().vidaMax = obj.GetComponent<enemyController>().vidaMax + (55 * iteracionOleada);
                     obj.GetComponent<enemyController>().dano = obj.GetComponent<enemyController>().dano + (22 * iteracionOleada);
-                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (1 * iteracionOleada)), obj.transform.localScale.y * (1 + (1 * iteracionOleada)), 1);
+                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (0.5f * iteracionOleada)), obj.transform.localScale.y * (1 + (0.5f * iteracionOleada)), 1);
                     break;
                 case 7:
                     obj = Instantiate(prefabsEnemigosNiv7[Random.RandomRange(0, prefabsEnemigosNiv1.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     obj.GetComponent<enemyController>().vidaMax = obj.GetComponent<enemyController>().vidaMax + (55 * iteracionOleada);
                     obj.GetComponent<enemyController>().dano = obj.GetComponent<enemyController>().dano + (22 * iteracionOleada);
-                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (1 * iteracionOleada)), obj.transform.localScale.y * (1 + (1 * iteracionOleada)), 1);
+                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (0.5f * iteracionOleada)), obj.transform.localScale.y * (1 + (0.5f * iteracionOleada)), 1);
                     break;
                 case 8:
                     obj = Instantiate(prefabsEnemigosNiv8[Random.RandomRange(0, prefabsEnemigosNiv2.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     obj.GetComponent<enemyController>().vidaMax = obj.GetComponent<enemyController>().vidaMax + (55 * iteracionOleada);
                     obj.GetComponent<enemyController>().dano = obj.GetComponent<enemyController>().dano + (22 * iteracionOleada);
-                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (1 * iteracionOleada)), obj.transform.localScale.y * (1 + (1 * iteracionOleada)), 1);
+                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (0.5f * iteracionOleada)), obj.transform.localScale.y * (1 + (0.5f * iteracionOleada)), 1);
                     break;
                 case 9:
                     obj = Instantiate(prefabsEnemigosNiv9[Random.RandomRange(0, prefabsEnemigosNiv3.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     obj.GetComponent<enemyController>().vidaMax = obj.GetComponent<enemyController>().vidaMax + (55 * iteracionOleada);
                     obj.GetComponent<enemyController>().dano = obj.GetComponent<enemyController>().dano + (22 * iteracionOleada);
-                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (1 * iteracionOleada)), obj.transform.localScale.y * (1 + (1 * iteracionOleada)), 1);
+                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (0.5f * iteracionOleada)), obj.transform.localScale.y * (1 + (0.5f * iteracionOleada)), 1);
                     break;
                 case 10:
                     obj = Instantiate(prefabsEnemigosNiv10[Random.RandomRange(0, prefabsEnemigosNiv4.Length)], new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity);
                     obj.GetComponent<enemyController>().vidaMax = obj.GetComponent<enemyController>().vidaMax + (55 * iteracionOleada);
                     obj.GetComponent<enemyController>().dano = obj.GetComponent<enemyController>().dano + (22 * iteracionOleada);
-                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (1 * iteracionOleada)), obj.transform.localScale.y * (1 + (1 * iteracionOleada)), 1);
+                    obj.transform.localScale = new Vector3(obj.transform.localScale.x * (1 + (0.5f * iteracionOleada)), obj.transform.localScale.y * (1 + (0.5f * iteracionOleada)), 1);
                     break;
             }
         }

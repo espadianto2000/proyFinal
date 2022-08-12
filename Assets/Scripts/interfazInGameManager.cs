@@ -37,11 +37,13 @@ public class interfazInGameManager : MonoBehaviour
 
     [Header("joystick")]
     [SerializeField] private GameObject joystick;
+    [SerializeField] private GameObject joystick2;
     void Start()
     {
         if(SystemInfo.deviceType == DeviceType.Handheld)
         {
             joystick.SetActive(true);
+            joystick2.SetActive(true);
         }
         if (GameObject.Find("gameManager"))
         {

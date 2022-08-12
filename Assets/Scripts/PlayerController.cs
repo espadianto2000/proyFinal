@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource audioDaga;
 
     [SerializeField] private FixedJoystick joystick;
+    [SerializeField] private FixedJoystick joystick2;
 
     private Material origMaterial;
     public Material flashMaterial;
@@ -832,14 +833,10 @@ public class PlayerController : MonoBehaviour
                     transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 0);
                 }
                 //touch
-                if (Input.touchCount > 0)
-                {
-                    Touch tc = Input.GetTouch(0);
-                    Vector2 pos = tc.position;
-                    pos.x = pos.x - (Screen.width / 2f);
-                    pos.y = pos.y - (Screen.height / 2f);
-                    Debug.Log($"posicionTouchX: {pos.x} || posicionTouchY: {pos.y}");
-                }
+                Vector2 dest = new Vector2(joystick2.Horizontal, joystick2.Vertical);
+                dest = dest * 1000;
+                Vector2 destinoAtaq = new Vector2(transform.position.x + (dest.x), transform.position.y + (dest.y));
+                destinoAtaque = destinoAtaq;
                 //
             }
             else
@@ -870,7 +867,7 @@ public class PlayerController : MonoBehaviour
                 //Debug.Log(Input.mousePosition);
                 pos.x = pos.x - (Screen.width / 2f);
                 pos.y = pos.y - (Screen.height / 2f);
-                Debug.Log($"posicionMouseX: {pos.x} || posicionMouseY: {pos.y}");
+                //Debug.Log($"posicionMouseX: {pos.x} || posicionMouseY: {pos.y}");
                 Vector2 destinoAtaq = new Vector2(transform.position.x + (pos.x), transform.position.y + (pos.y));
                 destinoAtaque = destinoAtaq;
             }

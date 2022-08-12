@@ -51,11 +51,17 @@ public class enemyController : MonoBehaviour
             if (Random.Range(0,100) < player.GetComponent<PlayerController>().porcentajeAparicionCorazones*100)
             {
                 Instantiate(waveM.corazon, transform.position, Quaternion.identity);
+                if(GameObject.FindGameObjectsWithTag("Exp").Length > 75)
+                {
+                    if(Random.Range(0,100) < 10)
+                    {
+                        Instantiate(waveM.iman);
+                    }
+                }
             }
             interfazManager.GetComponent<interfazInGameManager>().puntos += 1*player.GetComponent<PlayerController>().porcentajePuntos;
             sonidoMuerte.Play();
             Destroy(transform.gameObject);
-
         }
         //Debug.Log(transform.position.x);
         

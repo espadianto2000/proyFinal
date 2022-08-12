@@ -47,6 +47,14 @@ public class expOrb : MonoBehaviour
                 collision.GetComponent<PlayerController>().curar(exp);
                 Destroy(gameObject);
             }
+            if(transform.tag == "iman")
+            {
+                foreach(GameObject orbe in GameObject.FindGameObjectsWithTag("Exp"))
+                {
+                    orbe.GetComponent<expOrb>().moverse = true;
+                }
+                Destroy(gameObject);
+            }
         }
     }
 }
