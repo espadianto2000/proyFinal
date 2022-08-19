@@ -21,7 +21,7 @@ public class gameData
     public gameData(int din, int vida, int vel, int dano, int crit, int exp, int pts, int dinex, int spvida, int cur, int velat, bool pj2, bool ulti, float hs)
     {
         this.dinero = din;
-        this.nivelSpawnVida = vida;
+        this.nivelVidaExtra = vida;
         this.nivelVelocidadExtra = vel;
         this.nivelDanoExtra = dano;
         this.nivelCritExtra = crit;
@@ -67,15 +67,12 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        path = Application.dataPath + Path.AltDirectorySeparatorChar + "saveData.json";
+        
+        //path = Application.dataPath + Path.AltDirectorySeparatorChar + "saveData.json";
         persistentPath = Application.persistentDataPath+Path.AltDirectorySeparatorChar+"saveData.json";
-        try
+        if (System.IO.File.Exists(persistentPath))
         {
             cargar();
-            
-        }
-        catch
-        {
         }
         statsArr = new int[10];
         statsArr[0] = nivelVidaExtra;
@@ -300,11 +297,13 @@ public class gameManager : MonoBehaviour
 
                 break;
         }
+        guardar();
     }
     public void guardar()
     {
         gd = new gameData(dinero, nivelVidaExtra, nivelVelocidadExtra, nivelDanoExtra, nivelCritExtra, nivelExpExtra, nivelPuntosExtra, nivelDineroExtra, nivelSpawnVida, nivelCuracionExtra, nivelVelocidadAtaqueExtra, desbloquearPersonaje2, desbloquearUlti, highScore);
         string json = JsonUtility.ToJson(gd);
+        File.Delete(persistentPath);
         using StreamWriter writer = new StreamWriter(persistentPath);
         writer.Write(json);
     }
