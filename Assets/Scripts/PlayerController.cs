@@ -239,7 +239,7 @@ public class PlayerController : MonoBehaviour
             transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
             Invoke("desplegarMenuMuerte",2.5f);
         }
-        if (exp >= xpNecesaria)
+        if(exp >= xpNecesaria)
         {
             exp = exp - xpNecesaria;
             Debug.Log("se sube de nivel");
@@ -770,6 +770,38 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    public void presionarInvisibilidad()
+    {
+        if(invLVL >=1 && (invisibilidad && !invisibilidadActiva))
+        {
+            transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 0.5f);
+            invisibilidadActiva = true;
+            esVisible = false;
+            Invoke("hacerVisible", (4.5f + (0.5f * invLVL)));
+            Debug.Log("Invisible");
+        }
+    }
+    public void presionarUlti()
+    {
+        if (cargaUlti >= 1 && !ultiUsado && gm.desbloquearUlti)
+        {
+            ultiUsado = true;
+            if (SceneManager.GetActiveScene().name == "jugador1")
+            {
+                //ulti galahad
+                slash.transform.localScale = new Vector3(tamanoAtaque, tamanoAtaque, tamanoAtaque) * 2.5f;
+                multiplicadorDanoUlti = 2.5f;
+                reduccionVelocidadAtaqueUlti = 0.3f;
+            }
+            else
+            {
+                //ulti beatriz
+                multiplicadorDanoUlti = 2.5f;
+                multiplicadorTamanoUlti = 2.5f;
+                reduccionVelocidadAtaqueUlti = 0.3f;
+            }
+        }
+    }
     void hacerVisible()
     {
         transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().color.b, 1f);
@@ -784,7 +816,10 @@ public class PlayerController : MonoBehaviour
         newdir.y = pos.y - slash.transform.position.y;
 
         float angle = Mathf.Atan2(newdir.y, newdir.x) * Mathf.Rad2Deg;
-        slash.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        if (SystemInfo.deviceType != DeviceType.Handheld)
+        {
+            slash.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
         if (SceneManager.GetActiveScene().name == "jugador2")
         {
             Vector3 targ = pos;
@@ -843,6 +878,14 @@ public class PlayerController : MonoBehaviour
                 dest = dest * 1000;
                 Vector2 destinoAtaq = new Vector2(transform.position.x + (dest.x), transform.position.y + (dest.y));
                 destinoAtaque = destinoAtaq;
+                Vector3 newdir = destinoAtaque;
+                newdir.z = 0f;
+
+                newdir.x = destinoAtaque.x - slash.transform.position.x;
+                newdir.y = destinoAtaque.y - slash.transform.position.y;
+
+                float angle = Mathf.Atan2(newdir.y, newdir.x) * Mathf.Rad2Deg;
+                slash.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
                 //
             }
             else

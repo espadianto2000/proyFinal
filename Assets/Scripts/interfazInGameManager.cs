@@ -13,6 +13,9 @@ public class interfazInGameManager : MonoBehaviour
     public GameObject ulti;
     public GameObject player;
     [SerializeField] private GameObject pausaBut;
+    [SerializeField] private GameObject mira;
+    [SerializeField] private GameObject botInvi;
+    [SerializeField] private GameObject botUlti;
 
     [Header("itemsIcon")]
     public GameObject espinas;
@@ -39,13 +42,20 @@ public class interfazInGameManager : MonoBehaviour
     [Header("joystick")]
     [SerializeField] private GameObject joystick;
     [SerializeField] private GameObject joystick2;
+    
     void Start()
     {
         if(SystemInfo.deviceType == DeviceType.Handheld)
         {
             joystick.SetActive(true);
             joystick2.SetActive(true);
+            botInvi.SetActive(true);
+            botUlti.SetActive(true);
             pausaBut.SetActive(true);
+            if (mira)
+            {
+                mira.SetActive(true);
+            }
         }
         if (GameObject.Find("gameManager"))
         {
