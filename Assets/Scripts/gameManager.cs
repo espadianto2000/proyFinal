@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
@@ -31,10 +32,6 @@ public class gameManager : MonoBehaviour
     public AudioSource audioNivel;
     public AudioSource audioClick;
     private bool iniciado = false;
-    //public delegate void SceneChange(string sceneName);
-
-    //public static event SceneChange LoadScene;
-
     private void init()
     {
         if (gameManager.instance == null)
@@ -54,6 +51,7 @@ public class gameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        Invoke("inicio", 2f);
         statsArr = new int[10];
         statsArr[0] = nivelVidaExtra;
         statsArr[1] = nivelDanoExtra;
@@ -66,8 +64,25 @@ public class gameManager : MonoBehaviour
         statsArr[8] = nivelCuracionExtra;
         statsArr[9] = nivelVelocidadAtaqueExtra;
         cambiarCursorMain();
-        StartCoroutine(irMenuPrincipal());
     }
+
+    void inicio()
+    {
+        StartCoroutine(cargaInicial());
+    }
+
+    IEnumerator cargaInicial()
+    {
+        var asyncLoadLevel = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+        while (!asyncLoadLevel.isDone)
+        {
+            Debug.Log(asyncLoadLevel.progress);
+            GameObject.Find("carga").GetComponent<Text>().text = ((Mathf.Round(asyncLoadLevel.progress * 10000)) / 100f) + "%";
+            GameObject.Find("Slider").GetComponent<Slider>().value = asyncLoadLevel.progress;
+            yield return null;
+        }
+    }
+
     void Update()
     {
         if (!iniciado)
@@ -139,16 +154,11 @@ public class gameManager : MonoBehaviour
         }
         
     }
-    public IEnumerator irMenuPrincipal()
+    public void irMenuPrincipal()
     {
         if (musicaManager.instance != null) { musicaManager.instance.cambiarAMenu(); }
-        var async = SceneManager.LoadSceneAsync("menu", LoadSceneMode.Single);
-        while (!async.isDone)
-        {
-            Debug.Log(async.progress);
-            yield return null;
-        }
-        //LoadScene?.Invoke(newSceneName);
+        SceneManager.LoadSceneAsync("menu", LoadSceneMode.Single);
+        
     }
     public void acabarPartida()
     {
