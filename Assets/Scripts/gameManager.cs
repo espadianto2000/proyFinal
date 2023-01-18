@@ -1,49 +1,14 @@
 using System;
+using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[Serializable]
-public class gameData
-{
-    public int dinero = 0;
-    public int nivelVidaExtra = 0;
-    public int nivelVelocidadExtra = 0;
-    public int nivelDanoExtra = 0;
-    public int nivelCritExtra = 0;
-    public int nivelExpExtra = 0;
-    public int nivelPuntosExtra = 0;
-    public int nivelDineroExtra = 0;
-    public int nivelSpawnVida = 0;
-    public int nivelCuracionExtra = 0;
-    public int nivelVelocidadAtaqueExtra = 0;
-    public bool desbloquearPersonaje2 = false;
-    public bool desbloquearUlti = false;
-    public float highScore = 0;
-    public gameData(int din, int vida, int vel, int dano, int crit, int exp, int pts, int dinex, int spvida, int cur, int velat, bool pj2, bool ulti, float hs)
-    {
-        this.dinero = din;
-        this.nivelVidaExtra = vida;
-        this.nivelVelocidadExtra = vel;
-        this.nivelDanoExtra = dano;
-        this.nivelCritExtra = crit;
-        this.nivelExpExtra = exp;
-        this.nivelPuntosExtra = pts;
-        this.nivelDineroExtra = dinex;
-        this.nivelSpawnVida = spvida;
-        this.nivelCuracionExtra = cur;
-        this.nivelVelocidadAtaqueExtra = velat;
-        this.desbloquearPersonaje2 = pj2;
-        this.desbloquearUlti = ulti;
-        this.highScore = hs;
-    }
-}
-
 public class gameManager : MonoBehaviour
 {
     public static gameManager instance=null;
-    public gameData gd;
+    private gameData gd;
     public bool estadoPausa=false;
     public int dinero = 0;
     public int nivelVidaExtra = 0;
@@ -62,19 +27,19 @@ public class gameManager : MonoBehaviour
     public Texture2D cursorNormal;
     public int[] statsArr;
     public GameObject menuPausa;
-    public musicaManager mm;
     public AudioSource musica;
     public AudioSource audioNivel;
     public AudioSource audioClick;
+    private bool iniciado = false;
+    //public delegate void SceneChange(string sceneName);
 
-    private string path = "";
-    private string persistentPath="";
+    //public static event SceneChange LoadScene;
 
-    private void Awake()
+    private void init()
     {
-        if(instance == null)
+        if (gameManager.instance == null)
         {
-            instance = this;
+            gameManager.instance = this;
             DontDestroyOnLoad(this);
             try
             {
@@ -87,13 +52,8 @@ public class gameManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
-    }
-
-    void Start()
-    {   
-        
         statsArr = new int[10];
         statsArr[0] = nivelVidaExtra;
         statsArr[1] = nivelDanoExtra;
@@ -106,13 +66,15 @@ public class gameManager : MonoBehaviour
         statsArr[8] = nivelCuracionExtra;
         statsArr[9] = nivelVelocidadAtaqueExtra;
         cambiarCursorMain();
-        irMenuPrincipal();
-        audioNivel = GameObject.Find("AudioNivel").GetComponent<AudioSource>();
+        StartCoroutine(irMenuPrincipal());
     }
-
-    // Update is called once per frame
     void Update()
     {
+        if (!iniciado)
+        {
+            init();
+            iniciado = true;
+        }
         if(Input.GetKeyDown(KeyCode.O))
         {
             dinero += 10000;
@@ -166,7 +128,7 @@ public class gameManager : MonoBehaviour
     }
     public void empezarPartida(int personaje)
     {
-        mm.cambiarAJugador();
+        musicaManager.instance.cambiarAJugador();
         if(personaje == 1)
         {
             SceneManager.LoadScene("jugador1", LoadSceneMode.Single);
@@ -177,10 +139,16 @@ public class gameManager : MonoBehaviour
         }
         
     }
-    public void irMenuPrincipal()
+    public IEnumerator irMenuPrincipal()
     {
-        if (mm != null) { mm.cambiarAMenu(); }
-        SceneManager.LoadScene("menu", LoadSceneMode.Single);
+        if (musicaManager.instance != null) { musicaManager.instance.cambiarAMenu(); }
+        var async = SceneManager.LoadSceneAsync("menu", LoadSceneMode.Single);
+        while (!async.isDone)
+        {
+            Debug.Log(async.progress);
+            yield return null;
+        }
+        //LoadScene?.Invoke(newSceneName);
     }
     public void acabarPartida()
     {

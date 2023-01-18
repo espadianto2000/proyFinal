@@ -11,7 +11,7 @@ public class updateThings : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gm = GameObject.Find("gameManager").GetComponent<gameManager>();
+        gm = gameManager.instance;
         dinero.GetComponent<TextMeshProUGUI>().text = gm.dinero + "$";
         maxPts.GetComponent<TextMeshProUGUI>().text = (Mathf.Round(gm.highScore*100)/100) + "";
     }

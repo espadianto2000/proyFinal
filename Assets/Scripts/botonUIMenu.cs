@@ -35,7 +35,7 @@ public class botonUIMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         if (transform.tag == "boton2")
         {
-            if (GameObject.Find("gameManager").GetComponent<gameManager>().desbloquearPersonaje2)
+            if (gameManager.instance.desbloquearPersonaje2)
             {
                 GetComponent<Button>().interactable = true;
             }

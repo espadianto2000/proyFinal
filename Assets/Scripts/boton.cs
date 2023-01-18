@@ -35,7 +35,7 @@ public class boton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     {
         if(transform.tag == "boton2")
         {
-            if (GameObject.Find("gameManager").GetComponent<gameManager>().desbloquearPersonaje2)
+            if (gameManager.instance.desbloquearPersonaje2)
             {
                 GetComponent<Button>().interactable = true;
             }
@@ -70,10 +70,10 @@ public class boton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         GetComponent<Image>().color = new Color(0, 0, 0, 0);
         if(transform.tag == "boton1")
         {
-            GameObject.Find("gameManager").GetComponent<gameManager>().empezarPartida(1);
+            gameManager.instance.empezarPartida(1);
         }else if (transform.tag == "boton2" && GetComponent<Button>().interactable)
         {
-            GameObject.Find("gameManager").GetComponent<gameManager>().empezarPartida(2);
+            gameManager.instance.empezarPartida(2);
         }
     }
 }

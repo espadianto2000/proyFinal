@@ -118,21 +118,20 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        if (GameObject.Find("gameManager") != null)
-        {
-            gm = GameObject.Find("gameManager").GetComponent<gameManager>();
-            vidaMax = vidaMax * (1 + (0.04f * gm.nivelVidaExtra));
-            DanoBase = DanoBase * (1 + (0.05f * gm.nivelDanoExtra));
-            VelocidadBase = VelocidadBase * (1 + (0.06f * gm.nivelVelocidadExtra));
-            probCritico = probCritico + (0.04f * gm.nivelCritExtra);
-            porcentajeExp = porcentajeExp + (0.05f*gm.nivelExpExtra);
-            porcentajePuntos = porcentajePuntos + (0.05f * gm.nivelPuntosExtra);
-            porcentajeDinero = porcentajeDinero + (0.05f * gm.nivelDineroExtra);
-            porcentajeAparicionCorazones = porcentajeAparicionCorazones + (0.01f * gm.nivelSpawnVida);
-            porcentajeCuraciones = porcentajeCuraciones + (0.04f * gm.nivelCuracionExtra);
-            velocidadAtaque = velocidadAtaque * (1 - (0.05f * gm.nivelVelocidadAtaqueExtra));
-            velocidadAtaque = velocidadAtaque < 0.3f ? 0.3f : velocidadAtaque;
-        }
+        
+        gm = gameManager.instance;
+        vidaMax = vidaMax * (1 + (0.04f * gm.nivelVidaExtra));
+        DanoBase = DanoBase * (1 + (0.05f * gm.nivelDanoExtra));
+        VelocidadBase = VelocidadBase * (1 + (0.06f * gm.nivelVelocidadExtra));
+        probCritico = probCritico + (0.04f * gm.nivelCritExtra);
+        porcentajeExp = porcentajeExp + (0.05f*gm.nivelExpExtra);
+        porcentajePuntos = porcentajePuntos + (0.05f * gm.nivelPuntosExtra);
+        porcentajeDinero = porcentajeDinero + (0.05f * gm.nivelDineroExtra);
+        porcentajeAparicionCorazones = porcentajeAparicionCorazones + (0.01f * gm.nivelSpawnVida);
+        porcentajeCuraciones = porcentajeCuraciones + (0.04f * gm.nivelCuracionExtra);
+        velocidadAtaque = velocidadAtaque * (1 - (0.05f * gm.nivelVelocidadAtaqueExtra));
+        velocidadAtaque = velocidadAtaque < 0.3f ? 0.3f : velocidadAtaque;
+        
         origMaterial = transform.GetChild(0).GetComponent<SpriteRenderer>().material;
         vivo = true;
         rd = GetComponentInChildren<Renderer>();

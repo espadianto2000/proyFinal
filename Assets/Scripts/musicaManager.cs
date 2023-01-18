@@ -5,11 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class musicaManager : MonoBehaviour
 {
+    public static musicaManager instance;
     public AudioSource music;
     public AudioClip musicaMenu;
     public AudioClip[] musicaGame;
+    [SerializeField]
+    private AudioSource audioNivel;
+    [SerializeField]
+    private AudioSource audioClick;
+    private void Awake()
+    {
+        if (musicaManager.instance == null)
+        {
+            musicaManager.instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Start()
     {
+        gameManager.instance.audioClick = audioClick;
+        gameManager.instance.audioNivel = audioNivel;
         music = GetComponent<AudioSource>();
     }
     private void Update()
