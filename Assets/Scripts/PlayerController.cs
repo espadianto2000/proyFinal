@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
     public float multiplicadorDanoUlti = 1;
     public float multiplicadorTamanoUlti = 1;
     public float reduccionVelocidadAtaqueUlti = 1;
+    public bool moverAtaque = true;
 
     [Header("subidaNivel")]
     public float xpNecesaria;
@@ -809,6 +810,7 @@ public class PlayerController : MonoBehaviour
     }
     public void atacar(Vector2 pos)
     {
+        moverAtaque = false;
         Vector3 newdir = pos;
         newdir.z = 0f;
 
@@ -835,11 +837,10 @@ public class PlayerController : MonoBehaviour
             obj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             obj.GetComponent<flecha>().destino = targ.normalized;
             espadaAudio.Play();
-
+            moverAtaque = true;
         }
         if (SceneManager.GetActiveScene().name == "jugador1")
         {
-            
             slash.transform.GetChild(0).GetComponent<Animator>().SetTrigger("atacar");
             espadaAudio.Play();
         }
@@ -874,18 +875,21 @@ public class PlayerController : MonoBehaviour
                     transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 0);
                 }
                 //touch
-                Vector2 dest = new Vector2(joystick2.Horizontal, joystick2.Vertical);
-                dest = dest * 1000;
-                Vector2 destinoAtaq = new Vector2(transform.position.x + (dest.x), transform.position.y + (dest.y));
-                destinoAtaque = destinoAtaq;
-                Vector3 newdir = destinoAtaque;
-                newdir.z = 0f;
+                if (moverAtaque)
+                {
+                    Vector2 dest = new Vector2(joystick2.Horizontal, joystick2.Vertical);
+                    dest = dest * 1000;
+                    Vector2 destinoAtaq = new Vector2(transform.position.x + (dest.x), transform.position.y + (dest.y));
+                    destinoAtaque = destinoAtaq;
+                    Vector3 newdir = destinoAtaque;
+                    newdir.z = 0f;
 
-                newdir.x = destinoAtaque.x - slash.transform.position.x;
-                newdir.y = destinoAtaque.y - slash.transform.position.y;
+                    newdir.x = destinoAtaque.x - slash.transform.position.x;
+                    newdir.y = destinoAtaque.y - slash.transform.position.y;
 
-                float angle = Mathf.Atan2(newdir.y, newdir.x) * Mathf.Rad2Deg;
-                slash.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                    float angle = Mathf.Atan2(newdir.y, newdir.x) * Mathf.Rad2Deg;
+                    slash.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                }
                 //
             }
             else
@@ -912,13 +916,14 @@ public class PlayerController : MonoBehaviour
                 {
                     transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 0);
                 }
-                Vector2 pos = Input.mousePosition;
-                //Debug.Log(Input.mousePosition);
-                pos.x = pos.x - (Screen.width / 2f);
-                pos.y = pos.y - (Screen.height / 2f);
-                //Debug.Log($"posicionMouseX: {pos.x} || posicionMouseY: {pos.y}");
-                Vector2 destinoAtaq = new Vector2(transform.position.x + (pos.x), transform.position.y + (pos.y));
-                destinoAtaque = destinoAtaq;
+                if (moverAtaque)
+                {
+                    Vector2 pos = Input.mousePosition;
+                    pos.x = pos.x - (Screen.width / 2f);
+                    pos.y = pos.y - (Screen.height / 2f);
+                    Vector2 destinoAtaq = new Vector2(transform.position.x + (pos.x), transform.position.y + (pos.y));
+                    destinoAtaque = destinoAtaq;
+                }
             }
             if (timerAtaque > velocidadAtaque*reduccionVelocidadAtaqueUlti)
             {

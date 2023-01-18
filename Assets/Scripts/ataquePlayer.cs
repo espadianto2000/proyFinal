@@ -24,6 +24,10 @@ public class ataquePlayer : MonoBehaviour
     {
         
     }
+    public void acabarAtaque()
+    {
+        pc.moverAtaque = true;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "RecibeDano" && collision.name == "AreaRecibeDano")
