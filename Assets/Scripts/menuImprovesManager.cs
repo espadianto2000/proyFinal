@@ -13,8 +13,8 @@ public class menuImprovesManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gm = GameObject.Find("gameManager").GetComponent<gameManager>();
-        botones = new GameObject[] { transform.GetChild(1).gameObject, transform.GetChild(2).gameObject, transform.GetChild(3).gameObject, transform.GetChild(4).gameObject, transform.GetChild(5).gameObject, transform.GetChild(6).gameObject, transform.GetChild(7).gameObject, transform.GetChild(8).gameObject, transform.GetChild(9).gameObject, transform.GetChild(10).gameObject, transform.GetChild(11).gameObject, transform.GetChild(12).gameObject };
+        gm = gameManager.instance;
+        //botones = new GameObject[] { transform.GetChild(1).gameObject, transform.GetChild(2).gameObject, transform.GetChild(3).gameObject, transform.GetChild(4).gameObject, transform.GetChild(5).gameObject, transform.GetChild(6).gameObject, transform.GetChild(7).gameObject, transform.GetChild(8).gameObject, transform.GetChild(9).gameObject, transform.GetChild(10).gameObject, transform.GetChild(11).gameObject, transform.GetChild(12).gameObject };
         actualizar();
     }
 

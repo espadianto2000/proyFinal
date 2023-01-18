@@ -57,13 +57,10 @@ public class interfazInGameManager : MonoBehaviour
                 mira.SetActive(true);
             }
         }
-        if (GameObject.Find("gameManager"))
+        gm = gameManager.instance;
+        if (gm.desbloquearUlti)
         {
-            gm = GameObject.Find("gameManager").GetComponent<gameManager>();
-            if (gm.desbloquearUlti)
-            {
-                ulti.SetActive(true);
-            }
+            ulti.SetActive(true);
         }
     }
 

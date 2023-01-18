@@ -1,7 +1,10 @@
+using System;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[Serializable]
 public class gameData
 {
     public int dinero = 0;
@@ -39,6 +42,7 @@ public class gameData
 
 public class gameManager : MonoBehaviour
 {
+    public static gameManager instance=null;
     public gameData gd;
     public bool estadoPausa=false;
     public int dinero = 0;
@@ -59,21 +63,37 @@ public class gameManager : MonoBehaviour
     public int[] statsArr;
     public GameObject menuPausa;
     public musicaManager mm;
+    public AudioSource musica;
     public AudioSource audioNivel;
+    public AudioSource audioClick;
 
     private string path = "";
     private string persistentPath="";
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
-        //path = Application.dataPath + Path.AltDirectorySeparatorChar + "saveData.json";
-        persistentPath = Application.persistentDataPath+Path.AltDirectorySeparatorChar+"saveData.json";
-        if (System.IO.File.Exists(persistentPath))
+        if(instance == null)
         {
-            cargar();
+            instance = this;
+            DontDestroyOnLoad(this);
+            try
+            {
+                cargar();
+            }
+            catch
+            {
+
+            }
         }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
+    void Start()
+    {   
+        
         statsArr = new int[10];
         statsArr[0] = nivelVidaExtra;
         statsArr[1] = nivelDanoExtra;
@@ -84,8 +104,7 @@ public class gameManager : MonoBehaviour
         statsArr[6] = nivelDineroExtra;
         statsArr[7] = nivelSpawnVida;
         statsArr[8] = nivelCuracionExtra;
-        statsArr[9] = nivelVelocidadExtra;
-        DontDestroyOnLoad(gameObject);
+        statsArr[9] = nivelVelocidadAtaqueExtra;
         cambiarCursorMain();
         irMenuPrincipal();
         audioNivel = GameObject.Find("AudioNivel").GetComponent<AudioSource>();
@@ -301,18 +320,45 @@ public class gameManager : MonoBehaviour
     }
     public void guardar()
     {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/data.ub";
+        FileStream stream = new FileStream(path, FileMode.Create);
+        //
         gd = new gameData(dinero, nivelVidaExtra, nivelVelocidadExtra, nivelDanoExtra, nivelCritExtra, nivelExpExtra, nivelPuntosExtra, nivelDineroExtra, nivelSpawnVida, nivelCuracionExtra, nivelVelocidadAtaqueExtra, desbloquearPersonaje2, desbloquearUlti, highScore);
-        string json = JsonUtility.ToJson(gd);
+        //
+        formatter.Serialize(stream, gd);
+        stream.Close();
+
+        /*string json = JsonUtility.ToJson(gd);
         File.Delete(persistentPath);
         using StreamWriter writer = new StreamWriter(persistentPath);
-        writer.Write(json);
+        writer.Write(json);*/
+
     }
     public void cargar()
     {
-        using StreamReader rd = new StreamReader(persistentPath);
+        string path = Application.persistentDataPath + "/data.ub";
+        gameData data = null;
+        if (File.Exists(path))
+        {
+            Debug.Log("existe archivo");
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+            Debug.Log(path);
+            data = formatter.Deserialize(stream) as gameData;
+            stream.Close();
+            Debug.Log("cargado correctamente");
+        }
+        else
+        {
+            Debug.Log("No data");
+        }
+
+        /*using StreamReader rd = new StreamReader(persistentPath);
         string json = rd.ReadToEnd();
 
-        gd = JsonUtility.FromJson<gameData>(json);
+        gd = JsonUtility.FromJson<gameData>(json);*/
+        gd = data;
         dinero = gd.dinero;
         nivelVidaExtra = gd.nivelVidaExtra;
         nivelDanoExtra = gd.nivelDanoExtra;
