@@ -11,6 +11,8 @@ public class gameManager : MonoBehaviour
     public static gameManager instance=null;
     private gameData gd;
     public bool estadoPausa=false;
+    [Header("Atributos comprados")]
+    public int gems = 0;
     public int dinero = 0;
     public int nivelVidaExtra = 0;
     public int nivelVelocidadExtra = 0;
@@ -25,6 +27,7 @@ public class gameManager : MonoBehaviour
     public bool desbloquearPersonaje2 = false;
     public bool desbloquearUlti = false;
     public float highScore=0;
+    [Header("")]
     public Texture2D cursorNormal;
     public int[] statsArr;
     public GameObject menuPausa;
@@ -302,7 +305,7 @@ public class gameManager : MonoBehaviour
         string path = Application.persistentDataPath + "/data.ub";
         FileStream stream = new FileStream(path, FileMode.Create);
         //
-        gd = new gameData(dinero, nivelVidaExtra, nivelVelocidadExtra, nivelDanoExtra, nivelCritExtra, nivelExpExtra, nivelPuntosExtra, nivelDineroExtra, nivelSpawnVida, nivelCuracionExtra, nivelVelocidadAtaqueExtra, desbloquearPersonaje2, desbloquearUlti, highScore);
+        gd = new gameData(gems, dinero, nivelVidaExtra, nivelVelocidadExtra, nivelDanoExtra, nivelCritExtra, nivelExpExtra, nivelPuntosExtra, nivelDineroExtra, nivelSpawnVida, nivelCuracionExtra, nivelVelocidadAtaqueExtra, desbloquearPersonaje2, desbloquearUlti, highScore);
         //
         formatter.Serialize(stream, gd);
         stream.Close();
@@ -337,6 +340,7 @@ public class gameManager : MonoBehaviour
 
         gd = JsonUtility.FromJson<gameData>(json);*/
         gd = data;
+        gems = data.gems;
         dinero = gd.dinero;
         nivelVidaExtra = gd.nivelVidaExtra;
         nivelDanoExtra = gd.nivelDanoExtra;

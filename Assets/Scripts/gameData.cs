@@ -3,6 +3,7 @@ using System;
 [Serializable]
 public class gameData
 {
+    public int gems = 0;
     public int dinero = 0;
     public int nivelVidaExtra = 0;
     public int nivelVelocidadExtra = 0;
@@ -17,8 +18,9 @@ public class gameData
     public bool desbloquearPersonaje2 = false;
     public bool desbloquearUlti = false;
     public float highScore = 0;
-    public gameData(int din, int vida, int vel, int dano, int crit, int exp, int pts, int dinex, int spvida, int cur, int velat, bool pj2, bool ulti, float hs)
+    public gameData(int gem, int din, int vida, int vel, int dano, int crit, int exp, int pts, int dinex, int spvida, int cur, int velat, bool pj2, bool ulti, float hs)
     {
+        this.gems = gem;
         this.dinero = din;
         this.nivelVidaExtra = vida;
         this.nivelVelocidadExtra = vel;
