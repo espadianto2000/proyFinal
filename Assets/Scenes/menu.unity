@@ -4521,7 +4521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2214597873710376082, guid: fd71c03e7a60dbf4b904a5d798378430, type: 3}
       propertyPath: productId
-      value: com.XiaoPiao.TheBoredHero.5000gems
+      value: com.xiaopiao.theboredhero.5000gems
       objectReference: {fileID: 0}
     - target: {fileID: 2214597873710376082, guid: fd71c03e7a60dbf4b904a5d798378430, type: 3}
       propertyPath: onPurchaseComplete.m_PersistentCalls.m_Calls.Array.size
@@ -6820,7 +6820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2214597873710376082, guid: fd71c03e7a60dbf4b904a5d798378430, type: 3}
       propertyPath: productId
-      value: com.XiaoPiao.TheBoredHero.10000gems
+      value: com.xiaopiao.theboredhero.10000gems
       objectReference: {fileID: 0}
     - target: {fileID: 2214597873710376082, guid: fd71c03e7a60dbf4b904a5d798378430, type: 3}
       propertyPath: onPurchaseComplete.m_PersistentCalls.m_Calls.Array.size
@@ -10037,7 +10037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2214597873710376082, guid: fd71c03e7a60dbf4b904a5d798378430, type: 3}
       propertyPath: productId
-      value: com.XiaoPiao.TheBoredHero.1000gems
+      value: com.xiaopiao.theboredhero.1000gems
       objectReference: {fileID: 0}
     - target: {fileID: 2214597873710376082, guid: fd71c03e7a60dbf4b904a5d798378430, type: 3}
       propertyPath: onPurchaseComplete.m_PersistentCalls.m_Calls.Array.size
@@ -14199,7 +14199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2214597873710376082, guid: fd71c03e7a60dbf4b904a5d798378430, type: 3}
       propertyPath: productId
-      value: com.XiaoPiao.TheBoredHero.500gems
+      value: com.xiaopiao.theboredhero.500gems
       objectReference: {fileID: 0}
     - target: {fileID: 2214597873710376082, guid: fd71c03e7a60dbf4b904a5d798378430, type: 3}
       propertyPath: onPurchaseComplete.m_PersistentCalls.m_Calls.Array.size
@@ -15899,7 +15899,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2214597873710376082, guid: fd71c03e7a60dbf4b904a5d798378430, type: 3}
       propertyPath: productId
-      value: com.XiaoPiao.TheBoredHero.200gems
+      value: com.xiaopiao.theboredhero.200gems
       objectReference: {fileID: 0}
     - target: {fileID: 2214597873710376082, guid: fd71c03e7a60dbf4b904a5d798378430, type: 3}
       propertyPath: onPurchaseComplete.m_PersistentCalls.m_Calls.Array.size
