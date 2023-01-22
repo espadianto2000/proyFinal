@@ -4,6 +4,7 @@ using UnityEngine;
 using GoogleMobileAds.Api;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LogicaAds : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class LogicaAds : MonoBehaviour
     private BannerView bannerAd;
     private InterstitialAd interstitialAd;
     private RewardedAd rewardedAd;
-
+    public GameObject cargaPrefab;
+    public GameObject cargaGO;
 
     // Start is called before the first frame update
     void Start()
@@ -92,6 +94,7 @@ public class LogicaAds : MonoBehaviour
     }
      public void MostrarReward()
      {
+        Instantiate(cargaPrefab);
         PedirReward();
         //rewardedAd.Show();
 
@@ -128,13 +131,19 @@ public class LogicaAds : MonoBehaviour
         AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded ad with the request.
         this.rewardedAd.LoadAd(request);
+        Debug.Log("Se instancio el prefab");
+
     }
 
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleRewardedAdLoaded event received");
         rewardedAd.Show();
+        //StartCoroutine(Esperar())
+
+
     }
+
 
     public void HandleRewardedAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
     {
@@ -143,6 +152,8 @@ public class LogicaAds : MonoBehaviour
 
     public void HandleRewardedAdOpening(object sender, EventArgs args)
     {
+        Destroy(GameObject.Find("Carga(Clone)"));
+
         MonoBehaviour.print("HandleRewardedAdOpening event received");
     }
 
@@ -155,6 +166,11 @@ public class LogicaAds : MonoBehaviour
 
     public void HandleRewardedAdClosed(object sender, EventArgs args)
     {
+        if(SceneManager.GetActiveScene().name == "jugador1" || SceneManager.GetActiveScene().name == "jugador2")
+        {
+            GameObject.Find("Heroe").GetComponent<PlayerController>().revivir();
+
+        }
         MonoBehaviour.print("HandleRewardedAdClosed event received");
     }
 
@@ -162,7 +178,7 @@ public class LogicaAds : MonoBehaviour
     {
         //HACER UN BOOLEANDO Y PASARLO AL ADCLOSED, SI NO HAS VISTO EL VIDEO ES FALSE Y NO SE TE REVIVE
         Debug.Log("Recomensa reclamada");
-        GameObject.Find("visto").GetComponent<Text>().text = "Visto";
+        //GameObject.Find("visto").GetComponent<Text>().text = "Visto";
     }
 }
 
