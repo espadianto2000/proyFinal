@@ -9,6 +9,7 @@ public class menuImprovesManager : MonoBehaviour
     public gameManager gm;
     public GameObject[] botones;
     public GameObject dinero;
+    public GameObject gemas;
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +36,9 @@ public class menuImprovesManager : MonoBehaviour
     }
     public void actualizar()
     {
-        dinero.GetComponent<TextMeshProUGUI>().text = gm.dinero + "$";
-        for(int i=0;i<botones.Length-2;i++)
+        dinero.GetComponent<TextMeshProUGUI>().text = gm.dinero + "";
+        gemas.GetComponent<TextMeshProUGUI>().text = gm.gems + "";
+        for (int i=0;i<botones.Length-2;i++)
         {
             //Debug.Log("boton: " + i);
             botones[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "nivel: " + gm.statsArr[i];
