@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GoogleMobileAds.Api;
 using System;
+using UnityEngine.UI;
 
 public class LogicaAds : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class LogicaAds : MonoBehaviour
     {
         MobileAds.Initialize(initStatus => { });
         PedirInterstitial();
+        //PedirReward();
 
     }
 
@@ -91,9 +93,9 @@ public class LogicaAds : MonoBehaviour
      public void MostrarReward()
      {
         PedirReward();
-        rewardedAd.Show();
-         
-     }
+        //rewardedAd.Show();
+
+    }
 
      
     public void PedirReward()
@@ -131,6 +133,7 @@ public class LogicaAds : MonoBehaviour
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleRewardedAdLoaded event received");
+        rewardedAd.Show();
     }
 
     public void HandleRewardedAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
@@ -157,7 +160,9 @@ public class LogicaAds : MonoBehaviour
 
     public void HandleUserEarnedReward(object sender, Reward args)
     {
+        //HACER UN BOOLEANDO Y PASARLO AL ADCLOSED, SI NO HAS VISTO EL VIDEO ES FALSE Y NO SE TE REVIVE
         Debug.Log("Recomensa reclamada");
+        GameObject.Find("visto").GetComponent<Text>().text = "Visto";
     }
 }
 
