@@ -6,6 +6,7 @@ using System;
 
 public class LogicaAds : MonoBehaviour
 {
+    public static LogicaAds instance;
     private BannerView bannerAd;
     private InterstitialAd interstitialAd;
     private RewardedAd rewardedAd;
@@ -15,13 +16,8 @@ public class LogicaAds : MonoBehaviour
     void Start()
     {
         MobileAds.Initialize(initStatus => { });
-        //this.PedirBanner();
         PedirInterstitial();
-        //if(interstitialAd.IsLoaded())
-       // {
-       //     interstitialAd.Show();
-       // }
-        //PedirReward();
+
     }
 
     // Update is called once per frame
@@ -30,7 +26,15 @@ public class LogicaAds : MonoBehaviour
     }
     private void Awake()
     {
-
+        if(LogicaAds.instance == null)
+        {
+            LogicaAds.instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     private void PedirBanner()
     {
@@ -68,12 +72,7 @@ public class LogicaAds : MonoBehaviour
         // Load the interstitial with the request.
         this.interstitialAd.LoadAd(request);
     }
-    /*private void PedirReward()
-    {
-        rewardAd = new RewardedAd(rewardId);
-        AdRequest pedir = new AdRequest.Builder().Build();
-        rewardAd.LoadAd(pedir);
-    }*/
+
     public void MostrarBanner()
     {
         Debug.Log("Hola?");
