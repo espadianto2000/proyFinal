@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour
     public WaveManager wm;
     public GameObject hmHeal;
     public bool fueraPausa = false;
+    [SerializeField]
+    private GameObject destruirEnemigos;
+    [SerializeField]
+    private int vecesMuertas = 0;
     [Header("Stats")]
     public float VelocidadBase;
     public float DanoBase;
@@ -50,6 +54,7 @@ public class PlayerController : MonoBehaviour
     public int nivelXPMejora = 0;
     public int nivelPtsMejora = 0;
     public int nivelDineroMejora = 0;
+    public int revividas = 0;
 
     [Header("movimiento")]
     public Vector2 destinoAtaque = new Vector2(0,0);
@@ -1099,16 +1104,27 @@ public class PlayerController : MonoBehaviour
     }
     void desplegarMenuMuerte()
     {
-        menuMuerte.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = ((Mathf.Round(wm.timeTotal*100))/100)+"s";
-        menuMuerte.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos + "";
+        vecesMuertas++;
+        menuMuerte.GetComponent<controllerMenuMuerte>().mostrardata(((Mathf.Round(wm.timeTotal * 100)) / 100) + "s", menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos + "", (int)Mathf.Round(menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos * 0.75f) + "$",Mathf.Floor(menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos/200)+"",vecesMuertas);
+        
         if (menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos > gm.highScore)
         {
             gm.highScore = menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos;
         }
-        menuMuerte.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = (int)Mathf.Round(menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos * 0.75f) + "$";
-        gm.dinero += (int)Mathf.Round((menuMuerte.transform.parent.GetComponent<interfazInGameManager>().puntos * 0.75f) * porcentajeDinero);
-        gm.guardar();
+        
         menuMuerte.SetActive(true);
         Time.timeScale = 0;
+    }
+    public void revivir()
+    {
+        vivo = true;
+        vidaActual = vidaMax;
+        transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 0);
+        transform.GetChild(0).GetComponent<Animator>().SetTrigger("revivir");
+        transform.GetChild(0).GetComponent<SpriteRenderer>().material = origMaterial;
+        transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+        Instantiate(destruirEnemigos, transform.position, Quaternion.identity);
+        menuMuerte.SetActive(false);
+        Time.timeScale = 1;
     }
 }

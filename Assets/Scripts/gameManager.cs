@@ -79,7 +79,7 @@ public class gameManager : MonoBehaviour
         var asyncLoadLevel = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
         while (!asyncLoadLevel.isDone)
         {
-            Debug.Log(asyncLoadLevel.progress);
+            //Debug.Log(asyncLoadLevel.progress);
             GameObject.Find("carga").GetComponent<Text>().text = ((Mathf.Round(asyncLoadLevel.progress * 10000)) / 100f) + "%";
             GameObject.Find("Slider").GetComponent<Slider>().value = asyncLoadLevel.progress;
             yield return null;
