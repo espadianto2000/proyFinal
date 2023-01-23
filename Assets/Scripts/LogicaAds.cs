@@ -75,6 +75,43 @@ public class LogicaAds : MonoBehaviour
         AdRequest request = new AdRequest.Builder().Build();
         // Load the interstitial with the request.
         this.interstitialAd.LoadAd(request);
+
+        // Called when an ad request has successfully loaded.
+        this.interstitialAd.OnAdLoaded += HandleOnAdLoaded;
+        // Called when an ad request failed to load.
+        this.interstitialAd.OnAdFailedToLoad += HandleOnAdFailedToLoad;
+        // Called when an ad is shown.
+        this.interstitialAd.OnAdOpening += HandleOnAdOpening;
+        // Called when the ad is closed.
+        this.interstitialAd.OnAdClosed += HandleOnAdClosed;
+    }
+    public void HandleOnAdLoaded(object sender, EventArgs args)
+    {
+        MonoBehaviour.print("HandleAdLoaded event received");
+    }
+
+    public void HandleOnAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
+    {
+
+    }
+
+    public void HandleOnAdOpening(object sender, EventArgs args)
+    {
+        MonoBehaviour.print("HandleAdOpening event received");
+    }
+
+    public void HandleOnAdClosed(object sender, EventArgs args)
+    {
+        MonoBehaviour.print("HandleAdClosed event received");
+        StartCoroutine(DelayPausa());
+        Debug.Log("se cerro el ad");
+
+    }
+    IEnumerator DelayPausa()
+    {
+        yield return new WaitForSeconds(0.01f);
+        Time.timeScale = 0;
+
     }
 
     public void MostrarBanner()
@@ -94,7 +131,11 @@ public class LogicaAds : MonoBehaviour
     }
      public void MostrarReward()
      {
-        Instantiate(cargaPrefab);
+        if(!gameManager.instance.premium)
+        {
+            Instantiate(cargaPrefab);
+
+        }
         PedirReward();
         //rewardedAd.Show();
 
@@ -138,7 +179,19 @@ public class LogicaAds : MonoBehaviour
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleRewardedAdLoaded event received");
-        rewardedAd.Show();
+        if(!gameManager.instance.premium)
+        {
+            rewardedAd.Show();
+
+        }
+        else
+        {
+            if (SceneManager.GetActiveScene().name == "jugador1" || SceneManager.GetActiveScene().name == "jugador2")
+            {
+                GameObject.Find("Heroe").GetComponent<PlayerController>().revivir();
+
+            }
+        }
         //StartCoroutine(Esperar())
 
 

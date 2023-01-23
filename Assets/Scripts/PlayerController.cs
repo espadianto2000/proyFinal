@@ -255,10 +255,11 @@ public class PlayerController : MonoBehaviour
             menuSubidaNivel.transform.GetChild(4).GetComponent<improvementsManager>().generarMejoras();
             menuSubidaNivel.transform.parent.GetComponent<interfazInGameManager>().updateStats(vidaMax, DanoBase, VelocidadBase, probCritico, velocidadAtaque, tamanoAtaque, porcentajeExp, porcentajePuntos, porcentajeDinero);
             Time.timeScale = 0;
-            if (WaveManager.instance.mostrarAnuncio)
+            if (WaveManager.instance.mostrarAnuncio && !gameManager.instance.premium)
             {
                 WaveManager.instance.mostrarAnuncio = false;
                 //mostrar anuncio
+                LogicaAds.instance.MostrarInters();
                 Debug.Log("se muestra anuncio");
                 //AQUIIIIIIII//
                 ///////

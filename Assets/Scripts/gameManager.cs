@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
+    public bool premium = false;
     public static gameManager instance=null;
     private gameData gd;
     public bool estadoPausa=false;
