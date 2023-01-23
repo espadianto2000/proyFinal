@@ -178,18 +178,18 @@ public class gameManager : MonoBehaviour
         switch (orden)
         {
             case 0:
-                if (dinero >= 1500)
+                if (dinero >= 5000)
                 {
                     desbloquearPersonaje2 = true;
-                    dinero -= 1500;
+                    dinero -= 5000;
                 }
                 
                 break;
             case 1:
-                if(dinero >= 1000)
+                if(dinero >= 3000)
                 {
                     desbloquearUlti = true;
-                    dinero -= 1000;
+                    dinero -= 3000;
                 }
                 
                 break;
@@ -306,7 +306,7 @@ public class gameManager : MonoBehaviour
         string path = Application.persistentDataPath + "/data.ub";
         FileStream stream = new FileStream(path, FileMode.Create);
         //
-        gd = new gameData(gems, dinero, nivelVidaExtra, nivelVelocidadExtra, nivelDanoExtra, nivelCritExtra, nivelExpExtra, nivelPuntosExtra, nivelDineroExtra, nivelSpawnVida, nivelCuracionExtra, nivelVelocidadAtaqueExtra, desbloquearPersonaje2, desbloquearUlti, highScore);
+        gd = new gameData(gems, dinero, nivelVidaExtra, nivelVelocidadExtra, nivelDanoExtra, nivelCritExtra, nivelExpExtra, nivelPuntosExtra, nivelDineroExtra, nivelSpawnVida, nivelCuracionExtra, nivelVelocidadAtaqueExtra, desbloquearPersonaje2, desbloquearUlti, highScore, premium);
         //
         formatter.Serialize(stream, gd);
         stream.Close();
@@ -357,5 +357,6 @@ public class gameManager : MonoBehaviour
         desbloquearPersonaje2 = gd.desbloquearPersonaje2;
         desbloquearUlti = gd.desbloquearUlti;
         highScore = gd.highScore;
+        premium = gd.premium;
     }
 }

@@ -41,15 +41,15 @@ public class menuImprovesManager : MonoBehaviour
         for (int i=0;i<botones.Length-2;i++)
         {
             //Debug.Log("boton: " + i);
-            botones[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "nivel: " + gm.statsArr[i];
+            botones[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "lvl: " + gm.statsArr[i];
             if(gm.statsArr[i] != 0)
             {
-                botones[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Costo: " + (100 + Mathf.Floor(100 * (gm.statsArr[i] * gm.statsArr[i]))) + "$";
+                botones[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Cost: " + (100 + Mathf.Floor(100 * (gm.statsArr[i] * gm.statsArr[i]))) + "$";
             }
-            else botones[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Costo: " +(100 + 0)+"$";
+            else botones[i].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Cost: " +(100 + 0)+"$";
         }
-        botones[botones.Length - 2].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = gm.desbloquearPersonaje2? "desbloqueado" : "bloqueado";
-        botones[botones.Length - 1].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = (gm.desbloquearUlti ? "desbloqueado" : "bloqueado");
+        botones[botones.Length - 2].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = gm.desbloquearPersonaje2? "unlocked" : "locked";
+        botones[botones.Length - 1].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = (gm.desbloquearUlti ? "unlocked" : "locked");
         botones[botones.Length - 2].transform.GetChild(3).gameObject.SetActive(gm.desbloquearPersonaje2 ? false : true);
         botones[botones.Length - 1].transform.GetChild(3).gameObject.SetActive(gm.desbloquearUlti ? false : true);
         botones[botones.Length - 2].transform.GetChild(4).GetComponent<Button>().interactable = gm.desbloquearPersonaje2 ? false : true;

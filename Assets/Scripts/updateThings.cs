@@ -9,6 +9,7 @@ public class updateThings : MonoBehaviour
     public GameObject dinero;
     public GameObject gemas;
     public GameObject maxPts;
+    public GameObject premium;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,17 @@ public class updateThings : MonoBehaviour
         dinero.GetComponent<TextMeshProUGUI>().text = gm.dinero + "";
         gemas.GetComponent<TextMeshProUGUI>().text = gm.gems + "";
         maxPts.GetComponent<TextMeshProUGUI>().text = (Mathf.Round(gm.highScore*100)/100) + "";
+    }
+    private void Update()
+    {
+        if (gm.premium)
+        {
+            premium.SetActive(true);
+        }
+        else
+        {
+            premium.SetActive(false);
+        }
     }
     public void salir()
     {
