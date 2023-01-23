@@ -255,6 +255,16 @@ public class PlayerController : MonoBehaviour
             menuSubidaNivel.transform.GetChild(4).GetComponent<improvementsManager>().generarMejoras();
             menuSubidaNivel.transform.parent.GetComponent<interfazInGameManager>().updateStats(vidaMax, DanoBase, VelocidadBase, probCritico, velocidadAtaque, tamanoAtaque, porcentajeExp, porcentajePuntos, porcentajeDinero);
             Time.timeScale = 0;
+            if (WaveManager.instance.mostrarAnuncio)
+            {
+                WaveManager.instance.mostrarAnuncio = false;
+                //mostrar anuncio
+                Debug.Log("se muestra anuncio");
+                //AQUIIIIIIII//
+                ///////
+                ///////
+                ///////
+            }
         }
         xpSlider.value = exp / xpNecesaria;
         vidaSlider.value = vidaActual / vidaMax;

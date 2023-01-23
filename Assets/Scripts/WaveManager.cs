@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    public static WaveManager instance;
+    [Header("")]
+    public bool mostrarAnuncio = false;
+
     [Header("Prefabs enemigos")]
     public GameObject[] prefabsEnemigosNiv0;
     public GameObject[] prefabsEnemigosNiv1;
@@ -31,6 +35,10 @@ public class WaveManager : MonoBehaviour
     public GameObject corazon;
     public GameObject iman;
 
+    private void Awake()
+    {
+        WaveManager.instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -57,10 +65,14 @@ public class WaveManager : MonoBehaviour
             {
                 nivelDificultad = 0;
                 iteracionOleada++;
-                cantidadMaximaEnemigos = 40;
+                cantidadMaximaEnemigos = 40 + (20 * iteracionOleada);
                 enemigosPorOleada = 3;
             }
             else { nivelDificultad++;
+                if(nivelDificultad != 0 && nivelDificultad % 2 == 0)
+                {
+                    mostrarAnuncio = true;
+                }
                 enemigosPorOleada = 3;
             }
             cantidadMaximaEnemigos+=5;
