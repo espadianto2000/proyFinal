@@ -5,6 +5,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 
 public class gameManager : MonoBehaviour
 {
@@ -91,6 +93,7 @@ public class gameManager : MonoBehaviour
     {
         if (!iniciado)
         {
+            PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
             init();
             iniciado = true;
         }
@@ -113,6 +116,23 @@ public class gameManager : MonoBehaviour
             }
         }
     }
+
+    internal void ProcessAuthentication(SignInStatus status)
+    {
+        if (status == SignInStatus.Success)
+        {
+            // Continue with Play Games Services
+            Debug.Log("se logea");
+        }
+        else
+        {
+            Debug.Log("continua sin logearse");
+            // Disable your integration with Play Games Services or show a login button
+            // to ask users to sign-in. Clicking it should call
+            // PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication).
+        }
+    }
+
     public void pausa()
     {
         estadoPausa = true;
@@ -359,4 +379,6 @@ public class gameManager : MonoBehaviour
         highScore = gd.highScore;
         premium = gd.premium;
     }
+
+    
 }
