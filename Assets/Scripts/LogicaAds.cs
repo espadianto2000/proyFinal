@@ -59,6 +59,10 @@ public class LogicaAds : MonoBehaviour
         // Load the banner with the request.
         this.bannerAd.LoadAd(request);
     }
+    public void cerrarBanner()
+    {
+        bannerAd.Destroy();
+    }
     private void PedirInterstitial()
     {
 #if UNITY_ANDROID
@@ -200,7 +204,10 @@ public class LogicaAds : MonoBehaviour
 
     public void HandleRewardedAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
     {
-        
+        Destroy(GameObject.Find("Carga(Clone)"));
+        GameObject.Find("conexion").GetComponent<Image>().color = Color.red;
+
+
     }
 
     public void HandleRewardedAdOpening(object sender, EventArgs args)

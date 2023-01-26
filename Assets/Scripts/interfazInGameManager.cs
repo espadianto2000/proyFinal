@@ -125,6 +125,10 @@ public class interfazInGameManager : MonoBehaviour
         gm.outPausa();
         //player.GetComponent<PlayerController>().fueraPausa = true;
     }
+    public void cerrBanner()
+    {
+        LogicaAds.instance.cerrarBanner();
+    }
     public void pausa()
     {
         gm.pausa();

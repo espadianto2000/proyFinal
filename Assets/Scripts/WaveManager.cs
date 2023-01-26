@@ -72,6 +72,7 @@ public class WaveManager : MonoBehaviour
                 if(nivelDificultad != 0 && nivelDificultad % 2 == 0)
                 {
                     mostrarAnuncio = true;
+                    Debug.Log("se hizo true");
                 }
                 enemigosPorOleada = 3;
             }
