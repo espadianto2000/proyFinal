@@ -1,6 +1,7 @@
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using GooglePlayGames.BasicApi.SavedGame;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -83,10 +84,12 @@ public class menuOpciones : MonoBehaviour
         txt.color = orginalColor;
     }
 
-    public void ShowSelectUI()
+
+
+    public void SaveGamePropio()
     {
-        uint maxNumToDisplay = 5;
-        bool allowCreateNew = false;
+        uint maxNumToDisplay = 1;
+        bool allowCreateNew = true;
         bool allowDelete = true;
 
         ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
@@ -96,19 +99,109 @@ public class menuOpciones : MonoBehaviour
             allowDelete,
             OnSavedGameSelected);
     }
+    public void LoadGamePropio()
+    {
+        uint maxNumToDisplay = 1;
+        bool allowCreateNew = true;
+        bool allowDelete = true;
 
-
+        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+        savedGameClient.ShowSelectSavedGameUI("Select saved game",
+            maxNumToDisplay,
+            allowCreateNew,
+            allowDelete,
+            OnSavedGameSelectedLoad);
+    }
     public void OnSavedGameSelected(SelectUIStatus status, ISavedGameMetadata game)
     {
         if (status == SelectUIStatus.SavedGameSelected)
         {
             // handle selected game save
+            byte[] temp = new byte[2];
+            SaveGame(game, temp, game.TotalTimePlayed);
         }
         else
         {
             // handle cancel or error
         }
     }
+    public void OnSavedGameSelectedLoad(SelectUIStatus status, ISavedGameMetadata game)
+    {
+        if (status == SelectUIStatus.SavedGameSelected)
+        {
+            OpenSavedGame(game.Filename);
+        }
+        else
+        {
+            // handle cancel or error
+        }
+    }
+
+    public void OpenSavedGame(string filename)
+    {
+        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+        savedGameClient.OpenWithAutomaticConflictResolution(filename, DataSource.ReadCacheOrNetwork,
+            ConflictResolutionStrategy.UseLongestPlaytime, OnSavedGameOpened);
+    }
+    public void OnSavedGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game)
+    {
+        if (status == SavedGameRequestStatus.Success)
+        {
+            Debug.Log("data cargada");
+        }
+        else
+        {
+            // handle error
+        }
+    }
+    void SaveGame(ISavedGameMetadata game, byte[] savedData, TimeSpan totalPlaytime)
+    {
+        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+
+        SavedGameMetadataUpdate.Builder builder = new SavedGameMetadataUpdate.Builder();
+        builder = builder
+            .WithUpdatedPlayedTime(totalPlaytime)
+            .WithUpdatedDescription("Saved game at " + DateTime.Now);
+        /*if (savedImage != null)
+        {
+            // This assumes that savedImage is an instance of Texture2D
+            // and that you have already called a function equivalent to
+            // getScreenshot() to set savedImage
+            // NOTE: see sample definition of getScreenshot() method below
+            byte[] pngData = savedImage.EncodeToPNG();
+            builder = builder.WithUpdatedPngCoverImage(pngData);
+        }*/
+        SavedGameMetadataUpdate updatedMetadata = builder.Build();
+        savedGameClient.CommitUpdate(game, updatedMetadata, savedData, OnSavedGameWritten);
+        Debug.Log("se guardo");
+    }
+
+    public void OnSavedGameWritten(SavedGameRequestStatus status, ISavedGameMetadata game)
+    {
+        if (status == SavedGameRequestStatus.Success)
+        {
+            // handle reading or writing of saved game.
+        }
+        else
+        {
+            // handle error
+        }
+    }
+
+    public Texture2D getScreenshot()
+    {
+        // Create a 2D texture that is 1024x700 pixels from which the PNG will be
+        // extracted
+        Texture2D screenShot = new Texture2D(1024, 700);
+
+        // Takes the screenshot from top left hand corner of screen and maps to top
+        // left hand corner of screenShot texture
+        screenShot.ReadPixels(
+            new Rect(0, 0, Screen.width, (Screen.width / 1024) * 700), 0, 0);
+        return screenShot;
+    }
+
+
     IEnumerator fadeInAndOut(Text targetText, bool fadeIn, float duration)
     {
 
