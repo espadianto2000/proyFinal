@@ -335,7 +335,10 @@ public class gameManager : MonoBehaviour
         File.Delete(persistentPath);
         using StreamWriter writer = new StreamWriter(persistentPath);
         writer.Write(json);*/
-
+    }
+    public gameData getGameData()
+    {
+        return new gameData(gems, dinero, nivelVidaExtra, nivelVelocidadExtra, nivelDanoExtra, nivelCritExtra, nivelExpExtra, nivelPuntosExtra, nivelDineroExtra, nivelSpawnVida, nivelCuracionExtra, nivelVelocidadAtaqueExtra, desbloquearPersonaje2, desbloquearUlti, highScore, premium);
     }
     public void cargar()
     {
@@ -378,6 +381,38 @@ public class gameManager : MonoBehaviour
         desbloquearUlti = gd.desbloquearUlti;
         highScore = gd.highScore;
         premium = gd.premium;
+    }
+    public void cargaExterna(gameData gd)
+    {
+        gems = gd.gems;
+        dinero = gd.dinero;
+        nivelVidaExtra = gd.nivelVidaExtra;
+        nivelDanoExtra = gd.nivelDanoExtra;
+        nivelVelocidadExtra = gd.nivelVelocidadExtra;
+        nivelDanoExtra = gd.nivelDanoExtra;
+        nivelCritExtra = gd.nivelCritExtra;
+        nivelExpExtra = gd.nivelExpExtra;
+        nivelPuntosExtra = gd.nivelPuntosExtra;
+        nivelDineroExtra = gd.nivelDineroExtra;
+        nivelSpawnVida = gd.nivelSpawnVida;
+        nivelCuracionExtra = gd.nivelCuracionExtra;
+        nivelVelocidadAtaqueExtra = gd.nivelVelocidadAtaqueExtra;
+        desbloquearPersonaje2 = gd.desbloquearPersonaje2;
+        desbloquearUlti = gd.desbloquearUlti;
+        highScore = gd.highScore;
+        premium = gd.premium;
+        statsArr = new int[10];
+        statsArr[0] = nivelVidaExtra;
+        statsArr[1] = nivelDanoExtra;
+        statsArr[2] = nivelVelocidadExtra;
+        statsArr[3] = nivelCritExtra;
+        statsArr[4] = nivelExpExtra;
+        statsArr[5] = nivelPuntosExtra;
+        statsArr[6] = nivelDineroExtra;
+        statsArr[7] = nivelSpawnVida;
+        statsArr[8] = nivelCuracionExtra;
+        statsArr[9] = nivelVelocidadAtaqueExtra;
+        guardar();
     }
 
     

@@ -14,9 +14,12 @@ public class updateThings : MonoBehaviour
     void Start()
     {
         gm = gameManager.instance;
+    }
+    public void updateThingsFunc()
+    {
         dinero.GetComponent<TextMeshProUGUI>().text = gm.dinero + "";
         gemas.GetComponent<TextMeshProUGUI>().text = gm.gems + "";
-        maxPts.GetComponent<TextMeshProUGUI>().text = (Mathf.Round(gm.highScore*100)/100) + "";
+        maxPts.GetComponent<TextMeshProUGUI>().text = (Mathf.Round(gm.highScore * 100) / 100) + "";
     }
     private void Update()
     {

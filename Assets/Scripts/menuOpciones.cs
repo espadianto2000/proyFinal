@@ -4,6 +4,8 @@ using GooglePlayGames.BasicApi.SavedGame;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
@@ -11,8 +13,10 @@ using UnityEngine.UI;
 public class menuOpciones : MonoBehaviour
 {
     public GameObject botonConexion;
-    public GameObject cloudData;
+    public GameObject saveDataButton;
+    public GameObject loadDataButton;
     public Text txt;
+    public bool isSaving;
     public void datos()
     {
 
@@ -23,11 +27,13 @@ public class menuOpciones : MonoBehaviour
         {
             botonConexion.GetComponent<Button>().interactable = false;
             botonConexion.GetComponentInChildren<Text>().text = "CONNECTED";
-            cloudData.GetComponent<Button>().interactable = true;
+            saveDataButton.GetComponent<Button>().interactable = true;
+            loadDataButton.GetComponent<Button>().interactable = true;
         }
         else
         {
-            cloudData.GetComponent<Button>().interactable = false;
+            saveDataButton.GetComponent<Button>().interactable = false;
+            loadDataButton.GetComponent<Button>().interactable = false;
             botonConexion.GetComponent<Button>().interactable = true;
             botonConexion.GetComponentInChildren<Text>().text = "DISCONNECTED";
         }
@@ -83,9 +89,84 @@ public class menuOpciones : MonoBehaviour
         txt.enabled = false;
         txt.color = orginalColor;
     }
+    //New save try
+    public void OpenSave(bool saving)
+    {
+        if (PlayGamesPlatform.Instance.IsAuthenticated())
+        {
+            isSaving = saving;
+            PlayGamesPlatform.Instance.SavedGame.OpenWithAutomaticConflictResolution("Guardado_Unico", DataSource.ReadCacheOrNetwork, ConflictResolutionStrategy.UseLongestPlaytime, SaveGameOpen);
+            //((PlayGamesPlatform)Social.Active).SavedGame.OpenWithAutomaticConflictResolution("Guardado_Unico", DataSource.ReadCacheOrNetwork, ConflictResolutionStrategy.UseLongestPlaytime, SaveGameOpen);
+        }
+    }
+    private void SaveGameOpen(SavedGameRequestStatus status, ISavedGameMetadata meta)
+    {
+        if(status == SavedGameRequestStatus.Success)
+        {
+            if (isSaving)
+            {
+                isSaving = false;
+                byte[] myData = GetSaveString();
+
+                SavedGameMetadataUpdate updateForMetadata = new SavedGameMetadataUpdate.Builder().WithUpdatedDescription("I have updated my game at: " + DateTime.Now.ToString()).Build();
+
+                PlayGamesPlatform.Instance.SavedGame.CommitUpdate(meta, updateForMetadata, myData, SaveCallBack);
+                //((PlayGamesPlatform)Social.Active).SavedGame.CommitUpdate(meta,updateForMetadata,myData,SaveCallBack);
+            }
+            else
+            {
+                PlayGamesPlatform.Instance.SavedGame.ReadBinaryData(meta, LoadCallBack);
+                //((PlayGamesPlatform)Social.Active).SavedGame.ReadBinaryData(meta, LoadCallBack);
+            }
+        }
+    }
+    private void LoadCallBack(SavedGameRequestStatus status, byte[] data)
+    {
+        gameData gd = null;
+        if(status == SavedGameRequestStatus.Success)
+        {
+            MemoryStream ms = new MemoryStream(data);
+            BinaryFormatter formatter = new BinaryFormatter();
+            gd = formatter.Deserialize(ms) as gameData;
+            ms.Close();
+            gameManager.instance.cargaExterna(gd);
+            showToast("Game data successfully loaded from cloud", 2);
+            GameObject.Find("Menu").GetComponent<updateThings>().updateThingsFunc();
+        }
+        else
+        {
+            showToast("Error while attempting to load game data from cloud", 2);
+        }
+    }
+    private byte[] GetSaveString()
+    {
+        gameManager.instance.guardar();
+        string path = Application.persistentDataPath + "/data.ub";
+        byte[] data = null;
+        if (File.Exists(path))
+        {
+            data = File.ReadAllBytes(path);
+        }
+        return data;
+    }
+    private void SaveCallBack(SavedGameRequestStatus status, ISavedGameMetadata meta)
+    {
+        if(status == SavedGameRequestStatus.Success)
+        {
+            showToast("Game data saved successfully in cloud",2);
+            Debug.Log("successfully saved in cloud");
+        }
+        else
+        {
+            showToast("Error while attempting to save game data in cloud", 2);
+            Debug.Log("failed saved in cloud");
+        }
+    }
+    //
 
 
 
+    /*
     public void SaveGamePropio()
     {
         uint maxNumToDisplay = 1;
@@ -162,15 +243,6 @@ public class menuOpciones : MonoBehaviour
         builder = builder
             .WithUpdatedPlayedTime(totalPlaytime)
             .WithUpdatedDescription("Saved game at " + DateTime.Now);
-        /*if (savedImage != null)
-        {
-            // This assumes that savedImage is an instance of Texture2D
-            // and that you have already called a function equivalent to
-            // getScreenshot() to set savedImage
-            // NOTE: see sample definition of getScreenshot() method below
-            byte[] pngData = savedImage.EncodeToPNG();
-            builder = builder.WithUpdatedPngCoverImage(pngData);
-        }*/
         SavedGameMetadataUpdate updatedMetadata = builder.Build();
         savedGameClient.CommitUpdate(game, updatedMetadata, savedData, OnSavedGameWritten);
         Debug.Log("se guardo");
@@ -200,7 +272,7 @@ public class menuOpciones : MonoBehaviour
             new Rect(0, 0, Screen.width, (Screen.width / 1024) * 700), 0, 0);
         return screenShot;
     }
-
+    */
 
     IEnumerator fadeInAndOut(Text targetText, bool fadeIn, float duration)
     {
