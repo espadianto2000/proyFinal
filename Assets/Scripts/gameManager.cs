@@ -10,6 +10,8 @@ using GooglePlayGames.BasicApi;
 
 public class gameManager : MonoBehaviour
 {
+    public bool LogeadoGPS = false;
+    public string userID = "";
     public bool premium = false;
     public static gameManager instance=null;
     private gameData gd;
@@ -38,26 +40,30 @@ public class gameManager : MonoBehaviour
     public AudioSource audioNivel;
     public AudioSource audioClick;
     private bool iniciado = false;
-    private void init()
+    private void Awake()
     {
         if (gameManager.instance == null)
         {
             gameManager.instance = this;
             DontDestroyOnLoad(this);
-            try
-            {
-                cargar();
-            }
-            catch
-            {
-
-            }
+            PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
         }
         else
         {
             Destroy(gameObject);
         }
-        Invoke("inicio", 2f);
+    }
+    private void init()
+    {
+        try
+        {
+            cargar();
+        }
+        catch
+        {
+
+        }
+        inicio();
         statsArr = new int[10];
         statsArr[0] = nivelVidaExtra;
         statsArr[1] = nivelDanoExtra;
@@ -93,9 +99,9 @@ public class gameManager : MonoBehaviour
     {
         if (!iniciado)
         {
-            PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
-            init();
-            iniciado = true;
+            //PlayGamesPlatform.Activate();
+            //PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
+            //PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication);
         }
         if(Input.GetKeyDown(KeyCode.O))
         {
@@ -122,15 +128,23 @@ public class gameManager : MonoBehaviour
         if (status == SignInStatus.Success)
         {
             // Continue with Play Games Services
+            LogeadoGPS = true;
+            userID = PlayGamesPlatform.Instance.localUser.id;
             Debug.Log("se logea");
+            
         }
         else
         {
             Debug.Log("continua sin logearse");
+            LogeadoGPS = false;
+            userID = "guest";
             // Disable your integration with Play Games Services or show a login button
             // to ask users to sign-in. Clicking it should call
             // PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication).
         }
+        Debug.Log("callback de autenticacion");
+        Invoke("init",1f);
+        iniciado = true;
     }
 
     public void pausa()
@@ -323,7 +337,7 @@ public class gameManager : MonoBehaviour
     public void guardar()
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/data.ub";
+        string path = Application.persistentDataPath + $"/{userID}.ub";
         FileStream stream = new FileStream(path, FileMode.Create);
         //
         gd = new gameData(gems, dinero, nivelVidaExtra, nivelVelocidadExtra, nivelDanoExtra, nivelCritExtra, nivelExpExtra, nivelPuntosExtra, nivelDineroExtra, nivelSpawnVida, nivelCuracionExtra, nivelVelocidadAtaqueExtra, desbloquearPersonaje2, desbloquearUlti, highScore, premium);
@@ -342,7 +356,7 @@ public class gameManager : MonoBehaviour
     }
     public void cargar()
     {
-        string path = Application.persistentDataPath + "/data.ub";
+        string path = Application.persistentDataPath + $"/{userID}.ub";
         gameData data = null;
         if (File.Exists(path))
         {

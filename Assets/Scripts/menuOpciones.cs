@@ -17,9 +17,16 @@ public class menuOpciones : MonoBehaviour
     public GameObject loadDataButton;
     public Text txt;
     public bool isSaving;
-    public void datos()
+    public Text code;
+    public void dataCode()
     {
-
+        if(code.text == "7H380R3DH3R0-dev")
+        {
+            gameData gd = new gameData(gameManager.instance.gems + 10000, gameManager.instance.dinero + 10000, gameManager.instance.nivelVidaExtra, gameManager.instance.nivelVelocidadExtra, gameManager.instance.nivelDanoExtra, gameManager.instance.nivelCritExtra, gameManager.instance.nivelExpExtra, gameManager.instance.nivelPuntosExtra, gameManager.instance.nivelDineroExtra, gameManager.instance.nivelSpawnVida, gameManager.instance.nivelCuracionExtra, gameManager.instance.nivelVelocidadAtaqueExtra, true, true, gameManager.instance.highScore, true);
+            gameManager.instance.cargaExterna(gd);
+            showToast("Claimed secret dev code", 2);
+            GameObject.Find("Menu").GetComponent<updateThings>().updateThingsFunc();
+        }
     }
     private void Update()
     {

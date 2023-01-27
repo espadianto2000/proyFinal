@@ -14,6 +14,7 @@ public class updateThings : MonoBehaviour
     void Start()
     {
         gm = gameManager.instance;
+        updateThingsFunc();
     }
     public void updateThingsFunc()
     {
