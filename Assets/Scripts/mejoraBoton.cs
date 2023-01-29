@@ -109,11 +109,33 @@ public class mejoraBoton : MonoBehaviour
         transform.parent.GetComponent<improvementsManager>().mejorar(valorOrden);
         transform.parent.parent.gameObject.SetActive(false);
         transform.parent.parent.parent.GetComponent<interfazInGameManager>().salirPausa();
+        if (WaveManager.instance.mostrarAnuncio && !gameManager.instance.premium)
+        {
+            //WaveManager.instance.mostrarAnuncio = false;
+            //mostrar anuncio
+            LogicaAds.instance.MostrarInters();
+            Debug.Log("se muestra anuncio");
+            //AQUIIIIIIII//
+            ///////
+            ///////
+            ///////
+        }
     }
     public void mejorarItem()
     {
         transform.parent.GetComponent<improvementsManager>().mejorarItem(valorOrden);
         transform.parent.parent.parent.GetComponent<interfazInGameManager>().salirPausa();
         transform.parent.parent.gameObject.SetActive(false);
+        if (WaveManager.instance.mostrarAnuncio && !gameManager.instance.premium)
+        {
+            //WaveManager.instance.mostrarAnuncio = false;
+            //mostrar anuncio
+            LogicaAds.instance.MostrarInters();
+            Debug.Log("se muestra anuncio");
+            //AQUIIIIIIII//
+            ///////
+            ///////
+            ///////
+        }
     }
 }

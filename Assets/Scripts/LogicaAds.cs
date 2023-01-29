@@ -107,13 +107,18 @@ public class LogicaAds : MonoBehaviour
     public void HandleOnAdClosed(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleAdClosed event received");
-        StartCoroutine(DelayPausa());
+       // if(SystemInfo.deviceType == DeviceType.Handheld)
+        //{
+         //   StartCoroutine(DelayPausa());
+
+        //}
         Debug.Log("se cerro el ad");
 
     }
     IEnumerator DelayPausa()
     {
         yield return new WaitForSeconds(0.01f);
+        GameObject.Find("Heroe").GetComponent<PlayerController>().fueraPausa = true;
         Time.timeScale = 0;
 
     }

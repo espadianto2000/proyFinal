@@ -121,9 +121,15 @@ public class PlayerController : MonoBehaviour
     public Image cactus;
     public Image bomba;
 
+    public float posI1;
+    public float posI2;
+    public float posI3;
+
     void Start()
     {
-        
+        posI1 = joystick.transform.GetChild(0).transform.position.x;
+        posI2 = joystick.transform.GetChild(0).transform.position.y;
+        posI2 = joystick.transform.GetChild(0).transform.position.z;
         gm = gameManager.instance;
         vidaMax = vidaMax * (1 + (0.04f * gm.nivelVidaExtra));
         DanoBase = DanoBase * (1 + (0.05f * gm.nivelDanoExtra));
@@ -166,7 +172,7 @@ public class PlayerController : MonoBehaviour
             dagaLVL = 4;
             bombaLVL = 4;
         }*/
-        if(Time.timeScale==0 && fueraPausa && (joystick.Horizontal != 0 || joystick.Vertical != 0))
+        if (Time.timeScale==0 && fueraPausa && (joystick.Horizontal != 0 || joystick.Vertical != 0))
         {
             Time.timeScale = 1;
             fueraPausa = false;
@@ -251,13 +257,16 @@ public class PlayerController : MonoBehaviour
             xpNecesaria = xpNecesaria * 1.25f;
             //manejar subida de nivel
             menuSubidaNivel.SetActive(true);
+            joystick.transform.GetChild(0).transform.position = new Vector3(posI1, posI2, joystick.transform.GetChild(0).transform.position.z);
             //menuSubidaNivel.transform.GetChild(4).gameObject.SetActive(true);
             menuSubidaNivel.transform.GetChild(4).GetComponent<improvementsManager>().generarMejoras();
             menuSubidaNivel.transform.parent.GetComponent<interfazInGameManager>().updateStats(vidaMax, DanoBase, VelocidadBase, probCritico, velocidadAtaque, tamanoAtaque, porcentajeExp, porcentajePuntos, porcentajeDinero);
             Time.timeScale = 0;
-            if (WaveManager.instance.mostrarAnuncio && !gameManager.instance.premium)
+            joystick.transform.GetChild(0).transform.position = new Vector3(posI1, posI2, joystick.transform.GetChild(0).transform.position.z);
+
+            /*if (WaveManager.instance.mostrarAnuncio && !gameManager.instance.premium)
             {
-                WaveManager.instance.mostrarAnuncio = false;
+                //WaveManager.instance.mostrarAnuncio = false;
                 //mostrar anuncio
                 LogicaAds.instance.MostrarInters();
                 Debug.Log("se muestra anuncio");
@@ -265,7 +274,7 @@ public class PlayerController : MonoBehaviour
                 ///////
                 ///////
                 ///////
-            }
+            }*/
         }
         xpSlider.value = exp / xpNecesaria;
         vidaSlider.value = vidaActual / vidaMax;

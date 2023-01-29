@@ -159,9 +159,51 @@ public class gameManager : MonoBehaviour
         estadoPausa = false;
         if (SystemInfo.deviceType == DeviceType.Handheld && SceneManager.GetActiveScene().name != "menu")
         {
+            
             Time.timeScale = 0;
             GameObject.Find("Heroe").GetComponent<PlayerController>().fueraPausa = true;
         }else Time.timeScale = 1;
+    }
+    public void outPausa2()
+    {
+        menuPausa.SetActive(false);
+        estadoPausa = false;
+        if (WaveManager.instance.mostrarAnuncio && !premium)
+        {
+            //WaveManager.instance.mostrarAnuncio = false;
+            //mostrar anuncio
+            LogicaAds.instance.MostrarInters();
+            Debug.Log("se muestra anuncio");
+            //AQUIIIIIIII//
+            ///////
+            ///////
+            ///////
+        }
+        Time.timeScale = 1;
+    }
+    public void outPass()
+    {
+        menuPausa.SetActive(false);
+        estadoPausa = false;
+        if (SystemInfo.deviceType == DeviceType.Handheld && SceneManager.GetActiveScene().name != "menu")
+        {
+            if (WaveManager.instance.mostrarAnuncio && !premium)
+            {
+                //WaveManager.instance.mostrarAnuncio = false;
+                //mostrar anuncio
+                LogicaAds.instance.MostrarInters();
+                Debug.Log("se muestra anuncio");
+                //AQUIIIIIIII//
+                ///////
+                ///////
+                ///////
+            }
+
+            Time.timeScale = 0;
+            GameObject.Find("Heroe").GetComponent<PlayerController>().fueraPausa = true;
+        }
+        else Time.timeScale = 1;
+        
     }
     public void forceOutPausa()
     {
@@ -174,9 +216,11 @@ public class gameManager : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "jugador1")
         {
             SceneManager.LoadScene("jugador1", LoadSceneMode.Single);
+            Time.timeScale = 1;
         }else if(SceneManager.GetActiveScene().name == "jugador2")
         {
             SceneManager.LoadScene("jugador2", LoadSceneMode.Single);
+            Time.timeScale = 1;
         }
     }
     public void empezarPartida(int personaje)

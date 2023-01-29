@@ -123,7 +123,12 @@ public class interfazInGameManager : MonoBehaviour
     public void salirPausa()
     {
         gm.outPausa();
-        //player.GetComponent<PlayerController>().fueraPausa = true;
+        player.GetComponent<PlayerController>().fueraPausa = true;
+    }
+    public void salirPass()
+    {
+        gm.outPass();
+        player.GetComponent<PlayerController>().fueraPausa = true;
     }
     public void cerrBanner()
     {

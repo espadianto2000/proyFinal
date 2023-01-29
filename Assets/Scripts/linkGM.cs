@@ -19,7 +19,7 @@ public class linkGM : MonoBehaviour
     {
         gameManager.instance.audioClick.Play();
         gameManager.instance.reiniciarPartida();
-        gameManager.instance.outPausa();
+        gameManager.instance.outPausa2();
     }
     public void salir()
     {
