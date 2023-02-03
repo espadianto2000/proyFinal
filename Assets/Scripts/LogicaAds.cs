@@ -43,7 +43,7 @@ public class LogicaAds : MonoBehaviour
     private void PedirBanner()
     {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-3940256099942544/6300978111";
+        string adUnitId = "ca-app-pub-9842563229947557/8112047865";//anuncio banner real
 #elif UNITY_IPHONE
             string adUnitId = "ca-app-pub-3940256099942544/2934735716";
 #else
@@ -66,7 +66,7 @@ public class LogicaAds : MonoBehaviour
     private void PedirInterstitial()
     {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+        string adUnitId = "ca-app-pub-9842563229947557/2452527079";//anuncio inters real
 #elif UNITY_IPHONE
         string adUnitId = "ca-app-pub-3940256099942544/4411468910";
 #else
@@ -155,7 +155,7 @@ public class LogicaAds : MonoBehaviour
     {
         string adUnitId;
 #if UNITY_ANDROID
-        adUnitId = "ca-app-pub-3940256099942544/5224354917";
+        adUnitId = "ca-app-pub-9842563229947557/6607394505";//anuncio bonoficado real
 #elif UNITY_IPHONE
             adUnitId = "ca-app-pub-3940256099942544/1712485313";
 #else
