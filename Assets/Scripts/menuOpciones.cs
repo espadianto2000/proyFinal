@@ -16,7 +16,8 @@ public class menuOpciones : MonoBehaviour
     public GameObject saveDataButton;
     public GameObject loadDataButton;
     public Text txt;
-    public bool isSaving;
+    public bool isSaving=false;
+    public bool isLoading=false;
     public Text code;
     public void dataCode()
     {
@@ -44,6 +45,10 @@ public class menuOpciones : MonoBehaviour
             botonConexion.GetComponent<Button>().interactable = true;
             botonConexion.GetComponentInChildren<Text>().text = "DISCONNECTED";
         }
+    }
+    public void logout()
+    {
+        //PlayGamesPlatform.Instance.SignOut();
     }
     public void login()
     {
@@ -97,40 +102,103 @@ public class menuOpciones : MonoBehaviour
         txt.color = orginalColor;
     }
     //New save try
-    public void OpenSave(bool saving)
+
+    public void uiOpenSave(bool saving)
+    {
+        OpenSave(saving);
+        Debug.Log("uiOpenSave _ " + saving);
+    }
+
+    public void OpenSave(bool saving, bool loading = false, string guardado = "")
     {
         if (PlayGamesPlatform.Instance.IsAuthenticated())
         {
             isSaving = saving;
-            PlayGamesPlatform.Instance.SavedGame.OpenWithAutomaticConflictResolution("Guardado_Unico", DataSource.ReadCacheOrNetwork, ConflictResolutionStrategy.UseLongestPlaytime, SaveGameOpen);
-            //((PlayGamesPlatform)Social.Active).SavedGame.OpenWithAutomaticConflictResolution("Guardado_Unico", DataSource.ReadCacheOrNetwork, ConflictResolutionStrategy.UseLongestPlaytime, SaveGameOpen);
-        }
-    }
-    private void SaveGameOpen(SavedGameRequestStatus status, ISavedGameMetadata meta)
-    {
-        if(status == SavedGameRequestStatus.Success)
-        {
-            if (isSaving)
+            isLoading = loading;
+            if (saving)
             {
-                isSaving = false;
-                byte[] myData = GetSaveString();
-
-                SavedGameMetadataUpdate updateForMetadata = new SavedGameMetadataUpdate.Builder().WithUpdatedDescription("I have updated my game at: " + DateTime.Now.ToString()).Build();
-
-                PlayGamesPlatform.Instance.SavedGame.CommitUpdate(meta, updateForMetadata, myData, SaveCallBack);
-                //((PlayGamesPlatform)Social.Active).SavedGame.CommitUpdate(meta,updateForMetadata,myData,SaveCallBack);
+                Debug.Log("guardando");
+                PlayGamesPlatform.Instance.SavedGame.OpenWithAutomaticConflictResolution("Guardado_Unico", DataSource.ReadCacheOrNetwork, ConflictResolutionStrategy.UseUnmerged, SaveGameOpen);
+            }
+            else if(!loading)
+            {
+                Debug.Log("cargando 1");
+                ShowSelectUI();
             }
             else
             {
-                PlayGamesPlatform.Instance.SavedGame.ReadBinaryData(meta, LoadCallBack);
+                Debug.Log("cargando 2");
+                PlayGamesPlatform.Instance.SavedGame.OpenWithAutomaticConflictResolution(guardado, DataSource.ReadCacheOrNetwork, ConflictResolutionStrategy.UseLastKnownGood, SaveGameOpen);
+            }
+            
+            //((PlayGamesPlatform)Social.Active).SavedGame.OpenWithAutomaticConflictResolution("Guardado_Unico", DataSource.ReadCacheOrNetwork, ConflictResolutionStrategy.UseLongestPlaytime, SaveGameOpen);
+        }
+    }
+
+    void ShowSelectUI()
+    {
+        uint maxNumToDisplay = 5;
+        bool allowCreateNew = false;
+        bool allowDelete = true;
+
+        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+        savedGameClient.ShowSelectSavedGameUI("Select saved game",
+            maxNumToDisplay,
+            allowCreateNew,
+            allowDelete,
+            LoadCallBack);
+    }
+
+    private void SaveGameOpen(SavedGameRequestStatus status, ISavedGameMetadata meta)
+    {
+        Debug.Log("callback");
+        if(status == SavedGameRequestStatus.Success)
+        {
+            Debug.Log("success callback");
+            if (isSaving)
+            {
+                Debug.Log("callback guardando");
+                isSaving = false;
+                byte[] myData = GetSaveString();
+                Debug.Log("update metadata");
+                SavedGameMetadataUpdate updateForMetadata = new SavedGameMetadataUpdate.Builder().WithUpdatedDescription("I have updated my game at: " + DateTime.Now.ToString()).Build();
+                Debug.Log("commit save");
+                PlayGamesPlatform.Instance.SavedGame.CommitUpdate(meta, updateForMetadata, myData, SaveCallBack);
+                Debug.Log("saved");
+                //((PlayGamesPlatform)Social.Active).SavedGame.CommitUpdate(meta,updateForMetadata,myData,SaveCallBack);
+            }
+            else if(isLoading)
+            {
+                Debug.Log("callback cargando");
+                isLoading = false;
+                Debug.Log("cargar datos");
+                PlayGamesPlatform.Instance.SavedGame.ReadBinaryData(meta, loadCallback2);
                 //((PlayGamesPlatform)Social.Active).SavedGame.ReadBinaryData(meta, LoadCallBack);
             }
         }
     }
-    private void LoadCallBack(SavedGameRequestStatus status, byte[] data)
+    //private void LoadCallBack(SelectUIStatus status, byte[] data)
+    private void LoadCallBack(SelectUIStatus status, ISavedGameMetadata data)
+    {
+        
+        if(status == SelectUIStatus.SavedGameSelected)
+        {
+            //
+            //
+            //TODO: Mostrar dialog que muestre datos sobre el guardado seleccionado y confirmar su carga o no
+            //
+            //
+            OpenSave(false,true,data.Filename);
+        }
+        else
+        {
+            showToast("Error while attempting to load game data from cloud", 2);
+        }
+    }
+    private void loadCallback2(SavedGameRequestStatus status, byte[] data)
     {
         gameData gd = null;
-        if(status == SavedGameRequestStatus.Success)
+        if (status == SavedGameRequestStatus.Success)
         {
             MemoryStream ms = new MemoryStream(data);
             BinaryFormatter formatter = new BinaryFormatter();
@@ -148,7 +216,7 @@ public class menuOpciones : MonoBehaviour
     private byte[] GetSaveString()
     {
         gameManager.instance.guardar();
-        string path = Application.persistentDataPath + "/data.ub";
+        string path = Application.persistentDataPath + $"/{gameManager.instance.userID}.ub";
         byte[] data = null;
         if (File.Exists(path))
         {
