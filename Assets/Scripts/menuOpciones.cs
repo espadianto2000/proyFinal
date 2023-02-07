@@ -19,6 +19,7 @@ public class menuOpciones : MonoBehaviour
     public bool isSaving=false;
     public bool isLoading=false;
     public Text code;
+    private ISavedGameClient savedGameClient;
     public void dataCode()
     {
         if(code.text == "7H380R3DH3R0-dev")
@@ -137,16 +138,26 @@ public class menuOpciones : MonoBehaviour
 
     void ShowSelectUI()
     {
-        uint maxNumToDisplay = 5;
-        bool allowCreateNew = false;
-        bool allowDelete = true;
-
-        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
-        savedGameClient.ShowSelectSavedGameUI("Select saved game",
+        savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+        savedGameClient.FetchAllSavedGames(DataSource.ReadNetworkOnly, callbackLlamadoLista);
+    }
+    void callbackLlamadoLista(SavedGameRequestStatus status, List<ISavedGameMetadata> meta)
+    {
+        if(status == SavedGameRequestStatus.Success)
+        {
+            uint maxNumToDisplay = 5;
+            bool allowCreateNew = false;
+            bool allowDelete = true;
+            savedGameClient.ShowSelectSavedGameUI("Select saved game",
             maxNumToDisplay,
             allowCreateNew,
             allowDelete,
             LoadCallBack);
+        }
+        else
+        {
+            showToast("Error while attempting to fetch cloud games", 2);
+        }
     }
 
     private void SaveGameOpen(SavedGameRequestStatus status, ISavedGameMetadata meta)
