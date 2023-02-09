@@ -519,6 +519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 976c6d2bb8e374743814c179b2f44d7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LogeadoGPS: 0
+  userID: 
   premium: 0
   estadoPausa: 0
   gems: 0
@@ -696,6 +698,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45eaf79636324447a33aa5dc05ad575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dummyBanner: {fileID: 3986686042868193875, guid: c954c46f1727b2e4a9c12b4ecaff207f, type: 3}
+  dummyInters: {fileID: 8439517852946742692, guid: 2bc9e3897dd7b2547ad96c823b693f14, type: 3}
+  dummyReward: {fileID: 7641973372613148990, guid: bc98ccccafa645b4cb53ec5507e4deb4, type: 3}
   cargaPrefab: {fileID: 6450791672781070169, guid: ca9939594dd5c9545845a82a9df2da62, type: 3}
   cargaGO: {fileID: 0}
 --- !u!224 &1438356927

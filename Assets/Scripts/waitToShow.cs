@@ -9,6 +9,7 @@ public class waitToShow : MonoBehaviour
     void Start()
     {
         Invoke("cerrarItem", 4);
+        Time.timeScale = 0;
     }
 
     private void cerrarItem()
@@ -17,6 +18,9 @@ public class waitToShow : MonoBehaviour
     }
     public void dest()
     {
+        Time.timeScale = 1;
+
         Destroy(gameObject);
+
     }
 }

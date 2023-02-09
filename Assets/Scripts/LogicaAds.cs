@@ -8,6 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class LogicaAds : MonoBehaviour
 {
+    public GameObject dummyBanner;
+    public GameObject dummyInters;
+    public GameObject dummyReward;
+
     public static LogicaAds instance;
     private BannerView bannerAd;
     private InterstitialAd interstitialAd;
@@ -126,26 +130,24 @@ public class LogicaAds : MonoBehaviour
     public void MostrarBanner()
     {
         Debug.Log("Hola?");
-        PedirBanner();
+        StartCoroutine(checkInternetConnection1());
     }
     public void MostrarInters()
     {
         Debug.Log("Inters");
-        
-            interstitialAd.Show();
+        StartCoroutine(checkInternetConnection2());
 
         
-       // interstitialAd.Destroy();
-        PedirInterstitial();
+        // interstitialAd.Destroy();
+
     }
-     public void MostrarReward()
+    public void MostrarReward()
      {
-        if(!gameManager.instance.premium)
-        {
-            Instantiate(cargaPrefab);
+        
+            
+            StartCoroutine(checkInternetConnection3());
 
-        }
-        PedirReward();
+        
         //rewardedAd.Show();
 
     }
@@ -244,6 +246,65 @@ public class LogicaAds : MonoBehaviour
         //HACER UN BOOLEANDO Y PASARLO AL ADCLOSED, SI NO HAS VISTO EL VIDEO ES FALSE Y NO SE TE REVIVE
         Debug.Log("Recomensa reclamada");
         //GameObject.Find("visto").GetComponent<Text>().text = "Visto";
+    }
+    IEnumerator checkInternetConnection1()
+    {
+        WWW www = new WWW("http://google.com/");
+
+        yield return www;
+        if (true)
+        {
+            //error, mostrar dummy
+            Instantiate(dummyBanner);
+
+
+        }
+        else
+        {
+            PedirBanner();
+        }
+    }
+    IEnumerator checkInternetConnection2()
+    {
+        WWW www = new WWW("http://google.com/");
+
+        yield return www;
+        if (true)
+        {
+            //error, mostrar dummy
+            Instantiate(dummyInters);
+        }
+        else
+        {
+            interstitialAd.Show();
+
+
+            PedirInterstitial();
+        }
+
+    }
+    IEnumerator checkInternetConnection3()
+    {
+        WWW www = new WWW("http://google.com/");
+
+        yield return www;
+        if (true)
+        {
+            //error, mostrar dummy
+            Instantiate(dummyReward);
+
+        }
+        else
+        {
+        //do somtehing
+        if (!gameManager.instance.premium)
+        {
+            Instantiate(cargaPrefab);
+
+        }
+        PedirReward();
+
+        }
     }
 }
 
