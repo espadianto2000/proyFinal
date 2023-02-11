@@ -280,6 +280,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4236168102549244745, guid: ba462fc07a42ea646977099dbc7dc832, type: 3}
+      propertyPath: GODummy
+      value: 
+      objectReference: {fileID: 8439517852946742692}
     - target: {fileID: 4236168102549244747, guid: ba462fc07a42ea646977099dbc7dc832, type: 3}
       propertyPath: m_Name
       value: Panel Inters

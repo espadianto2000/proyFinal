@@ -252,7 +252,7 @@ public class LogicaAds : MonoBehaviour
         WWW www = new WWW("http://google.com/");
 
         yield return www;
-        if (true)
+        if (www.error!=null)
         {
             //error, mostrar dummy
             Instantiate(dummyBanner);
@@ -269,7 +269,7 @@ public class LogicaAds : MonoBehaviour
         WWW www = new WWW("http://google.com/");
 
         yield return www;
-        if (true)
+        if (www.error != null)
         {
             //error, mostrar dummy
             Instantiate(dummyInters);
@@ -288,7 +288,7 @@ public class LogicaAds : MonoBehaviour
         WWW www = new WWW("http://google.com/");
 
         yield return www;
-        if (true)
+        if (www.error != null)
         {
             //error, mostrar dummy
             Instantiate(dummyReward);

@@ -21,7 +21,7 @@ public class dumAd : MonoBehaviour
         textoTiempo.text = (Mathf.FloorToInt(time % 60)).ToString() + " second(s) remaining";
         if(time>0)
         {
-            time -= Time.deltaTime;
+            time -= Time.unscaledDeltaTime;
         }
         else
         {
@@ -32,5 +32,8 @@ public class dumAd : MonoBehaviour
     public void destruir()
     {
         Destroy(ad);
+        Time.timeScale = 1;
+        GameObject.Find("Heroe").GetComponent<PlayerController>().revivir();
+        GameObject.Find("Heroe").GetComponent<PlayerController>().fueraPausa = true;
     }
 }

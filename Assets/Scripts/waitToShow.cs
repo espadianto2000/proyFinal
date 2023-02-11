@@ -6,9 +6,12 @@ public class waitToShow : MonoBehaviour
 {
     [SerializeField]
     public GameObject cerrar;
+    public float tiempoCerrar = 5f;
+    public GameObject GODummy;
+
     void Start()
     {
-        Invoke("cerrarItem", 4);
+        //Invoke("cerrarItem", 4);
         Time.timeScale = 0;
     }
 
@@ -19,8 +22,20 @@ public class waitToShow : MonoBehaviour
     public void dest()
     {
         Time.timeScale = 1;
+        GameObject.Find("Heroe").GetComponent<PlayerController>().fueraPausa = true;
+        Destroy(GODummy);
 
-        Destroy(gameObject);
+    }
+     void Update()
+    {
+        if(tiempoCerrar > 0)
+        {
+            tiempoCerrar -= Time.unscaledDeltaTime;
+        }
+        else
+        {
+            cerrar.SetActive(true);
+        }
 
     }
 }
