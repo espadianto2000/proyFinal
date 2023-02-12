@@ -33,7 +33,15 @@ public class llamarAds : MonoBehaviour
     }
     public void MostrarReward()
     {
-        LogicaAds.instance.MostrarReward();
+        if(!gameManager.instance.premium)
+        {
+            LogicaAds.instance.MostrarReward();
+
+        }
+        else
+        {
+            GameObject.Find("Heroe").GetComponent<PlayerController>().revivir();
+        }
 
 
 

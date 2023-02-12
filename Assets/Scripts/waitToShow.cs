@@ -22,7 +22,7 @@ public class waitToShow : MonoBehaviour
     public void dest()
     {
         Time.timeScale = 1;
-        GameObject.Find("Heroe").GetComponent<PlayerController>().fueraPausa = true;
+        GameObject.Find("Heroe").GetComponent<PlayerController>().fueraPausa = false;
         Destroy(GODummy);
 
     }

@@ -126,7 +126,7 @@ public class mejoraBoton : MonoBehaviour
         transform.parent.GetComponent<improvementsManager>().mejorarItem(valorOrden);
         transform.parent.parent.parent.GetComponent<interfazInGameManager>().salirPausa();
         transform.parent.parent.gameObject.SetActive(false);
-        if (WaveManager.instance.mostrarAnuncio && !gameManager.instance.premium)
+        if (!gameManager.instance.premium)
         {
             //WaveManager.instance.mostrarAnuncio = false;
             //mostrar anuncio

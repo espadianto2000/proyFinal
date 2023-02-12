@@ -34,6 +34,6 @@ public class dumAd : MonoBehaviour
         Destroy(ad);
         Time.timeScale = 1;
         GameObject.Find("Heroe").GetComponent<PlayerController>().revivir();
-        GameObject.Find("Heroe").GetComponent<PlayerController>().fueraPausa = true;
+        GameObject.Find("Heroe").GetComponent<PlayerController>().fueraPausa = false;
     }
 }

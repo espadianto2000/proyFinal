@@ -255,7 +255,11 @@ public class LogicaAds : MonoBehaviour
         if (www.error!=null)
         {
             //error, mostrar dummy
-            Instantiate(dummyBanner);
+            if (!gameManager.instance.premium)
+            {
+                Instantiate(dummyBanner);
+
+            }
 
 
         }
@@ -271,8 +275,12 @@ public class LogicaAds : MonoBehaviour
         yield return www;
         if (www.error != null)
         {
+            if (!gameManager.instance.premium)
+            {
+                Instantiate(dummyInters);
+
+            }
             //error, mostrar dummy
-            Instantiate(dummyInters);
         }
         else
         {
@@ -291,7 +299,16 @@ public class LogicaAds : MonoBehaviour
         if (www.error != null)
         {
             //error, mostrar dummy
-            Instantiate(dummyReward);
+            if (!gameManager.instance.premium)
+            {
+                Instantiate(dummyReward);
+            }
+            else
+            {
+                GameObject.Find("Heroe").GetComponent<PlayerController>().revivir();
+
+            }
+
 
         }
         else
