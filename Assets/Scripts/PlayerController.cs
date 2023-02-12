@@ -125,6 +125,8 @@ public class PlayerController : MonoBehaviour
     public float posI2;
     public float posI3;
 
+    public Collider2D colNotTrigger;
+
     void Start()
     {
         posI1 = joystick.transform.GetChild(0).transform.position.x;
@@ -225,25 +227,30 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && cargaUlti >=1 && !ultiUsado && gm.desbloquearUlti)                               
         {
             ultiUsado = true;
-            if(SceneManager.GetActiveScene().name == "jugador1")
+            if(SceneManager.GetActiveScene().buildIndex == 2)
             {
                 //ulti galahad
                 slash.transform.localScale = new Vector3(tamanoAtaque, tamanoAtaque, tamanoAtaque) * 2.5f;
                 multiplicadorDanoUlti = 2.5f;
                 reduccionVelocidadAtaqueUlti = 0.3f;
             }
-            else
+            else if(SceneManager.GetActiveScene().buildIndex == 3)
             {
                 //ulti beatriz
                 multiplicadorDanoUlti = 2.5f;
                 multiplicadorTamanoUlti = 2.5f;
                 reduccionVelocidadAtaqueUlti = 0.3f;
             }
+            else if(SceneManager.GetActiveScene().buildIndex == 4)
+            {
+
+            }
             
         }
         
         if(vidaActual <= 0 && vivo)
         {
+            colNotTrigger.enabled = false;
             vivo = false;
             transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 2);
             transform.GetChild(0).GetComponent<SpriteRenderer>().material = origMaterial;
@@ -1137,6 +1144,7 @@ public class PlayerController : MonoBehaviour
     }
     public void revivir()
     {
+        colNotTrigger.enabled = true;
         vivo = true;
         vidaActual = vidaMax;
         transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 0);
