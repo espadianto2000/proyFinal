@@ -131,7 +131,9 @@ public class gameManager : MonoBehaviour
             LogeadoGPS = true;
             userID = PlayGamesPlatform.Instance.localUser.id;
             Debug.Log("se logea");
-            
+            Debug.Log("callback de autenticacion");
+            Invoke("init", 1f);
+            iniciado = true;
         }
         else
         {
@@ -141,10 +143,11 @@ public class gameManager : MonoBehaviour
             // Disable your integration with Play Games Services or show a login button
             // to ask users to sign-in. Clicking it should call
             // PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication).
+            Debug.Log("callback de autenticacion");
+            Invoke("init", 1f);
+            iniciado = true;
         }
-        Debug.Log("callback de autenticacion");
-        Invoke("init",1f);
-        iniciado = true;
+        
     }
 
     public void pausa()
@@ -264,10 +267,10 @@ public class gameManager : MonoBehaviour
                 
                 break;
             case 1:
-                if(dinero >= 3000)
+                if(dinero >= 4000)
                 {
                     desbloquearUlti = true;
-                    dinero -= 3000;
+                    dinero -= 4000;
                 }
                 
                 break;
