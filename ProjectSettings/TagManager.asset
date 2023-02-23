@@ -17,6 +17,7 @@ TagManager:
   - slash
   - cactus
   - iman
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - EnemyHit
   - exp
   - Heore
-  - 
+  - Boss
   - 
   - 
   - 

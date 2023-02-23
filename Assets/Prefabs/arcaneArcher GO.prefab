@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 9149271340246357736}
   - component: {fileID: 6447328172514907863}
   - component: {fileID: -6227544045080178064}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: arcaneArcher GO
   m_TagString: Enemy
   m_Icon: {fileID: 0}

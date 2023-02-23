@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 6243002653373411424}
   - component: {fileID: 4517716087823117010}
   - component: {fileID: -1853749323520822532}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GoblinGO
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efda9cd7ead9acd41b51c2bafd7f05e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sonidoMuerte: {fileID: 0}
   flashMaterial: {fileID: 2100000, guid: 2234f93644e764b348e2cad4908e2653, type: 2}
   player: {fileID: 0}
   auxVolteado: 0

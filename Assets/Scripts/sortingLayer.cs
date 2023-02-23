@@ -9,4 +9,8 @@ public class sortingLayer : MonoBehaviour
     {
         rd.sortingOrder = -(int)(GetComponent<Collider2D>().bounds.min.y * 100);
     }
+    private void Update()
+    {
+        rd.sortingOrder = -(int)(GetComponent<Collider2D>().bounds.min.y * 100);
+    }
 }

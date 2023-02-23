@@ -964,6 +964,40 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void recibirDanoJugadorPublico(float dano)
+    {
+        if (vulnerable)
+        {
+            if (!evadirAtaque || Random.value >= probEvadir)
+            {
+                if (!escudoInmortal || vidaActual > dano || activadoInmortal || escudoInmLVL <= 0)
+                {
+                    if (!escudoProtector || escudoProtectorVida <= 0 || escudoProtLVL <= 0)
+                    {
+                        vidaActual -= dano;
+                        HacerInvulnerable();
+                        recibeDano();
+                    }
+                    else if (escudoProtector && escudoProtectorVida > 0 && escudoProtLVL >= 1)
+                    {
+                        escudoProtectorVida -= dano;
+                        HacerInvulnerable();
+                    }
+                }
+                else if (escudoInmortal && dano >= vidaActual && !activadoInmortal && escudoInmLVL >= 1)
+                {
+                    activadoInmortal = true;
+                    vidaActual = 1;
+                    HacerInvulnerableEscudo();
+                }
+            }
+            else
+            {
+                HacerInvulnerable();
+            }
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         
