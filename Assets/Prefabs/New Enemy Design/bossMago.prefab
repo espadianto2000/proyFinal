@@ -210,6 +210,7 @@ MonoBehaviour:
   atacando: 0
   estado: 0
   proy1: {fileID: 864192739193134149, guid: c26eb4e1d3894b74ca6a8c0d27f7195a, type: 3}
+  proy2: {fileID: 6967243583958580846, guid: e9995ee2a02121148bf7031bff682912, type: 3}
 --- !u!195 &3762277369440900738
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -303,7 +304,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 32767
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

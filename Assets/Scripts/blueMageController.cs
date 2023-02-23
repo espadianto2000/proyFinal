@@ -24,6 +24,7 @@ public class blueMageController : MonoBehaviour
     public int estado = 0;
     private float tiempoInterAtaque = 1f;
     public GameObject proy1;
+    public GameObject proy2;
     Vector3 posEstatico;
 
 
@@ -51,6 +52,7 @@ public class blueMageController : MonoBehaviour
             }
             else if(!atacando)
             {
+                transform.GetChild(0).GetComponent<Animator>().SetTrigger("anim1");
                 posEstatico = transform.position;
                 navAg.isStopped = true;
                 navAg.velocity = Vector3.zero;
@@ -60,21 +62,18 @@ public class blueMageController : MonoBehaviour
                 {
                     case 0:
                     case 3:
-                        estado = 1;
                         ataque1();
                         Invoke("acabarAtaque", 7f);
                         break;
                     case 1:
                     case 4:
-                        estado = 2;
-                        ataque1();
-                        Invoke("acabarAtaque", 7f);
+                        ataque2();
+                        Invoke("acabarAtaque", 15f);
                         break;
                     case 2:
                     case 5:
-                        estado = 3;
-                        ataque1();
-                        Invoke("acabarAtaque", 7f);
+                        ataque2();
+                        Invoke("acabarAtaque", 10f);
                         break;
                 }
             }
@@ -110,12 +109,25 @@ public class blueMageController : MonoBehaviour
                     Instantiate(proy1, player.transform.position, Quaternion.identity);
                 }
                 break;
+            case 2:
+                if (tiempoInterAtaque > 0)
+                {
+                    transform.position = posEstatico;
+                    tiempoInterAtaque -= Time.deltaTime;
+                }
+                else
+                {
+                    tiempoInterAtaque = 0.75f;
+                    Instantiate(proy2, new Vector3(transform.position.x,transform.position.y-2.5f,transform.position.z), Quaternion.Euler(new Vector3(0,0,Random.Range(0f,359f))));
+                }
+                break;
         }
     }
     void acabarAtaque()
     {
         estado = 0;
         atacando = false;
+        transform.GetChild(0).GetComponent<Animator>().SetTrigger("noAnim");
     }
 
     void ataque1()
@@ -125,7 +137,7 @@ public class blueMageController : MonoBehaviour
 
     void ataque2()
     {
-
+        estado = 2;
     }
 
     void ataque3()
