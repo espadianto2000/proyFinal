@@ -206,11 +206,12 @@ MonoBehaviour:
   animator: {fileID: 3762277369440900760}
   navAg: {fileID: 3762277369440900738}
   tiempoEntreAtaques: 2
-  tiempoMaxEntreAtaques: 15
+  tiempoMaxEntreAtaques: 10
   atacando: 0
   estado: 0
   proy1: {fileID: 864192739193134149, guid: c26eb4e1d3894b74ca6a8c0d27f7195a, type: 3}
   proy2: {fileID: 6967243583958580846, guid: e9995ee2a02121148bf7031bff682912, type: 3}
+  proy3: {fileID: 5945794405831167635, guid: d65e5c640de351e46b7359de055f6345, type: 3}
 --- !u!195 &3762277369440900738
 NavMeshAgent:
   m_ObjectHideFlags: 0

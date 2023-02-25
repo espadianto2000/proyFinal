@@ -25,6 +25,7 @@ public class blueMageController : MonoBehaviour
     private float tiempoInterAtaque = 1f;
     public GameObject proy1;
     public GameObject proy2;
+    public GameObject proy3;
     Vector3 posEstatico;
 
 
@@ -62,17 +63,17 @@ public class blueMageController : MonoBehaviour
                 {
                     case 0:
                     case 3:
-                        ataque1();
+                        ataque3();
                         Invoke("acabarAtaque", 7f);
                         break;
                     case 1:
                     case 4:
-                        ataque2();
+                        ataque3();
                         Invoke("acabarAtaque", 15f);
                         break;
                     case 2:
                     case 5:
-                        ataque2();
+                        ataque3();
                         Invoke("acabarAtaque", 10f);
                         break;
                 }
@@ -117,8 +118,20 @@ public class blueMageController : MonoBehaviour
                 }
                 else
                 {
-                    tiempoInterAtaque = 0.75f;
+                    tiempoInterAtaque = 0.5f;
                     Instantiate(proy2, new Vector3(transform.position.x,transform.position.y-2.5f,transform.position.z), Quaternion.Euler(new Vector3(0,0,Random.Range(0f,359f))));
+                }
+                break;
+            case 3:
+                if (tiempoInterAtaque > 0)
+                {
+                    transform.position = posEstatico;
+                    tiempoInterAtaque -= Time.deltaTime;
+                }
+                else
+                {
+                    tiempoInterAtaque = 0.5f;
+                    Instantiate(proy3, transform.GetChild(0).position, Quaternion.identity);
                 }
                 break;
         }
@@ -142,7 +155,7 @@ public class blueMageController : MonoBehaviour
 
     void ataque3()
     {
-
+        estado = 3;
     }
     void despertar()
     {
