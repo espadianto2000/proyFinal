@@ -133,7 +133,7 @@ public class enemyController : MonoBehaviour
         else
         {
             transform.GetChild(0).GetComponent<Animator>().SetInteger("estado", 0);
-            rb.velocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
         }
         if(!player.GetComponent<PlayerController>().esVisible)
         {
